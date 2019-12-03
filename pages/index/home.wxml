@@ -1,0 +1,76 @@
+<!--pages/index/home.wxml-->
+<view class='container'>
+  <view wx:if="{{imgUrls.length >1}}">
+    <swiper indicator-dots='true' autoplay="true" interval="2000" duration="1000" indicator-active-color="#1AAD19" class="slider" circular="true" bindchange="" current="{{currentSwiper}}">
+      <block wx:for="{{imgUrls}}" wx:key="{{imgUrlsId}}">
+        <swiper-item bindtap="banner_detail" wx:if="{{item.url}}" data-url="{{item.url}}">
+          <image src="{{item.pic}}" class="slide-image" />
+        </swiper-item>
+        <swiper-item wx:else data-id="{{item.id}}" data-title="{{item.name}}" data-url="{{item.url}}">
+          <image src="{{item.pic}}" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- <view class="dots">
+    <block wx:for="{{imgUrls}}" wx:key="{{imgUrlsId}}">
+      <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
+    </block>
+  </view> -->
+  </view>
+  <view wx:else style='margin-top:40rpx;'>
+    <block wx:for="{{imgUrls}}" wx:key="{{imgUrlsId}}">
+      <image src="{{item.pic}}" data-id="{{item.id}}" data-title="{{item.name}}" data-url="{{item.url}}" class="swiper_image"></image>
+    </block>
+  </view>
+  <view class='home_main_title'>
+    <text></text>
+    <text>{{news}}</text>
+    <text></text>
+  </view>
+
+  <swiper class="slider2" current="{{s_index}}" previous-margin="{{prev_m}}" next-margin="{{next_m}}" bindchange='onSlideChange' circular='true'>
+    <block wx:for="{{newsUrls}}" wx:key="{{newsUrlsId}}">
+      <swiper-item data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail" class="{{index == s_index ? ' zoom' : ''}}">
+        <view class='img_box' style='background:url({{item.pic}}) no-repeat center;background-size:cover;'>
+          <view class='desc'>{{item.title}}</view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class='home_main_title'>
+    <text></text>
+    <text>{{stories}}</text>
+    <text></text>
+  </view>
+  <scroll-view>
+    <block wx:for="{{storiesUrls}}" wx:key="{{storiesUrlsId}}">
+      <view class='list' bindtap="detail_img" data-id="{{item.id}}" data-title="{{item.title}}" wx:if="{{item.id < 2}}">
+        <view class='img_box'>
+          <image src='{{item.pic}}' mode="widthFix"></image>
+          <view class='desc'>{{item.title}}</view>
+        </view>
+      </view>
+      <view class='list' bindtap="detail" data-id="{{item.id}}" data-title="{{item.title}}" wx:if="{{item.id > 1}}">
+        <view class='img_box'>
+          <image src='{{item.pic}}' mode="widthFix"></image>
+          <view class='desc'>{{item.title}}</view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class="tab_bar {{isIpx ? 'fix-iphonex-button':''}}">
+    <view class='icon_home' bindtap='gohome'>
+      <view class='icon selected'>
+        <view class='home'></view>
+        <text>{{home}}</text>
+      </view>
+    </view>
+    <view class='icon_article' bindtap='goarticle'>
+      <view class='icon'>
+        <view class='article'></view>
+        <text>{{develop}}</text>
+      </view>
+    </view>
+  </view>
+</view>

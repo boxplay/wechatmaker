@@ -1,0 +1,120 @@
+.firstPage-whitebox{
+	width: calc(100vw * .9);
+	margin: 0 auto;
+	margin-top: 100rpx;
+	position: relative;
+	background-color: white;
+	border-radius: 20rpx;
+	color: black;
+}
+.firstPage-qabox{
+	width: calc(100vw * .9);
+	margin: 0 auto;
+	min-height: 65vh;
+	padding: 0.1rpx;
+	/* overflow:hidden; */
+}
+.firstPage-answers{
+	box-sizing: border-box;
+	width: calc(100vw * .9);
+	margin-top:20rpx ;
+	position: relative;
+}
+.firstPage-questions{
+	font-size: 38rpx;
+	margin: 0 auto;
+	margin-top: 14vh;
+	width: calc(100vw * .82);
+	text-align: left;
+	font-weight: 500;
+}
+.product_type{
+	display: inline-block;
+	font-size: 28rpx;
+	width: calc(100vw * .38);
+	border:1rpx solid rgb(241,241,241);
+	border-radius: 10rpx;
+	color: rgb(45,45,45);
+	background-color:rgb(241,241,241);
+	margin-bottom: calc(100vw * .03);
+	padding: 20rpx 0rpx;
+	text-align: center;
+}
+.type_selected{
+	background-color:rgb(233,216,251);
+	border:1rpx solid rgb(176,146,237);
+	color: rgb(92,0,220);
+}
+/* .product_type:nth-child(even){
+	margin-left: calc(100vw * .1);
+} */
+.product_type:nth-child(odd){
+	margin-right: calc(100vw * .03);
+}
+.line{
+	width: calc(100vw * .8);
+	height: 2rpx;
+	margin:0 auto;
+	background-color: black;
+	margin-top: 40rpx;
+}
+.firstPage-button-box{
+	margin-top: 80rpx;
+	margin-bottom: 80rpx;
+}
+.firstPage-button{
+	width: calc(100vw * .9);
+	margin: 0 auto;
+	height: 100rpx;
+	line-height: 85rpx;
+	border-radius: 100rpx;
+	text-align: center;
+	color:white;
+	background-color: rgb(113,23,222);
+	padding: 10rpx;
+}
+.subdata-textarea{
+	border:1rpx solid rgb(241,241,241);
+	background-color: rgb(241,241,241);
+	display: block;
+	margin: 0 auto;
+	width: calc(100vw * .8);
+	text-align: left;
+	border-radius: 10rpx;
+	padding: 15rpx;
+}
+.subdata-question-box{
+	text-align: left;
+	width: calc(100vw * .82);
+	margin: 0 auto;
+}
+.subdata-question{
+	padding: 15rpx 0 15rpx 0;
+}
+.subdata-input input{
+	background-color: rgb(241,241,241);
+	border-radius: 10rpx;
+	height: 45rpx;
+	line-height: 45rpx;
+	padding: 15rpx;
+}
+.line-dashed{
+	background-color: lightGray;
+	height: 1px;
+	width: calc(100vw * .8);
+	margin: 0 auto;
+}
+.subdata-button{
+	border: none;
+	text-align: center;
+	width: calc(100vw * .82);
+	margin: 0 auto;
+	color: rgb(92,0,220);
+	font-size: 30rpx;
+	margin-top:30rpx;
+	margin-bottom:30rpx;
+	background-color: rbg(241,241,241);
+}
+.subdata-button::after{
+	border:none;
+}

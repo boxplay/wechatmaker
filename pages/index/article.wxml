@@ -1,0 +1,53 @@
+<!--pages/index/article.wxml-->
+<!--index.wxml-->
+<view class="top_bar" bindtap='openMenu'>
+  <view class="ctx menu {{ open==1 ? 'close' : '' }}"></view>
+</view>
+<view class="container" style="height:100%;">
+  <scroll-view style="height:100%" scroll-into-view="{{toView}}" scroll-y="true">
+  <view wx:if="{{lang == 'zh_CN'}}">
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad1.jpg' mode='widthFix' id="p_2"></image>
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad2.jpg' mode='widthFix' id="p_3"></image>
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad3.jpg' mode='widthFix' id="p_4"></image>
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad4.jpg' mode='widthFix' id="p_5"></image>
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad5.jpg' mode='widthFix' id="p_6"></image>
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad6.jpg' mode='widthFix' id="p_7"></image>
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad7.jpg' mode='widthFix'></image>
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad8.jpg' mode='widthFix'></image>
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad9.jpg' mode='widthFix' id="p_8"></image>
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad10.jpg' mode='widthFix' id="p_9"></image>
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad11.jpg' mode='widthFix'></image>
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad12.jpg' mode='widthFix' id="p_10"></image>
+    <image src='https://makercdn.someet.cc/makerforch/cheforpad13.jpg' mode='widthFix' id="p_11"></image>
+  </view>
+  <view wx:else>
+    <image src='http://makercdn.someet.cc/12foripad.jpg' mode='widthFix' id="p_2"></image>
+    <image src='http://makercdn.someet.cc/13foripad.jpg' mode='widthFix' id="p_3"></image>
+    <image src='http://makercdn.someet.cc/14foripad.jpg' mode='widthFix' id="p_4"></image>
+    <image src='http://makercdn.someet.cc/15foripad.jpg' mode='widthFix' id="p_5"></image>
+    <image src='http://makercdn.someet.cc/16foripad.jpg' mode='widthFix' id="p_6"></image>
+    <image src='http://makercdn.someet.cc/17foripad.jpg' mode='widthFix' id="p_7"></image>
+    <image src='http://makercdn.someet.cc/18foripad.jpg' mode='widthFix'></image>
+    <image src='http://makercdn.someet.cc/19foripad.jpg' mode='widthFix'></image>
+    <image src='http://makercdn.someet.cc/21foripad.jpg' mode='widthFix' id="p_8"></image>
+    <image src='http://makercdn.someet.cc/22foripad.jpg' mode='widthFix' id="p_9"></image>
+    <image src='http://makercdn.someet.cc/23foripad.jpg' mode='widthFix' id="p_10"></image>
+    <image src='http://makercdn.someet.cc/24foripad.jpg' mode='widthFix' id="p_11"></image>
+  </view>
+  </scroll-view>
+</view>
+<view class="tab_bar  {{isIpx ? 'fix-iphonex-button':''}}">
+  <view class='icon_home' bindtap='gohome'>
+    <view class='icon'>
+      <view class='home'></view>
+      <text>{{home}}</text>
+    </view>
+  </view>
+  <view class='icon_article' bindtap='goarticle'>
+    <view class='icon selected'>
+      <view class='article'></view>
+      <text>{{develop}}</text>
+    </view>
+  </view>
+</view>
+<include src="../include/menu" />

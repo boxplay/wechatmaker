@@ -1,0 +1,12 @@
+<!--pages/index/detail_img.wxml-->
+<!-- <import src="../../utils/wxParse/wxParse.wxml"/>  -->
+<view class='container'>
+  <view class='main_title'>{{title}}</view>
+  <view class='sub_title'>
+    <text class='post_date'>{{topic_date}}</text>
+    <text class='from'>{{topic_from}}</text>
+  </view>
+  <view class='content'>
+    <rich-text nodes="{{content}}"></rich-text>
+  </view>
+</view>

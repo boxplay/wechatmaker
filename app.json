@@ -1,0 +1,21 @@
+{
+	"pages": [
+		"pages/wx/subpage",
+		"pages/wx/subdata",
+		"pages/wx/index",
+		"pages/wx/home",
+		"pages/index/home",
+		"pages/index/index",
+		"pages/logs/logs",
+		"pages/index/article",
+		"pages/index/detail",
+		"pages/index/detail_img"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "WeChat Maker",
+		"navigationBarTextStyle": "black"
+	},
+	"sitemapLocation": "sitemap.json"
+}

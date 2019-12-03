@@ -1,0 +1,126 @@
+<!--pages/index/home.wxml-->
+<view class='container' style="background: url('https://img.someet.cc/FnbUpq3Ely1wYnjaQNnC2-6zwrMW') repeat;color:white;">
+	<form bindsubmit="formSubmit">
+		<view class="firstPage-whitebox">
+			<view class="firstPage-qabox">
+				<view class="firstPage-questions">
+					1.为什么参见这次自荐计划
+				</view>
+				<view class="firstPage-answers">
+					<textarea name="why_description" class="subdata-textarea"></textarea>
+					<view class="line"></view>
+				</view>
+				<view wx:if="{{product_has == 0}}">
+					<view class="firstPage-questions" style="margin-top:1vh;">
+						2.写下你希望用{{tips}}实现的ideal
+					</view>
+					<view class="firstPage-answers">
+						<textarea name="description" class="subdata-textarea"></textarea>
+						<view class="line"></view>
+					</view>
+				</view>
+				<view wx:if="{{product_has !=0 && product_id ==4}}">
+					<view class="subdata-question-box">
+						<view class="subdata-question">为你的作品写下推荐语</view>
+						<view class="subdata-question subdata-input">
+							<textarea data-index="0" bindinput="descriptionChange" bindblur="descriptionChange" class="subdata-textarea"
+							 placeholder="为你的作品写下自荐语"></textarea>
+						</view>
+						<view class="subdata-question">表情种类</view>
+						<view class="firstPage-answers">
+							<view class="product_type {{emoji_type == 1?'type_selected':''}}" data-id="1" data-ctype='emojitype' bindtap="clickFunc">
+								特种表情
+							</view>
+							<view class="product_type {{emoji_type == 0 && emoji_type !==''?'type_selected':''}}" data-id="0" data-ctype='emojitype' bindtap="clickFunc">
+								普通表情
+							</view>
+						</view>
+					</view>
+					<view class="subdata-question-box">
+						<view class="subdata-question">是否开通赞赏功能</view>
+						<view class="firstPage-answers">
+							<view class="product_type {{emoji_admire == 1?'type_selected':''}}" data-id="1" data-ctype='emojiadmire' bindtap="clickFunc">
+								是
+							</view>
+							<view class="product_type {{emoji_admire == 0 && emoji_admire !==''?'type_selected':''}}" data-ctype='emojiadmire' data-id="0" bindtap="clickFunc">
+								否
+							</view>
+						</view>
+					</view>
+				</view>
+				<!-- 微信表情和没有产品的才显示下面的内容 -->
+				<view wx:if="{{product_has !=0 && product_id !=4}}">
+					<view class="firstPage-questions" style="margin-top: 60rpx;">
+						2.{{tips}}介绍
+					</view>
+					<!-- 公众号信息 -->
+					<block wx:for="{{dataList}}" wx:for-index="index" wx:key="key" wx:for-item="item">
+						<view class="subdata-question-box">
+							<view class="subdata-question">{{tips}}介绍</view>
+							<view class="subdata-question subdata-input">
+								<input data-index="{{index}}" bindinput="wnameChange" bindblur="wnameChange" class="weui-input" placeholder="填写{{tips}}名称" />
+							</view>
+							<view class="subdata-question">为你的作品写下推荐语</view>
+							<view class="subdata-question subdata-input">
+								<textarea data-index="{{index}}" bindinput="descriptionChange" bindblur="descriptionChange" class="subdata-textarea"
+								 placeholder="为你的作品写下自荐语"></textarea>
+							</view>
+						</view>
+						<view class="subdata-question-box" wx:if="{{product_id != 4}}">
+							<view class="subdata-question">累计{{product_id == 1?'粉丝':'用户'}}数量有多少</view>
+							<view class="firstPage-answers">
+								<block wx:for="{{fansCountList}}" wx:key="unique" wx:for-index="key" wx:for-item="item">
+									<view class="product_type {{item.id == fansCount?'type_selected':''}}" data-id="{{item.id}}" data-index="{{index}}"
+									 bindtap="changeFansCount">
+										{{item.name}}
+									</view>
+								</block>
+							</view>
+						</view>
+						<!-- 公众号信息 -->
+						<view wx:if="{{dataList.length > 1 && index !=0}}">
+							<button class="subdata-button" bindtap="removeWxProduct" data-index="{{index}}">删除公众号 -</button>
+						</view>
+						<view class="line-dashed"></view>
+					</block>
+					<!-- 第二个微信公众号 -->
+					<view class="line-dashed"></view>
+					<view>
+						<button class="subdata-button" bindtap="addWxProduct">添加公众号 +</button>
+					</view>
+					<view class="line-dashed"></view>
+
+				</view>
+				<!-- 第二个微信公众号开始 -->
+				<view class="firstPage-questions" style="margin-top: 60rpx;">
+					3.是否愿意参加神秘挑战
+				</view>
+				<view class="firstPage-answers">
+					<view class="product_type {{challenge == 1?'type_selected':''}}" data-id="1" data-ctype='challenge' bindtap="clickFunc">
+						是
+					</view>
+					<view class="product_type {{challenge == 0 && challenge !==''?'type_selected':''}}" data-id="0" data-ctype='challenge' bindtap="clickFunc">
+						否
+					</view>
+				</view>
+				<view class="firstPage-questions" style="margin-top: 60rpx;">
+					4.请留下可以通知你自荐成功的联系方式
+				</view>
+				<view class="subdata-question-box">
+					<view class="subdata-question subdata-input">
+						<input name="nickname" class="weui-input" placeholder="昵称" />
+					</view>
+					<view class="subdata-question subdata-input">
+						<input name="wechat_id" class="weui-input" placeholder="微信号" />
+					</view>
+					<view class="subdata-question subdata-input">
+						<input name="phone" class="weui-input" placeholder="手机号" />
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="firstPage-button-box">
+			<button class="firstPage-button" formType="submit" bindtap="nextPage">提交自荐</button>
+		</view>
+	</form>
+</view>

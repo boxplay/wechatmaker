@@ -1,0 +1,83 @@
+<view class='menu_box' style='{{menu_show}}'>
+  <scroll-view style="height:100%;" scroll-y="true">
+    <view class='menu'>
+      <view class='list'>
+        <view class='main_title big' bindtap="toViewClick" data-hash="p_2">{{list_1}}</view>
+        <view class='main_title {{up1}}' bindtap='toggleClick1'>
+          <view class='arrow'></view>
+          {{list_2_1}}
+
+          <view class='list_cont'>
+          <text bindtap="toViewClick" data-hash="p_3">1.{{list_2_1_1}}</text>
+          <text bindtap="toViewClick" data-hash="p_4">2.{{list_2_1_2}}</text>
+          <text bindtap="toViewClick" data-hash="p_5">3.{{list_2_1_3}}</text>
+        </view>
+        </view>
+        <view class='main_title {{up2}}' bindtap='toggleClick2'>
+          <view class='arrow'></view>
+          {{list_2_2}}
+          <view class='list_cont'>
+            <text bindtap="toViewClick" data-hash="p_6">1.{{list_2_2_1}}</text>
+            <text bindtap="toViewClick" data-hash="p_7">2.{{list_2_2_2}}</text>
+            <text bindtap="toViewClick" data-hash="p_8">3.{{list_2_2_3}}</text>
+          </view>
+        </view>
+
+        <view class='main_title {{up3}}' bindtap='toggleClick3'>
+          <view class='arrow'></view>
+          {{list_2_3}}
+          <view class='list_cont'>
+            <text bindtap="toViewClick" data-hash="p_9">1.{{list_2_3_1}}</text>
+            <text bindtap="toViewClick" data-hash="p_10">2.{{list_2_3_2}}</text>
+          </view>
+        </view>
+        <view class='main_title' bindtap="toViewClick" data-hash="p_11">{{list_2_4}}</view>
+      </view>
+      <view class='icons' style='display:none;'>
+        <text class='main_title'>{{platforms}}</text>
+        <view class='icon_list clearfix'>
+          <view class='icon'>
+            <image src='../image/icon_mp.jpg' mode='aspectFit'></image>
+            <text>{{wxmp}}</text>
+          </view>
+          <view class='icon'>
+            <image src='../image/icon_open.jpg' mode='aspectFit'></image>
+            <text>{{wxopen}}</text>
+          </view>
+          <view class='icon'>
+            <image src='../image/icon_pay.jpg' mode='aspectFit'></image>
+            <text>{{wxpay}}</text>
+          </view>
+          <view class='icon'>
+            <image src='../image/icon_ad.jpg' mode='aspectFit'></image>
+            <text>{{wxad}}</text>
+          </view>
+          <view class='icon'>
+            <image src='../image/icon_ai.jpg' mode='aspectFit'></image>
+            <text>{{wxai}}</text>
+          </view>
+          <view class='icon'>
+            <image src='../image/icon_emo.jpg' mode='aspectFit'></image>
+            <text>{{wxemo}}</text>
+          </view>
+          <view class='icon'>
+            <image src='../image/icon_game.jpg' mode='aspectFit'></image>
+            <text>{{wxgame}}</text>
+          </view>
+          <view class='icon'>
+            <image src='../image/icon_mini.jpg' mode='aspectFit'></image>
+            <text>{{wxmini}}</text>
+          </view>
+          <view class='icon'>
+            <image src='../image/icon_ent.jpg' mode='aspectFit'></image>
+            <text>{{wxent}}</text>
+          </view>
+          <view class='icon'>
+            <image src='../image/icon_read.jpg' mode='aspectFit'></image>
+            <text>{{wxread}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

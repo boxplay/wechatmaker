@@ -1,0 +1,23 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- <view class="top_bar">
+    <view class="ctx menu {{ open==1 ? 'close' : '' }}" bindtap='openMenu' style='{{top_bar}}'></view>
+  </view> -->
+  <image src='../image/landpage.jpg' mode='aspectFit' class="{{isIpx ? 'fix-iphonex-page':''}}"></image>
+  <view class="tab_bar {{isIpx ? 'fix-iphonex-button':''}}">
+    <view class='icon_home' bindtap='gohome'>
+      <view class='icon selected'>
+        <view class='home'></view>
+        <text>{{home}}</text>
+      </view>
+    </view>
+    <view class='icon_article' bindtap='goarticle'>
+      <view class='icon'>
+        <view class='article'></view>
+        <text>{{develop}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<include src="../include/menu" />
+

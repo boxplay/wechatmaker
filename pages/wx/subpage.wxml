@@ -1,0 +1,39 @@
+<!--pages/index/home.wxml-->
+<view class='container' style="background: url('https://img.someet.cc/FnbUpq3Ely1wYnjaQNnC2-6zwrMW') repeat;color:white;height: 100%;">
+	<view class="firstPage-whitebox">
+		<view class="firstPage-qabox">
+			<view class="firstPage-questions">
+				1.你自荐/准备成为哪类产品的微信创客
+			</view>
+			<view class="firstPage-answers">
+				<view class="product_type {{product_id == 1?'type_selected':''}}" data-id="1" bindtap="changeProduct">
+					微信公众号
+				</view>
+				<view class="product_type {{product_id == 2?'type_selected':''}}" data-id="2" bindtap="changeProduct">
+					微信小程序
+				</view>
+				<view class="product_type {{product_id == 3?'type_selected':''}}" data-id="3" bindtap="changeProduct">
+					微信小游戏
+				</view>
+				<view class="product_type {{product_id == 4?'type_selected':''}}" data-id="4" bindtap="changeProduct">
+					微信表情
+				</view>
+			<view class="line"></view>	
+			</view>
+			<view class="firstPage-questions" style="margin-top: 60rpx;">
+				2.你自荐/准备成为哪类产品的微信创客
+			</view>
+			<view class="firstPage-answers">
+				<view class="product_type {{product_has == 1?'type_selected':''}}" data-id="1" bindtap="changeHas">
+					有
+				</view>
+				<view class="product_type {{product_has == 0?'type_selected':''}}"data-id="0" bindtap="changeHas">
+					没有
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="firstPage-button-box">
+		<button class="firstPage-button" bindtap="nextPage">下一步</button>
+	</view>
+</view>
