@@ -8,7 +8,7 @@
 				</view>
 				<view class="firstPage-answers">
 					<textarea name="why_description" class="subdata-textarea"></textarea>
-					<view class="line"></view>
+					<!-- <view class="line"></view> -->
 				</view>
 				<view wx:if="{{product_has == 0}}">
 					<view class="firstPage-questions" style="margin-top:1vh;">
@@ -16,7 +16,7 @@
 					</view>
 					<view class="firstPage-answers">
 						<textarea name="description" class="subdata-textarea"></textarea>
-						<view class="line"></view>
+						<!-- <view class="line"></view> -->
 					</view>
 				</view>
 				<view wx:if="{{product_has !=0 && product_id ==4}}">
@@ -70,7 +70,7 @@
 							<view class="subdata-question">累计{{product_id == 1?'粉丝':'用户'}}数量有多少</view>
 							<view class="firstPage-answers">
 								<block wx:for="{{fansCountList}}" wx:key="unique" wx:for-index="key" wx:for-item="item">
-									<view class="product_type {{item.id == fansCount?'type_selected':''}}" data-id="{{item.id}}" data-index="{{index}}"
+									<view class="product_type {{item.id == fansCount[index]?'type_selected':''}}" data-id="{{item.id}}" data-index="{{index}}"
 									 bindtap="changeFansCount">
 										{{item.name}}
 									</view>
@@ -81,14 +81,14 @@
 						<view wx:if="{{dataList.length > 1 && index !=0}}">
 							<button class="subdata-button" bindtap="removeWxProduct" data-index="{{index}}">删除公众号 -</button>
 						</view>
-						<view class="line-dashed"></view>
+						<!-- <view class="line-dashed"></view> -->
 					</block>
 					<!-- 第二个微信公众号 -->
-					<view class="line-dashed"></view>
+					<!-- <view class="line-dashed"></view> -->
 					<view>
 						<button class="subdata-button" bindtap="addWxProduct">添加公众号 +</button>
 					</view>
-					<view class="line-dashed"></view>
+					<!-- <view class="line-dashed"></view> -->
 
 				</view>
 				<!-- 第二个微信公众号开始 -->

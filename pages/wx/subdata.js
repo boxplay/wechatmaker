@@ -24,7 +24,7 @@ Page({
 			description: '',
 			fans_count:'',
 		}],
-		fansCount:'',
+		fansCount:[],
 		fansCountList: [{
 				id: 1,
 				name: '100以下'
@@ -71,10 +71,17 @@ Page({
 				'content-type': 'application/x-www-form-urlencoded'
 			},
 			method: 'POST',
-			url: 'http://127.0.0.1/index.php',
+			url: 'http://mac.ngrok.wdevelop.cn/index.php',
 			success: (res) => {
 				wx.hideLoading()
 				console.log(res.data)
+				if(res.data.status == 1){
+					wx.showToast({
+					  title: '自荐成功',
+					  icon: 'success',
+					  duration: 2000
+					})
+				}
 			},
 			fail: (err) => {
 				console.log(err)
@@ -105,9 +112,11 @@ Page({
 		console.log(index)
 		var dataList = this.data.dataList
 		dataList[index].fans_count = fansCount
+		var fansList = this.data.fansCount
+		fansList[index] = fansCount
 		this.setData({
 			dataList: dataList,
-			fansCount: fansCount
+			fansCount: fansList
 		})
 	},
 	goIndex: function(e) {
@@ -162,7 +171,6 @@ Page({
 			list.push({
 				product_name: '',
 				description: '',
-				product_id: '',
 				fans_count: '',
 			})
 			console.log(list);
@@ -181,7 +189,7 @@ Page({
 		tips[1] = '微信公众号'
 		tips[2] = '微信小程序'
 		tips[3] = '微信小游戏'
-		tips[4] = '微信表情';
+		tips[4] = '微信表情'
 		fansCountList = [{
 				id: 6,
 				name: '5000以下'
