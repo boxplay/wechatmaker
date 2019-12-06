@@ -76,7 +76,7 @@ Page({
 		ctx.clip(); //画了圆 再剪切  原始画布中剪切任意形状和尺寸。一旦剪切了某个区域，则所有之后的绘图都会被限制在被剪切的区域内
 		ctx.drawImage(app.globalData.avatarUrlTempPath, obj.avatar.x, obj.avatar.y, obj.avatar.width, obj.avatar.heigth); // 推进去图片
 		ctx.restore(); //恢复状态
-		var str = "我是一个粉刷匠粉刷本领强，我要把那新房子刷的很漂亮！门前大桥下游过一群鸭，快来快来数一数二四六七八哈哈哈哈嘿嘿嘿嘿啦啦啦啦你那次你那是开卡礼大萨达撒";
+		var str = "我是一个粉刷匠粉刷本领强，我要把那新房子刷的很漂亮！门前大桥下游过一群鸭，快来快来数一数二四六七八哈哈哈哈嘿嘿嘿嘿啦啦啦啦你那次你那是开你是一个主这组号的人啊你真是个棒槌";
 		this.drawText(ctx, str, 100, 580,550);
 		ctx.draw(true, function() {
 			console.log('111')
@@ -97,34 +97,32 @@ Page({
 	},
 	//文本换行 参数：1、canvas对象，2、文本 3、距离左侧的距离 4、距离顶部的距离 5、6、文本的宽度
 	drawText: function(ctx, str, leftWidth, initHeight,canvasWidth) {
-		ctx.font = 'normal bold 25px sans-serif';
+		ctx.font = 'normal bold 32px sans-serif';
 		ctx.setFillStyle('white');
 		var lineWidth = 10;
 		var chr = str.split(""); //这个方法是将一个字符串分割成字符串数组
-		console.log(chr)
 		var temp = "";
 		var row = [];
-		var index = 0;
-		for (var a = 0; a < chr.length; a++) {
+		var lastIndex = '';
+		for (var a = 0; a < chr.length-1; a++) {
 			if (ctx.measureText(temp).width < canvasWidth) {
 				temp += chr[a];
-				if(index >= chr.length){
-					a--;
-					temp += chr[a];
-					row.push(temp);
-					break;
-				}
 			} else {
 				a--; //这里添加了a-- 是为了防止字符丢失，效果图中有对比
 				row.push(temp);
 				temp = "";
+				lastIndex = a;
 			}
-			index +=1;
 		}
+		temp = "";
+		for (var a = lastIndex+1; a < chr.length; a++){
+			temp += chr[a];	
+		}
+		row.push(temp);
 		console.log(row)
 		for (var b = 0;b<row.length;b++) {
 			ctx.fillText(row[b],leftWidth,initHeight)
-			initHeight += 46;
+			initHeight += 40;
 		}
 	},
 	saveFile() {
