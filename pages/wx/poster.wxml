@@ -1,0 +1,6 @@
+<!--pages/index/home.wxml-->
+<view class='container'>
+	<canvas class="shareCanvas" canvas-id="shareBox"  style="width: 750px;height: 1334px;position:fixed;top:9999px"></canvas>
+	<image src="{{posterTempPath}}" width="100%" mode="widthFix" />
+	<button bindtap="saveFile">保存海报</button>
+</view>

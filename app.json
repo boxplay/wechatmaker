@@ -1,9 +1,10 @@
 {
 	"pages": [
+		"pages/wx/poster",
+		"pages/wx/home",
 		"pages/wx/subpage",
 		"pages/wx/subdata",
 		"pages/wx/index",
-		"pages/wx/home",
 		"pages/index/home",
 		"pages/index/index",
 		"pages/logs/logs",

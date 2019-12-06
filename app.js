@@ -61,7 +61,11 @@ App({
   globalData: {
     userInfo: null,
     isIpx: false,
-    language:''
+    language:'',
+	avatarUrlTempPath:'',
+	nickName:'',
+	shareBack:'https://img.someet.cc/phpXa5xyY',
+	shareBackTempPath:'',
   },
   onShow(options) {
     wx.getSystemInfo({

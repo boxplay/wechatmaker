@@ -1,0 +1,14 @@
+.home_main_title{font-size:38rpx;text-align:center;margin:40rpx auto 20rpx;}
+.home_main_title text{display:inline-block;margin:0 10rpx;}
+.home_main_title text:nth-child(odd){width:20rpx;border-bottom:1px solid #000;height:2rpx;line-height:2rpx;margin:-12rpx 10rpx 10rpx;}
+.home_main_title text:nth-child(even){height:38rpx;line-height:45rpx;font-weight:bold;}
+
+/* .shareCanvas{
+	width: calc(100vw);
+	margin: 0 auto;
+	height: calc(90vw * 667 / 375 - 100rpx);
+}
+ */
+image{
+	width: 100%;
+}

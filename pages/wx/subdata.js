@@ -54,6 +54,10 @@ Page({
 	},
 	//提交表单
 	formSubmit(e) {
+		wx.redirectTo({
+			url:'poster'
+		})
+		return false;
 		var formData = e.detail.value
 		formData.product_id = this.data.product_id
 		formData.product_has = this.data.product_has
@@ -61,6 +65,7 @@ Page({
 		formData.emoji_admire = this.data.emoji_admire
 		formData.emoji_type = this.data.emoji_type
 		formData.challenge = this.data.challenge
+		this.globalData.nickName = formData.nickname
 		wx.showLoading({
 			title: '正在提交',
 		})
@@ -71,9 +76,11 @@ Page({
 				'content-type': 'application/x-www-form-urlencoded'
 			},
 			method: 'POST',
-			url: 'http://mac.ngrok.wdevelop.cn/index.php',
+			url: 'https://someetapi.someet.cc/save.php',
+			// url:'http://127.0.0.1/index.php',
 			success: (res) => {
 				wx.hideLoading()
+				
 				console.log(res.data)
 				if(res.data.status == 1){
 					wx.showToast({

@@ -9,6 +9,33 @@ Page({
 	home: wx.T.locales["home"],
 	develop: wx.T.locales["develop"],
 	scrollHeight:'88rpx',
+	userInfo:{'nickName':''}
+  },
+  onGotUserInfo(e){
+	  var that = this
+  	  wx.setStorageSync('userInfo',e.detail.userInfo)
+  	  app.globalData.userInfo = e.detail.userInfo
+	  if(e.detail.userInfo.nickName){
+		  wx.getImageInfo({
+			  src: e.detail.userInfo.avatarUrl,//下载微信头像获得临时地址
+			  success: res => {
+				  //将头像缓存在全局变量里
+				  app.globalData.avatarUrlTempPath = res.path;
+				  wx.redirectTo({
+				  	url:'subpage'
+				  })
+			  },
+			  fail: res => {
+				  //失败回调
+			  }
+		  });
+	  }else{
+		  wx.showToast({
+		  	title: '获取用户信息失败',
+		  	icon: 'none',
+		  	duration: 2000
+		  })
+	  }
   },
   oHome: function (e) {
     wx.redirectTo({
@@ -30,6 +57,18 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+	var userInfo = wx.getStorageSync('userInfo')
+	console.log(userInfo)
+	if(userInfo){
+		this.setData({
+			userInfo:userInfo
+		})
+		app.globalData.avatarUrlTempPath = userInfo.avatarUrl
+	}else{
+		this.setData({
+			userInfo:null
+		})
+	}
     wx.getSystemInfo({
       success: function(res) {
         // console.log(res.windowWidth);
