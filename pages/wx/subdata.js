@@ -45,7 +45,8 @@ Page({
 				id: 5,
 				name: '100000+'
 			}
-		]
+		],
+		buttonDisable:false
 	},
 	oHome: function(e) {
 		wx.redirectTo({
@@ -54,10 +55,10 @@ Page({
 	},
 	//提交表单
 	formSubmit(e) {
-		wx.redirectTo({
-			url:'poster'
+		var  that = this
+		this.setData({
+			buttonDisable:true
 		})
-		return false;
 		var formData = e.detail.value
 		formData.product_id = this.data.product_id
 		formData.product_has = this.data.product_has
@@ -65,7 +66,52 @@ Page({
 		formData.emoji_admire = this.data.emoji_admire
 		formData.emoji_type = this.data.emoji_type
 		formData.challenge = this.data.challenge
-		this.globalData.nickName = formData.nickname
+		app.globalData.nickName = formData.nickname
+		var errorTips ='';
+		if(!formData.why_description){
+			errorTips = '为什么参加这次自己自荐计划'
+		}
+		if(!formData.description){
+			errorTips = '描述你的ideal'
+		}
+		if(!formData.challenge){
+			errorTips = '参不参加神秘挑战呢'
+		}
+		if(!formData.why_description){
+			errorTips = '为什么参加这次自己按计划'
+		}
+		if(formData.product_has == 1){
+			var dataList = this.data.dataList
+			for(let i =0;i<dataList.length;i++){
+				if(dataList[i].product_name || dataList[i].fans_count || dataList[i].description){
+					errorTips = '请完善信息'
+					break;
+				}
+			}
+			if(formData.product_id == 4){
+				if(formData.emoji_admire === '' || formData.emoji_type === ''){
+					errorTips = '请完善信息'
+				}
+			}
+		}
+		if(!(/^1[3|4|5|6|7|8|9][0-9]\d{8}$$/.test(formData.phone))){
+			errorTips = '请正确填写手机号码'
+		}
+		if(!formData.nickname || !formData.wechat_id){
+			errorTips = '请完善信息'
+		}
+		if(errorTips !== '' || errorTips){
+			wx.showToast({
+			  title: errorTips,
+			  icon:'none',
+			  duration: 2000
+			})
+			this.setData({
+				buttonDisable:false
+			})
+			return false
+		}
+		
 		wx.showLoading({
 			title: '正在提交',
 		})
@@ -87,6 +133,18 @@ Page({
 					  title: '自荐成功',
 					  icon: 'success',
 					  duration: 2000
+					})
+					wx.redirectTo({
+						url:'poster'
+					})
+				}else{
+					wx.showToast({
+					  title: '信息存储失败',
+					  icon: 'success',
+					  duration: 2000
+					})
+					that.setData({
+						buttonDisable:false
 					})
 				}
 			},

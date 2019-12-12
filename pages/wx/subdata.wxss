@@ -62,7 +62,7 @@
 	margin-top: 80rpx;
 	margin-bottom: 80rpx;
 }
-.firstPage-button{
+/* .firstPage-button{
 	width: calc(100vw * .9);
 	margin: 0 auto;
 	height: 100rpx;
@@ -72,7 +72,7 @@
 	color:white;
 	background-color: rgb(113,23,222);
 	padding: 10rpx;
-}
+} */
 .subdata-textarea{
 	border:1rpx solid rgb(241,241,241);
 	background-color: rgb(241,241,241);
@@ -117,4 +117,34 @@
 }
 .subdata-button::after{
 	border:none;
+}
+.firstPage-button{
+	width: calc(100vw * .9);
+	margin: 0 auto;
+	height: 100rpx;
+	line-height: 50rpx;
+	border-radius: 100rpx;
+	text-align: center;
+	color:white;
+	background-color: rgb(113,23,222);
+	padding: 10rpx;
+	position: relative;
+	overflow: visible;
+	z-index:20;
+	border:1px solid black;
+}
+.firstPage-button::after{
+	content: " ";
+	margin: 0 auto;
+	border-radius: 100rpx;
+	text-align: center;
+	color:white;
+	background-color: rgb(113,23,222);
+	padding: 10rpx;
+	position: absolute;
+	left:0;
+	right: 0;
+	top:-8rpx;
+	z-index:-1;
+	border:1px solid black;
 }

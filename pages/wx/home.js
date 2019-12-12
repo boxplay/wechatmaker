@@ -21,18 +21,20 @@ Page({
 			  success: res => {
 				  //将头像缓存在全局变量里
 				  app.globalData.avatarUrlTempPath = res.path;
-				  wx.redirectTo({
+				  wx.navigateTo({
 				  	url:'subpage'
 				  })
 			  },
 			  fail: res => {
-				  //失败回调
+				  wx.navigateTo({
+				  	url:'subpage'
+				  })
 			  }
 		  });
 	  }else{
 		  wx.showToast({
 		  	title: '获取用户信息失败',
-		  	icon: 'none',
+		  	icon: 'none', 
 		  	duration: 2000
 		  })
 	  }
@@ -48,7 +50,7 @@ Page({
     })
   },  
   goSubPage(){
-	  wx.redirectTo({
+	  wx.navigateTo({
 		  url:'subpage'
 	  })
   },

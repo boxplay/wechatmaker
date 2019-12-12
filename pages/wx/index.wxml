@@ -10,22 +10,28 @@
    </block>
  </swiper> -->
 	<scroll-view scroll-y="true" style="height: {{scrollHeight}};">
-	  <block wx:for="{{newsUrls}}" wx:key="{{index}}">
-	    <view class='list'>
-	      <view class='img_box'>
-	        <image src='{{item.pic}}' mode="widthFix"></image>
-	        <view class='desc'>{{item.title}}</view>
-	      </view>
-	    </view>
-	  </block>
-	  <block wx:for="{{newsUrls}}" wx:key="{{index}}">
-	    <view class='list'>
-	      <view class='img_box'>
-	        <image src='{{item.pic}}' mode="widthFix"></image>
-	        <view class='desc'>{{item.title}}</view>
-	      </view>
-	    </view>
-	  </block>
+		<block wx:for="{{newsUrls}}" wx:key="{{index}}">
+			<view class="title_box" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
+				{{item.title}}
+			</view>
+			<view class='list' data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
+				<view class='img_box'>
+					<image src='{{item.pic}}' mode="widthFix"></image>
+					<view class='desc'>{{item.title}}</view>
+				</view>
+			</view>
+		</block>
+		<block wx:for="{{newsUrls}}" wx:key="{{index}}" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
+			<view class="title_box">
+				{{item.title}}
+			</view>
+			<view class='list'>
+				<view class='img_box'>
+					<image src='{{item.pic}}' mode="widthFix"></image>
+					<view class='desc'>{{item.title}}</view>
+				</view>
+			</view>
+		</block>
 	</scroll-view>
 	<view class="tab_bar {{isIpx ? 'fix-iphonex-button':''}}">
 		<view class='icon_home' bindtap='goIndex'>

@@ -20,36 +20,49 @@ Page({
 	checkImage() {
 		var that = this;
 		var userInfo = app.globalData.userInfo
-		var shareBack = app.globalData.shareBack
+		var shareBack = 'https://img.someet.cc/phpXa5xyY'
 		if (!userInfo) {
-			userInfo = wx.getStorageSync('userInfo')
-			wx.getImageInfo({
-				src: userInfo.avatarUrl, //下载微信头像获得临时地址
-				success: res => {
-					//将头像缓存在全局变量里
-					app.globalData.avatarUrlTempPath = res.path;
-				},
-				fail: res => {
-					//失败回调
-				}
-			});
-			wx.getImageInfo({
-				src: shareBack, //下载微信头像获得临时地址
-				success: res => {
-					//将头像缓存在全局变量里
-					app.globalData.shareBackTempPath = res.path;
-					that.drawImage();
-				},
-				fail: res => {
-					//失败回调
-				}
-			});
-		} else {
-			this.drawImage();
+			userInfo = wx.getStorageSync('userInfo')	
 		}
+		if(!userInfo){
+			wx.showToast({
+			  title: '获取信息失败',
+			})
+			return false
+		}
+		wx.getImageInfo({
+			src: userInfo.avatarUrl, //下载微信头像获得临时地址
+			success: res => {
+				//将头像缓存在全局变量里
+				app.globalData.avatarUrlTempPath = res.path;
+			},
+			fail: res => {
+				//失败回调
+				wx.showToast({
+				  title: '获取图片1信息失败',
+				})
+			}
+		});
+		wx.getImageInfo({
+			src: shareBack, //下载微信头像获得临时地址
+			success: res => {
+				//将头像缓存在全局变量里
+				app.globalData.shareBackTempPath = res.path;
+				that.drawImage();
+			},
+			fail: res => {
+				//失败回调
+				wx.showToast({
+				  title: '获取图片2信息失败',
+				})
+			}
+		});
 	},
 	drawImage() {
 		var that = this;
+		wx.showLoading({
+		  title: '正在加载专属海报',
+		})
 		const ctx = wx.createCanvasContext('shareBox')
 		var obj = {
 			shareBack: { //背景图的位置和大小
@@ -76,10 +89,9 @@ Page({
 		ctx.clip(); //画了圆 再剪切  原始画布中剪切任意形状和尺寸。一旦剪切了某个区域，则所有之后的绘图都会被限制在被剪切的区域内
 		ctx.drawImage(app.globalData.avatarUrlTempPath, obj.avatar.x, obj.avatar.y, obj.avatar.width, obj.avatar.heigth); // 推进去图片
 		ctx.restore(); //恢复状态
-		var str = "a我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强";
+		var str = "我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强";
 		this.drawText(ctx, str, 100, 580,550);
-		ctx.draw(true, function() {
-			console.log('111')
+		ctx.draw(true, setTimeout(function() {
 			wx.canvasToTempFilePath({
 				x: 0,
 				y: 0,
@@ -90,10 +102,13 @@ Page({
 					that.setData({
 						posterTempPath: res.tempFilePath
 					})
-					console.log(that.data.posterTempPath)
+					wx.hideLoading()
+				},
+				fail(res) {
+					console.log(11111)
 				}
 			})
-		});
+		}, 1000));
 	},
 	//文本换行 参数：1、canvas对象，2、文本 3、距离左侧的距离 4、距离顶部的距离 5、6、文本的宽度
 	drawText: function(ctx, str, leftWidth, initHeight,canvasWidth) {
@@ -119,7 +134,6 @@ Page({
 			temp += chr[a];	
 		}
 		row.push(temp);
-		console.log(row)
 		for (var b = 0;b<row.length;b++) {
 			ctx.fillText(row[b],leftWidth,initHeight)
 			initHeight += 40;
@@ -197,7 +211,6 @@ Page({
 					that.setData({
 						scrollHeight: Number(win_h * 2 - 156) + 'rpx'
 					})
-					console.log(that.data.scrollHeight)
 				}
 			},
 		})

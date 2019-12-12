@@ -15,6 +15,14 @@ Page({
       url: 'home',
     })
   },
+  detail:function(e){
+    // console.log(e.currentTarget.dataset.url)
+    var detail_id = e.currentTarget.dataset.id;
+    var detail_title = e.currentTarget.dataset.title;
+    wx.navigateTo({
+      url: 'detail?id=' + detail_id + "&title=" + detail_title,
+    })
+  },
   goIndex: function (e) {
     wx.redirectTo({
       url: 'index',
@@ -39,12 +47,12 @@ Page({
         })
 		if(app.globalData.isIpx){
 			that.setData({
-				scrollHeight:Number(win_h*2 - 156) + 'rpx'
+				scrollHeight:Number(win_h*2 - 328) + 'rpx'
 			})
 			console.log(that.data.scrollHeight)
 		}else{
 			that.setData({
-				scrollHeight:Number(win_h*2 - 88) + 'rpx'
+				scrollHeight:Number(win_h*2 - 240) + 'rpx'
 			})
 			console.log(that.data.scrollHeight)
 		}

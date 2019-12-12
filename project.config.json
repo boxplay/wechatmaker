@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -22,7 +22,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.9.4",
-	"appid": "wx7a8f7e9ba1192987",
+	"appid": "wx1c0d06533e7dd178",
 	"projectname": "WechatMaker",
 	"debugOptions": {
 		"hidedInDevtools": []

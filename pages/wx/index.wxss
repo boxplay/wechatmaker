@@ -32,3 +32,8 @@
 .list{width:calc(100vw * .9);height:calc(100vw * .9 * .5);position:relative;margin:0 auto 40rpx;}
 .list .img_box{border-radius:20rpx;width:100%;height:calc(100vw * .9 * .5);overflow:hidden;position:relative;}
 .list .img_box image{width:100%;}
+.title_box{
+	margin: 0 auto;
+	margin-top: 30rpx;
+	margin-bottom: 15rpx;
+}

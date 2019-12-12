@@ -1,34 +1,101 @@
-.home_main_title{font-size:38rpx;text-align:center;margin:40rpx auto 20rpx;}
-.home_main_title text{display:inline-block;margin:0 10rpx;}
-.home_main_title text:nth-child(odd){width:20rpx;border-bottom:1px solid #000;height:2rpx;line-height:2rpx;margin:-12rpx 10rpx 10rpx;}
-.home_main_title text:nth-child(even){height:38rpx;line-height:45rpx;font-weight:bold;}
+.home_main_title {
+	font-size: 38rpx;
+	text-align: center;
+	margin: 40rpx auto 20rpx;
+}
+
+.home_main_title text {
+	display: inline-block;
+	margin: 0 10rpx;
+}
+
+.home_main_title text:nth-child(odd) {
+	width: 20rpx;
+	border-bottom: 1px solid #000;
+	height: 2rpx;
+	line-height: 2rpx;
+	margin: -12rpx 10rpx 10rpx;
+}
+
+.home_main_title text:nth-child(even) {
+	height: 38rpx;
+	line-height: 45rpx;
+	font-weight: bold;
+}
 
 /*用来包裹所有的小圆点  */
-.dots{  
-  width: 100%;
-  height: 36rpx; 
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  top:calc((100vw * .9) * .53 - 36rpx);
-  justify-content: center;
-  transition: all 05s ease-in-out;
-}  
-/*未选中时的小圆点样式 */
-.dot{  
-  width: 15rpx;  
-  height: 15rpx;   
-  border-radius: 50%;
-  margin:0 8rpx;
-  background-color: #f0f0f0f0;
-}  
-/*选中以后的小圆点样式  */
-.active{  
-  width: 35rpx;   
-  height: 15rpx;
-  border-radius: 7.5rpx;
-  background-color: #1AAD19;
+.dots {
+	width: 100%;
+	height: 36rpx;
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+	top: calc((100vw * .9) * .53 - 36rpx);
+	justify-content: center;
+	transition: all 05s ease-in-out;
 }
-.list{width:calc(100vw * .9);height:calc(100vw * .9 * .5);position:relative;margin:0 auto 40rpx;}
-.list .img_box{border-radius:20rpx;width:100%;height:calc(100vw * .9 * .5);overflow:hidden;position:relative;}
-.list .img_box image{width:100%;}
+
+/*未选中时的小圆点样式 */
+.dot {
+	width: 15rpx;
+	height: 15rpx;
+	border-radius: 50%;
+	margin: 0 8rpx;
+	background-color: #f0f0f0f0;
+}
+
+/*选中以后的小圆点样式  */
+.active {
+	width: 35rpx;
+	height: 15rpx;
+	border-radius: 7.5rpx;
+	background-color: #1AAD19;
+}
+
+.list {
+	width: calc(100vw * .9);
+	height: calc(100vw * .9 * .5);
+	position: relative;
+	margin: 0 auto 40rpx;
+}
+
+.list .img_box {
+	border-radius: 20rpx;
+	width: 100%;
+	height: calc(100vw * .9 * .5);
+	overflow: hidden;
+	position: relative;
+}
+
+.list .img_box image {
+	width: 100%;
+}
+
+.index-image-box {
+	position: relative;
+}
+
+.index-image-box image {
+	width: 100%;
+}
+
+.index-button-box {
+	position: fixed;
+	bottom: 120rpx;
+	left:0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: calc(140vw / 2);
+}
+
+.index-button-box button {
+	width: 100%;
+	background-color: rgb(29, 214, 70);
+	height: 80rpx;
+	border-radius: 80rpx;
+	line-height: 80rpx;
+}
+.index-button-x{
+	bottom: 188rpx;
+}

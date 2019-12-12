@@ -7,7 +7,7 @@
 					1.为什么参见这次自荐计划
 				</view>
 				<view class="firstPage-answers">
-					<textarea name="why_description" class="subdata-textarea"></textarea>
+					<textarea name="why_description" cursor-spacing='20' class="subdata-textarea"></textarea>
 					<!-- <view class="line"></view> -->
 				</view>
 				<view wx:if="{{product_has == 0}}">
@@ -15,7 +15,7 @@
 						2.写下你希望用{{tips}}实现的ideal
 					</view>
 					<view class="firstPage-answers">
-						<textarea name="description" class="subdata-textarea"></textarea>
+						<textarea name="description" cursor-spacing='20' class="subdata-textarea"></textarea>
 						<!-- <view class="line"></view> -->
 					</view>
 				</view>
@@ -23,9 +23,9 @@
 					<view class="subdata-question-box">
 						<view class="subdata-question">为你的作品写下推荐语</view>
 						<view class="subdata-question subdata-input">
-							<textarea data-index="0" bindinput="descriptionChange" bindblur="descriptionChange" class="subdata-textarea"
+							<textarea data-index="0" cursor-spacing='20' bindinput="descriptionChange" bindblur="descriptionChange" class="subdata-textarea"
 							 placeholder="为你的作品写下自荐语"></textarea>
-						</view>
+						</view> 
 						<view class="subdata-question">表情种类</view>
 						<view class="firstPage-answers">
 							<view class="product_type {{emoji_type == 1?'type_selected':''}}" data-id="1" data-ctype='emojitype' bindtap="clickFunc">
@@ -58,7 +58,7 @@
 						<view class="subdata-question-box">
 							<view class="subdata-question">{{tips}}介绍</view>
 							<view class="subdata-question subdata-input">
-								<input data-index="{{index}}" bindinput="wnameChange" bindblur="wnameChange" class="weui-input" placeholder="填写{{tips}}名称" />
+								<input data-index="{{index}}" cursor-spacing='20' bindinput="wnameChange" bindblur="wnameChange" class="weui-input" placeholder="填写{{tips}}名称" />
 							</view>
 							<view class="subdata-question">为你的作品写下推荐语</view>
 							<view class="subdata-question subdata-input">
@@ -79,14 +79,14 @@
 						</view>
 						<!-- 公众号信息 -->
 						<view wx:if="{{dataList.length > 1 && index !=0}}">
-							<button class="subdata-button" bindtap="removeWxProduct" data-index="{{index}}">删除公众号 -</button>
+							<button class="subdata-button" bindtap="removeWxProduct" data-index="{{index}}">删除{{tips}} -</button>
 						</view>
 						<!-- <view class="line-dashed"></view> -->
 					</block>
 					<!-- 第二个微信公众号 -->
 					<!-- <view class="line-dashed"></view> -->
 					<view>
-						<button class="subdata-button" bindtap="addWxProduct">添加公众号 +</button>
+						<button class="subdata-button" bindtap="addWxProduct">添加{{tips}}  +</button>
 					</view>
 					<!-- <view class="line-dashed"></view> -->
 
@@ -108,19 +108,19 @@
 				</view>
 				<view class="subdata-question-box">
 					<view class="subdata-question subdata-input">
-						<input name="nickname" class="weui-input" placeholder="昵称" />
+						<input name="nickname" cursor-spacing='20' class="weui-input" placeholder="昵称" />
 					</view>
 					<view class="subdata-question subdata-input">
-						<input name="wechat_id" class="weui-input" placeholder="微信号" />
+						<input name="wechat_id" cursor-spacing='20' class="weui-input" placeholder="微信号" />
 					</view>
 					<view class="subdata-question subdata-input">
-						<input name="phone" class="weui-input" placeholder="手机号" />
+						<input name="phone" type="number" cursor-spacing='20' class="weui-input" placeholder="手机号" />
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="firstPage-button-box">
-			<button class="firstPage-button" formType="submit" bindtap="nextPage">提交自荐</button>
+			<button class="firstPage-button" disabled="{{buttonDisable}}" formType="submit">提交自荐</button>
 		</view>
 	</form>
 </view>

@@ -1,7 +1,10 @@
 <!--pages/index/home.wxml-->
 <view class='container'>
-	<view>
-		<button type="primary" wx:if="{{userInfo.nickName}}" bindtap="goSubPage"> 我要自荐 {{userInfo.nickName}}</button>
+	<view class="index-image-box">
+		<image src="https://makercdn.someet.cc/WechatIMG2.jpg" width="100%" mode="widthFix" />
+	</view>
+	<view class="index-button-box {{isIpx ? 'index-button-x':''}}">
+		<button type="primary" wx:if="{{userInfo.nickName}}" bindtap="goSubPage"> 我要自荐</button>
 		<button wx:if="{{!userInfo.nickName || userInfo == null}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">我要自荐</button>
 	</view>
 	<view class="tab_bar {{isIpx ? 'fix-iphonex-button':''}}">

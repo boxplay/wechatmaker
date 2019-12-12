@@ -1,0 +1,14 @@
+<!--pages/index/detail.wxml-->
+<import src="../../utils/wxParse/wxParse.wxml"/> 
+<view class='container'>
+  <view class='main_title'>{{title}}</view>
+  <view class='sub_title'>
+    <text class='post_date'>{{topic_date}}</text>
+    <text class='from'>{{topic_from}}</text>
+  </view>
+  <view class='content wxParse'>
+    <!-- <image src='../image/list/001.jpg' mode="widthFix"></image> -->
+    <!-- <rich-text nodes="{{content}}"></rich-text> -->
+    <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+  </view>
+</view>
