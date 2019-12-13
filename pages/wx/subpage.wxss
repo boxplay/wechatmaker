@@ -3,6 +3,16 @@
 	color: white;
 	background-size: 100%;
 	z-index:0;
+	/* height: 100%; */
+}
+.pageTotal{
+	width: 40rpx;
+	height: 20rpx;
+	line-height: 20rpx;
+	text-align: center;
+	margin: 0 auto;
+	margin-bottom: 40rpx;
+	font-size: 38rpx;
 }
 .title-image{
 	position: absolute;
@@ -18,12 +28,18 @@
 	width: calc(100vw - 42rpx);
 	padding: 0.1px;
 	margin: 0 auto;
-	margin-top: 110rpx;
+	margin-top: 120rpx;
 	position: relative;
 	background-color: white;
 	border-radius: 20rpx;
 	color: black;
 	border:2rpx solid black;
+}
+.small-screen{
+	margin-top: 100rpx;
+}
+.large-screen{
+	margin-top: 170rpx;
 }
 .firstPage-whitebox-bottom-box{
 	width: calc(100vw - 42rpx);
@@ -41,7 +57,7 @@
 .firstPage-qabox{
 	width: calc(100vw - 86rpx);
 	margin: 0 auto;
-	min-height: 65vh;
+	min-height: 50vh;
 	/* padding: 0.1rpx; */
 	/* overflow:hidden; */
 }
@@ -67,7 +83,7 @@
 	border-radius: 10rpx;
 	color: rgb(45,45,45);
 	background-color:rgb(241,241,241);
-	margin-bottom: calc(100vw * .03);
+	margin-bottom: calc(100vw * .05);
 	padding: 20rpx 0rpx;
 	text-align: center;
 }
@@ -90,7 +106,7 @@
 	margin-top: 40rpx;
 }
 .firstPage-button-box{
-	margin-top: 80rpx;
+	margin-top: 40rpx;
 	margin-bottom: 80rpx;
 }
 .firstPage-button{

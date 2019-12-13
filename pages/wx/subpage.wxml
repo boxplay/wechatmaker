@@ -1,11 +1,11 @@
 <!--pages/index/home.wxml-->
-<view class='container'>
-	<view class="firstPage-whitebox">
+<view class='container' style="{{isIpx?'height: 100%;':''}}">
+	<view class="firstPage-whitebox {{isSmall?'small-screen':''}} {{isIpx ?'large-screen':''}}">
 		<view class="title-image">
 			<image src="https://img.someet.cc/phpMilTj5" style="width: 100%;" mode="widthFix" />
 		</view>
 		<view class="firstPage-qabox">
-			<view class="firstPage-questions" style="margin-top: 120rpx;">
+			<view class="firstPage-questions" style="margin-top: 180rpx;">
 				1.你自荐/准备成为哪类产品的微信创客
 			</view>
 			<view class="firstPage-answers">
@@ -28,15 +28,18 @@
 			</view>
 			<view class="firstPage-answers">
 				<view class="product_type {{product_has == 1?'type_selected':''}}" data-id="1" bindtap="changeHas">
-					有
+					是
 				</view>
 				<view class="product_type {{product_has == 0?'type_selected':''}}"data-id="0" bindtap="changeHas">
-					没有
+					否
 				</view>
 			</view>
 		</view>
 	</view>
-	<view class="firstPage-button-box">
+	<view class="firstPage-button-box" style="{{isIpx ? 'margin-top: 103rpx;':''}}">
+		<view class="pageTotal">
+			1/2
+		</view>
 		<button class="firstPage-button" bindtap="nextPage">下一步</button>
 	</view>
 </view>

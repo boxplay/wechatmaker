@@ -7,70 +7,66 @@
 			</view>
 			<view class="firstPage-qabox">
 				<view class="firstPage-questions" style="margin-top: 120rpx;">
-					1.为什么参见这次自荐计划
+					1.为什么参加这次自荐计划？
 				</view>
 				<view class="firstPage-answers">
-					<textarea name="why_description"  cursor-spacing='20' class="subdata-textarea" placeholder="当初为什么{{product_has == 1?'':'想'}}{{tipsAction}}{{tips}}"></textarea>
+					<textarea name="why_description" cursor-spacing='20' class="subdata-textarea" placeholder="{{product_has == 1?'当初':''}}为什么{{product_has == 1?'':'想'}}{{tipsAction}}{{tips}}"></textarea>
 					<!-- <view class="line"></view> -->
 				</view>
-				<view wx:if="{{product_has == 0}}">
-					<view class="firstPage-questions" style="margin-top:1vh;">
+				<view wx:if="{{product_has == 0}}" style="margin-top: 40rpx;">
+					<view class="firstPage-questions">
 						2.写下你希望用{{tips}}实现的idea
 					</view>
 					<view class="firstPage-answers">
-						<textarea name="description" data-index="0" bindinput="descriptionChange" bindblur="descriptionChange" cursor-spacing='20' class="subdata-textarea"></textarea>
+						<textarea name="description" data-index="0" bindinput="descriptionChange" bindblur="descriptionChange"
+						 cursor-spacing='20' class="subdata-textarea"></textarea>
 						<!-- <view class="line"></view> -->
 					</view>
 				</view>
-				<view wx:if="{{product_has !=0 && product_id ==4}}">
-					<view class="subdata-question-box">
-						<view class="subdata-question">为你的作品写下推荐语</view>
-						<view class="subdata-question subdata-input">
-							<textarea data-index="0" cursor-spacing='20' bindinput="descriptionChange" bindblur="descriptionChange" class="subdata-textarea"
-							 placeholder="为你的作品写下自荐语"></textarea>
-						</view> 
-						<view class="subdata-question">表情种类？</view>
-						<view class="firstPage-answers">
-							<view class="product_type {{emoji_type == 1?'type_selected':''}}" data-id="1" data-ctype='emojitype' bindtap="clickFunc">
-								特种表情
-							</view>
-							<view class="product_type {{emoji_type == 0 && emoji_type !==''?'type_selected':''}}" data-id="0" data-ctype='emojitype' bindtap="clickFunc">
-								普通表情
-							</view>
-						</view>
-					</view>
-					<view class="subdata-question-box">
-						<view class="subdata-question">是否开通赞赏功能</view>
-						<view class="firstPage-answers">
-							<view class="product_type {{emoji_admire == 1?'type_selected':''}}" data-id="1" data-ctype='emojiadmire' bindtap="clickFunc">
-								是
-							</view>
-							<view class="product_type {{emoji_admire == 0 && emoji_admire !==''?'type_selected':''}}" data-ctype='emojiadmire' data-id="0" bindtap="clickFunc">
-								否
-							</view>
-						</view>
-					</view>
-				</view>
 				<!-- 微信表情和没有产品的才显示下面的内容 -->
-				<view wx:if="{{product_has !=0 && product_id !=4}}">
+				<view wx:if="{{product_has !=0}}">
 					<view class="firstPage-questions" style="margin-top: 60rpx;">
 						2.{{tips}}介绍
 					</view>
 					<!-- 公众号信息 -->
 					<block wx:for="{{dataList}}" wx:for-index="index" wx:key="key" wx:for-item="item">
 						<view class="subdata-question-box">
-							<view class="subdata-question">{{tips}}介绍</view>
+							<view class="subdata-question">{{tips}}名称</view>
 							<view class="subdata-question subdata-input">
-								<input style="padding-left: 15rpx;" data-index="{{index}}" cursor-spacing='20' bindinput="wnameChange" bindblur="wnameChange" class="weui-input" placeholder="填写{{tips}}名称" />
+								<input style="padding-left: 15rpx;" data-index="{{index}}" cursor-spacing='20' bindinput="wnameChange" bindblur="wnameChange"
+								 class="weui-input" />
 							</view>
-							<view class="subdata-question">为你的作品写下推荐语</view>
+							<view class="subdata-question">为你的作品写下自荐语</view>
 							<view class="subdata-question subdata-input">
 								<textarea data-index="{{index}}" bindinput="descriptionChange" bindblur="descriptionChange" class="subdata-textarea"
-								 placeholder="为你的作品写下自荐语..."></textarea>
+								 placeholder="你觉得你作品有什么值得推荐的地方？你和你的作品有什么特别的故事吗?"></textarea>
+							</view>
+						</view>
+						<view class="subdata-question-box" wx:if="{{product_has !=0 && product_id ==4}}">
+							<view class="subdata-question">表情种类</view>
+							<view class="firstPage-answers">
+								<view class="product_type {{item.emoji_type == 1?'type_selected':''}}" data-index="{{index}}" data-id="1" data-ctype='emojitype' bindtap="clickFunc">
+									特效表情
+								</view>
+								<view class="product_type {{item.emoji_type == 0 && item.emoji_type !==''?'type_selected':''}}" data-index="{{index}}" data-id="0" data-ctype='emojitype'
+								 bindtap="clickFunc">
+									普通表情
+								</view>
+							</view>
+						</view>
+						<view class="subdata-question-box" wx:if="{{product_has !=0 && product_id ==3}}">
+							<view class="subdata-question">你的作品哪一部分最具有创新性？</view>
+							<view class="firstPage-answers">
+								<block wx:for="{{gameLighterList}}" wx:key="unique" wx:for-index="key" wx:for-item="item">
+									<view class="product_type {{item.id == gameLighter[index]?'type_selected':''}}" data-id="{{item.id}}" data-index="{{index}}"
+									 bindtap="changegameLighter">
+										{{item.name}}
+									</view>
+								</block>
 							</view>
 						</view>
 						<view class="subdata-question-box" wx:if="{{product_id != 4}}">
-							<view class="subdata-question">累计{{product_id == 1?'粉丝':'用户'}}数量有多少</view>
+							<view class="subdata-question">累计{{product_id == 1?'粉丝':'用户'}}数量有多少？</view>
 							<view class="firstPage-answers">
 								<block wx:for="{{fansCountList}}" wx:key="unique" wx:for-index="key" wx:for-item="item">
 									<view class="product_type {{item.id == fansCount[index]?'type_selected':''}}" data-id="{{item.id}}" data-index="{{index}}"
@@ -89,7 +85,7 @@
 					<!-- 第二个微信公众号 -->
 					<!-- <view class="line-dashed"></view> -->
 					<view>
-						<button class="subdata-button" bindtap="addWxProduct">添加{{tips}}  +</button>
+						<button class="subdata-button" bindtap="addWxProduct">添加{{tips}} +</button>
 					</view>
 					<!-- <view class="line-dashed"></view> -->
 
@@ -102,12 +98,13 @@
 					<view class="product_type {{challenge == 1?'type_selected':''}}" data-id="1" data-ctype='challenge' bindtap="clickFunc">
 						是
 					</view>
-					<view class="product_type {{challenge == 0 && challenge !==''?'type_selected':''}}" data-id="0" data-ctype='challenge' bindtap="clickFunc">
+					<view class="product_type {{challenge == 0 && challenge !==''?'type_selected':''}}" data-id="0" data-ctype='challenge'
+					 bindtap="clickFunc">
 						否
 					</view>
 				</view>
 				<view class="firstPage-questions" style="margin-top: 60rpx;">
-					4.请留下你的联系方式
+					4.请留下你的联系信息
 				</view>
 				<view class="subdata-question-box">
 					<view class="subdata-question subdata-input userinfoname">
@@ -122,10 +119,13 @@
 				</view>
 			</view>
 			<view class="firstPage-whitebox-bottom-box">
-				
+
 			</view>
 		</view>
 		<view class="firstPage-button-box">
+			<view class="pageTotal">
+				2/2
+			</view>
 			<button class="firstPage-button" disabled="{{buttonDisable}}" formType="submit">提交自荐</button>
 		</view>
 	</form>

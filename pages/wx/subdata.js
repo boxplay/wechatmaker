@@ -18,12 +18,12 @@ Page({
 		product_id: 0,
 		product_has: 'yes',
 		challenge: '',
-		emoji_type: '',
-		emoji_admire: '',
 		dataList: [{
 			product_name: '',
 			description: '',
 			fans_count:'',
+			emoji_type:'',
+			game_lighter:''
 		}],
 		fansCount:[],
 		fansCountList: [{
@@ -47,6 +47,24 @@ Page({
 				name: '100000+'
 			}
 		],
+		gameLighter:[],
+		gameLighterList: [{
+				id: 10,
+				name: '文字创意'
+			},
+			{
+				id: 11,
+				name: '图片创意'
+			},
+			{
+				id: 12,
+				name: '视频创意'
+			},
+			{
+				id: 13,
+				name: '互动创意'
+			}
+		],
 		buttonDisable:false
 	},
 	oHome: function(e) {
@@ -64,8 +82,8 @@ Page({
 		formData.product_id = this.data.product_id
 		formData.product_has = this.data.product_has
 		formData.desc = JSON.stringify(this.data.dataList)
-		formData.emoji_admire = this.data.emoji_admire
-		formData.emoji_type = this.data.emoji_type
+		// formData.emoji_admire = this.data.emoji_admire
+		// formData.emoji_type = this.data.emoji_type
 		formData.challenge = this.data.challenge
 		app.globalData.nickName = formData.nickname
 		var errorTips ='';
@@ -81,15 +99,16 @@ Page({
 		var dataList = this.data.dataList
 		if(formData.product_has == 1){
 			for(let i =0;i<dataList.length;i++){
-				console.log(dataList[i].product_name,dataList[i].fans_count,dataList[i].description)
-				if(!dataList[i].product_name || !dataList[i].fans_count || !dataList[i].description){
-					errorTips = '请完善信息1'
-					break;
-				}
-			}
-			if(formData.product_id == 4){
-				if(formData.emoji_admire === '' || formData.emoji_type === ''){
-					errorTips = '请完善信息2'
+				if(formData.product_id == 4){
+					if(!dataList[i].product_name || !dataList[i].emoji_type || !dataList[i].description){
+						errorTips = '请完善信息2'
+						break;
+					}
+				}else{
+					if(!dataList[i].product_name || !dataList[i].fans_count || !dataList[i].description){
+						errorTips = '请完善信息1'
+						break;
+					}
 				}
 			}
 		}else{
@@ -107,6 +126,7 @@ Page({
 		if(!formData.nickname || !formData.wechat_id){
 			errorTips = '请完善信息3'
 		}
+		console.log(errorTips)
 		if(errorTips !== '' || errorTips){
 			if(errorTips != '请正确填写手机号码') errorTips = '请填完后提交'
 			wx.showToast({
@@ -192,6 +212,21 @@ Page({
 			fansCount: fansList
 		})
 	},
+	//粉丝数量
+	changegameLighter(e) {
+		var fansCount = e.currentTarget.dataset.id
+		var index = e.currentTarget.dataset.index
+		console.log(index)
+		var dataList = this.data.dataList
+		dataList[index].game_lighter = fansCount
+		console.log(dataList[index])
+		var fansList = this.data.gameLighter
+		fansList[index] = fansCount
+		this.setData({
+			dataList: dataList,
+			gameLighter: fansList
+		})
+	},
 	goIndex: function(e) {
 		wx.redirectTo({
 			url: 'index',
@@ -201,25 +236,23 @@ Page({
 	clickFunc(e) {
 		var id = e.currentTarget.dataset.id;
 		var type = e.currentTarget.dataset.ctype;
+		var index = e.currentTarget.dataset.index;
 		var data;
 		switch (type) {
 			case 'challenge':
 				data = {
 					challenge: id
 				}
+				this.setData(data)
 				break;
 			case 'emojitype':
-				data = {
-					emoji_type: id
-				}
-				break;
-			case 'emojiadmire':
-				data = {
-					emoji_admire: id
-				}
-				break;
+				var dataList = this.data.dataList
+				dataList[index].emoji_type = id
+				console.log(dataList)
+				this.setData({
+					dataList: dataList,
+				})
 		}
-		this.setData(data)
 	},
 	//移除公众号
 	removeWxProduct(e) {
@@ -234,7 +267,7 @@ Page({
 	addWxProduct() {
 		var list = this.data.dataList
 		var index = list.length - 1;
-		if (!list[index]['product_name'] || !list[index]['description'] || !list[index]['fans_count']) {
+		if (!list[index]['product_name'] || !list[index]['description']) {
 			wx.showToast({
 				title: '请完整填写后添加',
 				icon: 'none',
@@ -245,6 +278,8 @@ Page({
 				product_name: '',
 				description: '',
 				fans_count: '',
+				emoji_type:'',
+				game_lighter:''
 			})
 			console.log(list);
 			this.setData({

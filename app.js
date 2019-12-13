@@ -26,7 +26,9 @@ App({
         console.log(res.language)
         if (res.windowHeight >= '724') {
           _this.globalData.isIpx = true;
-        }
+        }else if(res.windowHeight < '640'){
+			_this.globalData.isSmall = true;
+		}
         _this.globalData.language = res.language
       }
     })
@@ -61,6 +63,7 @@ App({
   globalData: {
     userInfo: null,
     isIpx: false,
+	isSmall:false,
     language:'',
 	avatarUrlTempPath:'',
 	nickName:'',

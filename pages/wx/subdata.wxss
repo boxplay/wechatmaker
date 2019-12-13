@@ -13,7 +13,15 @@
 	width: 90%;
 	left: 5%;
 }
-
+.pageTotal{
+	width: 40rpx;
+	height: 20rpx;
+	line-height: 20rpx;
+	text-align: center;
+	margin: 0 auto;
+	margin-bottom: 40rpx;
+	font-size: 38rpx;
+}
 .firstPage-whitebox{
 	width: calc(100vw - 42rpx);
 	padding: 0.1px;
@@ -48,11 +56,11 @@
 .firstPage-answers{
 	box-sizing: border-box;
 	width: 100%;
-	margin-top:28rpx ;
+	margin-top:20rpx ;
 	position: relative;
 }
 .firstPage-questions{
-	font-size: 42rpx;
+	font-size: 39rpx;
 	margin: 0 auto;
 	margin-top: 48rpx;
 	width: calc(100vw - 86rpx);
@@ -113,6 +121,8 @@
 	text-align: left;
 	border-radius: 10rpx;
 	padding: 24rpx;
+	font-size: 28rpx;
+	font-weight: 100;
 }
 .subdata-question-box{
 	text-align: left;
@@ -124,6 +134,9 @@
 	margin-top: 40rpx;
 	margin-bottom: 20rpx;
 	position: relative;
+	font-size: 34rpx;
+	font-weight: 500;
+
 }
 .subdata-input{
 	margin-top: 0rpx;
@@ -135,6 +148,8 @@
 	line-height: 45rpx;
 	padding: 15rpx;
 	padding-left: 55rpx;
+	font-size: 28rpx;
+	font-weight: 100;
 }
 .line-dashed{
 	background-color: lightGray;
@@ -187,6 +202,9 @@
 	z-index:-1;
 	font-weight: 700;
 	border:1px solid black;
+}
+.userinfoname{
+	margin-top: 20rpx;
 }
 .userinfoname:after{
 	background: url('data: image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAdCAYAAABWk2cPAAAB1klEQVRIib3WT6hMYRjH8c/lapAk+bcgGyUlfzZEbv6siCxkIRRWrOyuJEJ2JNnIRlY2kruxGlYWrKQuJTYWFookEaVEb87Eneec95xh5n5rNs/zO+c778x7nvMOtdttPbAEe7EOc/EWDzGGj01vMxwq5UzHJRzFtK7EIVzGBVzBz9I79CidjfvF6qqYU4hX4UideEqoRG7WCP8mrfpMqPYo3Y49oZrnVPHfV1InPRwq9bTqrquTbg6VZmzMpXLSqVgYqs1YlEvlpD/wLVSb8SWXykkTz0KlGS9zqTrpWKg043YuVSe9jnehmudRMUwqqZN+wkF8D51y3mNfPyZS+tY78SF0JvICm/AmdP5BmniA5bgbOr936kmswavQLaGJdAUu4knFSJyF80jvyOOYFxJd5KTpAb+F5xjF0pD4Q6uYXlfxunjNzQipgirpNoxjfyZTRVr5aTzFyrJM2Q2PFT/V/NDpjbQHHmNrnfQArhVztx+kVd/D+irpWtzAUJ+EHWbiDhZ0S4eLE0IrXNIfFhfnpwnSdK5ZPSBhh7QpN3Sk6XMiRAbDaEe6BcsmSborDY8k3R1agyOdmXck6cgkShMjSfp1kqWf06OSdu65/ziE9cI4zv4CFNZBo6FLgHEAAAAASUVORK5CYII=') no-repeat;

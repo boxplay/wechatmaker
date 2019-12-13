@@ -10,7 +10,8 @@ Page({
 	develop: wx.T.locales["develop"],
 	scrollHeight:'88rpx',
 	product_id:0,
-	product_has:'yes'
+	product_has:'yes',
+	isSmall: app.globalData.isSmall ? true : false,
   },
   oHome: function (e) {
     wx.redirectTo({
