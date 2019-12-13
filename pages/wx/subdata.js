@@ -10,6 +10,7 @@ Page({
 		develop: wx.T.locales["develop"],
 		scrollHeight: '88rpx',
 		tips: '微信公众号',
+		tipsAction:'开通',
 		nickname: '',
 		phone: '',
 		wechat_id: '',
@@ -101,6 +102,7 @@ Page({
 			errorTips = '请完善信息'
 		}
 		if(errorTips !== '' || errorTips){
+			errorTips = '请填完后提交'
 			wx.showToast({
 			  title: errorTips,
 			  icon:'none',
@@ -250,11 +252,12 @@ Page({
 	onLoad: function(options) {
 		var that = this;
 		var tips = new Array(),
-			fansCountList = new Array();
+			fansCountList = new Array(),tipsAction = new Array();
 		tips[1] = '微信公众号'
 		tips[2] = '微信小程序'
 		tips[3] = '微信小游戏'
 		tips[4] = '微信表情'
+		tipsAction = ['开通','开发','开发','设计']
 		fansCountList = [{
 				id: 6,
 				name: '5000以下'
@@ -285,7 +288,8 @@ Page({
 			that.setData({
 				product_id: data.product_id,
 				product_has: data.product_has,
-				tips: tips[index]
+				tips: tips[index],
+				tipsAction:tipsAction[index + 1]
 			})
 		});
 		wx.getSystemInfo({

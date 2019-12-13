@@ -1,18 +1,21 @@
 <!--pages/index/home.wxml-->
-<view class='container' style="background: url('https://img.someet.cc/FnbUpq3Ely1wYnjaQNnC2-6zwrMW') repeat;color:white;">
+<view class='container'>
 	<form bindsubmit="formSubmit">
 		<view class="firstPage-whitebox">
+			<view class="title-image">
+				<image src="https://img.someet.cc/phpMilTj5" style="width: 100%;" mode="widthFix" />
+			</view>
 			<view class="firstPage-qabox">
-				<view class="firstPage-questions">
+				<view class="firstPage-questions" style="margin-top: 120rpx;">
 					1.为什么参见这次自荐计划
 				</view>
 				<view class="firstPage-answers">
-					<textarea name="why_description" cursor-spacing='20' class="subdata-textarea"></textarea>
+					<textarea name="why_description" cursor-spacing='20' class="subdata-textarea" placeholder="当初为什么{{product_has == 1?'':'想'}}{{tipsAction}}{{tips}}"></textarea>
 					<!-- <view class="line"></view> -->
 				</view>
 				<view wx:if="{{product_has == 0}}">
 					<view class="firstPage-questions" style="margin-top:1vh;">
-						2.写下你希望用{{tips}}实现的ideal
+						2.写下你希望用{{tips}}实现的idea
 					</view>
 					<view class="firstPage-answers">
 						<textarea name="description" cursor-spacing='20' class="subdata-textarea"></textarea>
@@ -26,7 +29,7 @@
 							<textarea data-index="0" cursor-spacing='20' bindinput="descriptionChange" bindblur="descriptionChange" class="subdata-textarea"
 							 placeholder="为你的作品写下自荐语"></textarea>
 						</view> 
-						<view class="subdata-question">表情种类</view>
+						<view class="subdata-question">表情种类？</view>
 						<view class="firstPage-answers">
 							<view class="product_type {{emoji_type == 1?'type_selected':''}}" data-id="1" data-ctype='emojitype' bindtap="clickFunc">
 								特种表情
@@ -58,12 +61,12 @@
 						<view class="subdata-question-box">
 							<view class="subdata-question">{{tips}}介绍</view>
 							<view class="subdata-question subdata-input">
-								<input data-index="{{index}}" cursor-spacing='20' bindinput="wnameChange" bindblur="wnameChange" class="weui-input" placeholder="填写{{tips}}名称" />
+								<input style="padding-left: 15rpx;" data-index="{{index}}" cursor-spacing='20' bindinput="wnameChange" bindblur="wnameChange" class="weui-input" placeholder="填写{{tips}}名称" />
 							</view>
 							<view class="subdata-question">为你的作品写下推荐语</view>
 							<view class="subdata-question subdata-input">
 								<textarea data-index="{{index}}" bindinput="descriptionChange" bindblur="descriptionChange" class="subdata-textarea"
-								 placeholder="为你的作品写下自荐语"></textarea>
+								 placeholder="为你的作品写下自荐语..."></textarea>
 							</view>
 						</view>
 						<view class="subdata-question-box" wx:if="{{product_id != 4}}">
@@ -92,8 +95,8 @@
 
 				</view>
 				<!-- 第二个微信公众号开始 -->
-				<view class="firstPage-questions" style="margin-top: 60rpx;">
-					3.是否愿意参加神秘挑战
+				<view class="firstPage-questions" style="margin-top: 60rpx;margin-bottom: 20rpx;">
+					3.是否愿意参加神秘挑战？
 				</view>
 				<view class="firstPage-answers">
 					<view class="product_type {{challenge == 1?'type_selected':''}}" data-id="1" data-ctype='challenge' bindtap="clickFunc">
@@ -104,19 +107,22 @@
 					</view>
 				</view>
 				<view class="firstPage-questions" style="margin-top: 60rpx;">
-					4.请留下可以通知你自荐成功的联系方式
+					4.请留下你的联系方式
 				</view>
 				<view class="subdata-question-box">
-					<view class="subdata-question subdata-input">
-						<input name="nickname" cursor-spacing='20' class="weui-input" placeholder="昵称" />
+					<view class="subdata-question subdata-input userinfoname">
+						<input name="nickname" cursor-spacing='20' class="subdata-input-external" placeholder="昵称" />
 					</view>
-					<view class="subdata-question subdata-input">
-						<input name="wechat_id" cursor-spacing='20' class="weui-input" placeholder="微信号" />
+					<view class="subdata-question subdata-input userinfoid">
+						<input name="wechat_id" cursor-spacing='20' class="subdata-input-external" placeholder="微信号" />
 					</view>
-					<view class="subdata-question subdata-input">
-						<input name="phone" type="number" cursor-spacing='20' class="weui-input" placeholder="手机号" />
+					<view class="subdata-question subdata-input userinfophone">
+						<input name="phone" type="number" cursor-spacing='20' class="subdata-input-external" placeholder="手机号" />
 					</view>
 				</view>
+			</view>
+			<view class="firstPage-whitebox-bottom-box">
+				
 			</view>
 		</view>
 		<view class="firstPage-button-box">

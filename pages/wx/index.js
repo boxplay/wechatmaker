@@ -58,6 +58,7 @@ Page({
 		}
       },
     })
+	//预加载图片
     //banner
     //news
     wx.request({
