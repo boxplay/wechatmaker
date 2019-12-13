@@ -10,7 +10,7 @@
 					1.为什么参见这次自荐计划
 				</view>
 				<view class="firstPage-answers">
-					<textarea name="why_description" cursor-spacing='20' class="subdata-textarea" placeholder="当初为什么{{product_has == 1?'':'想'}}{{tipsAction}}{{tips}}"></textarea>
+					<textarea name="why_description"  cursor-spacing='20' class="subdata-textarea" placeholder="当初为什么{{product_has == 1?'':'想'}}{{tipsAction}}{{tips}}"></textarea>
 					<!-- <view class="line"></view> -->
 				</view>
 				<view wx:if="{{product_has == 0}}">
@@ -18,7 +18,7 @@
 						2.写下你希望用{{tips}}实现的idea
 					</view>
 					<view class="firstPage-answers">
-						<textarea name="description" cursor-spacing='20' class="subdata-textarea"></textarea>
+						<textarea name="description" data-index="0" bindinput="descriptionChange" bindblur="descriptionChange" cursor-spacing='20' class="subdata-textarea"></textarea>
 						<!-- <view class="line"></view> -->
 					</view>
 				</view>

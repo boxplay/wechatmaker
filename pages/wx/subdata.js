@@ -72,26 +72,32 @@ Page({
 		if(!formData.why_description){
 			errorTips = '为什么参加这次自己自荐计划'
 		}
-		if(!formData.description){
-			errorTips = '描述你的ideal'
-		}
 		if(!formData.challenge){
 			errorTips = '参不参加神秘挑战呢'
 		}
 		if(!formData.why_description){
-			errorTips = '为什么参加这次自己按计划'
+			errorTips = '为什么参加这次自荐计划'
 		}
+		var dataList = this.data.dataList
 		if(formData.product_has == 1){
-			var dataList = this.data.dataList
 			for(let i =0;i<dataList.length;i++){
-				if(dataList[i].product_name || dataList[i].fans_count || dataList[i].description){
-					errorTips = '请完善信息'
+				console.log(dataList[i].product_name,dataList[i].fans_count,dataList[i].description)
+				if(!dataList[i].product_name || !dataList[i].fans_count || !dataList[i].description){
+					errorTips = '请完善信息1'
 					break;
 				}
 			}
 			if(formData.product_id == 4){
 				if(formData.emoji_admire === '' || formData.emoji_type === ''){
-					errorTips = '请完善信息'
+					errorTips = '请完善信息2'
+				}
+			}
+		}else{
+			for(let i =0;i<dataList.length;i++){
+				console.log(dataList[i].product_name,dataList[i].fans_count,dataList[i].description)
+				if(!dataList[i].description){
+					errorTips = '请描述你的idea'
+					break;
 				}
 			}
 		}
@@ -99,7 +105,7 @@ Page({
 			errorTips = '请正确填写手机号码'
 		}
 		if(!formData.nickname || !formData.wechat_id){
-			errorTips = '请完善信息'
+			errorTips = '请完善信息3'
 		}
 		if(errorTips !== '' || errorTips){
 			errorTips = '请填完后提交'
@@ -278,18 +284,18 @@ Page({
 		const eventChannel = that.getOpenerEventChannel()
 		//保存是否从活动报名提醒完善信息过来，详情页可能是 跳转而不是二级页面，暂时不用 
 		eventChannel.on('productTypeFunc', function(data) {
-			console.log(data)
-			var index = data.product_id
+			var index = Number(data.product_id), tindex = Number(data.product_id)
 			if (index > 1) {
 				that.setData({
 					fansCountList: fansCountList
 				})
 			}
+			tindex -=1
 			that.setData({
 				product_id: data.product_id,
 				product_has: data.product_has,
 				tips: tips[index],
-				tipsAction:tipsAction[index + 1]
+				tipsAction:tipsAction[tindex]
 			})
 		});
 		wx.getSystemInfo({
@@ -302,7 +308,6 @@ Page({
 					that.setData({
 						scrollHeight: Number(win_h * 2 - 156) + 'rpx'
 					})
-					console.log(that.data.scrollHeight)
 				}
 			},
 		})
