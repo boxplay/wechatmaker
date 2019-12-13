@@ -1,6 +1,6 @@
 <!--pages/index/home.wxml-->
 <view class='container'>
-	<image src="https://img.someet.cc/phpuQHR37" style="height: 0px;" />
+	<!-- <image src="https://img.someet.cc/phpuQHR37" style="height: 0px;" /> -->
 	<view class="index-image-box">
 		<image src="https://makercdn.someet.cc/WechatIMG2.jpg" width="100%" mode="widthFix" />
 	</view>

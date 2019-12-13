@@ -108,7 +108,7 @@ Page({
 			errorTips = '请完善信息3'
 		}
 		if(errorTips !== '' || errorTips){
-			errorTips = '请填完后提交'
+			if(errorTips != '请正确填写手机号码') errorTips = '请填完后提交'
 			wx.showToast({
 			  title: errorTips,
 			  icon:'none',

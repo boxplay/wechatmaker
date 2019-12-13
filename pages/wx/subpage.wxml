@@ -1,8 +1,11 @@
 <!--pages/index/home.wxml-->
 <view class='container'>
 	<view class="firstPage-whitebox">
+		<view class="title-image">
+			<image src="https://img.someet.cc/phpMilTj5" style="width: 100%;" mode="widthFix" />
+		</view>
 		<view class="firstPage-qabox">
-			<view class="firstPage-questions">
+			<view class="firstPage-questions" style="margin-top: 120rpx;">
 				1.你自荐/准备成为哪类产品的微信创客
 			</view>
 			<view class="firstPage-answers">

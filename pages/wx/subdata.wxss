@@ -6,7 +6,7 @@
 }
 .title-image{
 	position: absolute;
-	top: -42rpx;
+	top: -50rpx;
 	background: none;
 	z-index: 12;
 	background: none;
