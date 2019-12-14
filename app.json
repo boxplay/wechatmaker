@@ -1,7 +1,7 @@
 {
 	"pages": [
-		"pages/wx/poster",
 		"pages/wx/home",
+		"pages/wx/poster",
 		"pages/wx/subpage",
 		"pages/wx/index",
 		"pages/wx/detail",
