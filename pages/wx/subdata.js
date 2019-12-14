@@ -3,6 +3,7 @@ const app = getApp()
 
 Page({
 	data: {
+		zjTextShow:[true],
 		newsUrls: [],
 		title: 'Wechat Maker',
 		isIpx: app.globalData.isIpx ? true : false,
@@ -163,7 +164,7 @@ Page({
 					  duration: 2000
 					})
 					wx.redirectTo({
-						url:'poster'
+						url:'poster?p='+this.data.product_has+'&id='+formData.product_id+'&name='+this.data.dataList[0].product_name
 					})
 				}else{
 					wx.showToast({
@@ -179,6 +180,14 @@ Page({
 			fail: (err) => {
 				console.log(err)
 			}
+		})
+	},
+	changeTipsTextShow(e){
+		var index = e.currentTarget.dataset.index
+		var showOrHidden = this.data.zjTextShow
+		showOrHidden[index] = false
+		this.setData({
+			zjTextShow:showOrHidden
 		})
 	},
 	//
@@ -257,15 +266,19 @@ Page({
 	//移除公众号
 	removeWxProduct(e) {
 		var index = e.currentTarget.dataset.index;
+		var zjTextShow = this.data.zjTextShow
 		var list = this.data.dataList
+		zjTextShow.splice(index,1);
 		list.splice(index, 1)
 		this.setData({
-			dataList: list
+			dataList: list,
+			zjTextShow:zjTextShow
 		})
 	},
 	//增加公众号
 	addWxProduct() {
 		var list = this.data.dataList
+		var zjTextShow = this.data.zjTextShow
 		var index = list.length - 1;
 		if (!list[index]['product_name'] || !list[index]['description']) {
 			wx.showToast({
@@ -281,9 +294,11 @@ Page({
 				emoji_type:'',
 				game_lighter:''
 			})
+			zjTextShow.push(true)
 			console.log(list);
 			this.setData({
-				dataList: list
+				dataList: list,
+				zjTextShow:zjTextShow
 			})
 		}
 	},

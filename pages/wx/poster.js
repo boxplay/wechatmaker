@@ -14,13 +14,19 @@ Page({
 		},
 		w: 750,
 		h: 1334,
+		imgw:0,
+		imgh:0,
 		posterTempPath: '',
 		dpr: 2,
+		product_id:0,
+		product_name:'无啊',
+		product_has:1,
+		product_type:1
 	},
 	checkImage() {
 		var that = this;
 		var userInfo = app.globalData.userInfo
-		var shareBack = 'https://img.someet.cc/phpXa5xyY'
+		var shareBack = this.data.product_has === 1?'https://img.someet.cc/shareBack.jpg':'https://img.someet.cc/shareBack2.jpg'
 		if (!userInfo) {
 			userInfo = wx.getStorageSync('userInfo')	
 		}
@@ -31,24 +37,16 @@ Page({
 			return false
 		}
 		wx.getImageInfo({
-			src: userInfo.avatarUrl, //下载微信头像获得临时地址
-			success: res => {
-				//将头像缓存在全局变量里
-				app.globalData.avatarUrlTempPath = res.path;
-			},
-			fail: res => {
-				//失败回调
-				wx.showToast({
-				  title: '获取图片1信息失败',
-				})
-			}
-		});
-		wx.getImageInfo({
 			src: shareBack, //下载微信头像获得临时地址
 			success: res => {
 				//将头像缓存在全局变量里
 				app.globalData.shareBackTempPath = res.path;
-				that.drawImage();
+				console.log(res)
+				that.setData({
+					imgw:res.width,
+					imgh:res.height
+				})
+				that.drawImage(res.width,res.height);
 			},
 			fail: res => {
 				//失败回调
@@ -58,7 +56,7 @@ Page({
 			}
 		});
 	},
-	drawImage() {
+	drawImage(w,h) {
 		var that = this;
 		wx.showLoading({
 		  title: '正在加载专属海报',
@@ -71,12 +69,12 @@ Page({
 				x: 0,
 				y: 0
 			},
-			avatar: {
-				width: 80,
-				height: 80,
-				x: (this.data.w - 90) / 2,
-				y: 360
-			}
+			// avatar: {
+			// 	width: 80,
+			// 	height: 80,
+			// 	x: (this.data.w - 90) / 2,
+			// 	y: 360
+			// }
 		}
 		ctx.drawImage(app.globalData.shareBackTempPath, obj.shareBack.x, obj.shareBack.y, obj.shareBack.width, obj.shareBack
 			.height); // 推进去图片
@@ -84,19 +82,25 @@ Page({
 		ctx.save(); // 先保存状态 已便于画完圆再用
 		ctx.beginPath(); //开始绘制
 		// 先画个圆   前两个参数确定了圆心 （x,y） 坐标  第三个参数是圆的半径  四参数是绘图方向  默认是false，即顺时针
-		ctx.arc(obj.avatar.width / 2 + obj.avatar.x, obj.avatar.width / 2 + obj.avatar.y, obj.avatar.width / 2, 0, Math.PI *
-			2, false);
-		ctx.clip(); //画了圆 再剪切  原始画布中剪切任意形状和尺寸。一旦剪切了某个区域，则所有之后的绘图都会被限制在被剪切的区域内
-		ctx.drawImage(app.globalData.avatarUrlTempPath, obj.avatar.x, obj.avatar.y, obj.avatar.width, obj.avatar.heigth); // 推进去图片
+		// ctx.arc(obj.avatar.width / 2 + obj.avatar.x, obj.avatar.width / 2 + obj.avatar.y, obj.avatar.width / 2, 0, Math.PI *
+		// 	2, false);
+		// ctx.clip(); //画了圆 再剪切  原始画布中剪切任意形状和尺寸。一旦剪切了某个区域，则所有之后的绘图都会被限制在被剪切的区域内
+		// ctx.drawImage(app.globalData.avatarUrlTempPath, obj.avatar.x, obj.avatar.y, obj.avatar.width, obj.avatar.heigth); // 推进去图片
 		ctx.restore(); //恢复状态
-		var str = "我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强";
-		this.drawText(ctx, str, 100, 580,550);
+		var name = this.data.userInfo.nickName+" :"
+		console.log(this.data.userInfo)
+		this.drawText(ctx, name, 100, 740,520)
+		var str = "因为你的勇气和创造力，在”微信创客自荐计划“中，被认证为「微信创客」自荐作品:"+this.data.product_type+this.data.product_name+"已被收录";
+		if(this.data.product_has == 0){
+			str = "因为你的勇气和创造力，你在”微信创客自荐计划“中，我们看到了你成为「微信创客」的可能性。快用"+this.data.product_type+"实现你想法吧!";
+		}
+		this.drawText(ctx, str, 130, 800,480);
 		ctx.draw(true, setTimeout(function() {
 			wx.canvasToTempFilePath({
 				x: 0,
 				y: 0,
-				destWidth: that.w * that.dpr,
-				destHeight: that.h * that.dpr,
+				destWidth: w,
+				destHeight: h,
 				canvasId: 'shareBox',
 				success(res) {
 					that.setData({
@@ -112,9 +116,9 @@ Page({
 	},
 	//文本换行 参数：1、canvas对象，2、文本 3、距离左侧的距离 4、距离顶部的距离 5、6、文本的宽度
 	drawText: function(ctx, str, leftWidth, initHeight,canvasWidth) {
-		ctx.font = 'normal bold 32px sans-serif';
-		ctx.setFillStyle('white');
-		var lineWidth = 10;
+		ctx.font = 'normal 32px sans-serif';
+		ctx.setFillStyle('black');
+		var lineWidth = 18;
 		var chr = str.split(""); //这个方法是将一个字符串分割成字符串数组
 		var temp = "";
 		var row = [];
@@ -136,7 +140,7 @@ Page({
 		row.push(temp);
 		for (var b = 0;b<row.length;b++) {
 			ctx.fillText(row[b],leftWidth,initHeight)
-			initHeight += 40;
+			initHeight += 60;
 		}
 	},
 	saveFile() {
@@ -201,6 +205,18 @@ Page({
 	 */
 	onLoad: function(options) {
 		var that = this;
+		console.log(options);
+		var tips = new Array();
+		tips[1] = '公众号'
+		tips[2] = '小程序'
+		tips[3] = '小游戏'
+		tips[4] = '表情包'
+		// this.setData({
+		// 	product_id:options.id,
+		// 	product_name:options.name,
+		// 	product_has:options.p,
+		// 	product_type:tips[options.id]
+		// })
 		wx.getSystemInfo({
 			success: function(res) {
 				// console.log(res.windowWidth);
@@ -213,6 +229,10 @@ Page({
 					})
 				}
 			},
+		})
+		var userInfo = wx.getStorageSync('userInfo');
+		this.setData({
+			userInfo:userInfo
 		})
 		that.checkImage()
 	},

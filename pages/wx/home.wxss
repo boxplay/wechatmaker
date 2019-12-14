@@ -3,7 +3,15 @@
 	text-align: center;
 	margin: 40rpx auto 20rpx;
 }
-
+.home-video{
+	position: absolute;
+	top:1218rpx;
+	width: 100%;
+	margin: 0 auto;
+}
+.home-video video{
+	width: calc(100vw * 0.85);
+}
 .home_main_title text {
 	display: inline-block;
 	margin: 0 10rpx;

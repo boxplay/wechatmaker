@@ -37,9 +37,14 @@
 								 class="weui-input" />
 							</view>
 							<view class="subdata-question">为你的作品写下自荐语</view>
-							<view class="subdata-question subdata-input">
-								<textarea data-index="{{index}}" bindinput="descriptionChange" bindblur="descriptionChange" class="subdata-textarea"
-								 placeholder="你觉得你作品有什么值得推荐的地方？你和你的作品有什么特别的故事吗?"></textarea>
+							<view class="subdata-question subdata-input" style="position: relative;">
+								<textarea data-index="{{index}}" bindfocus="changeTipsTextShow" bindinput="descriptionChange" bindblur="descriptionChange" class="subdata-textarea"
+								 placeholder=""></textarea>
+								 {{zjTextShow[index]}}
+								 <view class="hiddenText" wx:if="{{zjTextShow[index] === true}}">
+								 	<text>你觉得你作品有什么值得推荐的地方？</text>
+								 	<text>你和你的作品有什么特别的故事吗?</text>
+								 </view>
 							</view>
 						</view>
 						<view class="subdata-question-box" wx:if="{{product_has !=0 && product_id ==4}}">
