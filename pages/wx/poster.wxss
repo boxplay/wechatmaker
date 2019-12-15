@@ -1,3 +1,17 @@
+.container{
+	position: relative;
+	height: 100%;
+	overflow: hidden;
+}
+.poster-img{
+	display: block;
+}
+.poster-btn{
+	position: absolute;
+	bottom: 65rpx;
+	width: 100%;
+	/*opacity: 0;*/
+}
 .home_main_title{font-size:38rpx;text-align:center;margin:40rpx auto 20rpx;}
 .home_main_title text{display:inline-block;margin:0 10rpx;}
 .home_main_title text:nth-child(odd){width:20rpx;border-bottom:1px solid #000;height:2rpx;line-height:2rpx;margin:-12rpx 10rpx 10rpx;}
@@ -11,4 +25,36 @@
  */
 image{
 	width: 100%;
+}
+.share-btn{
+	width: calc(100vw *.8);
+	margin: 0 auto;
+	height: 70rpx;
+	line-height: 35rpx;
+	border-radius: 70rpx;
+	text-align: center;
+	color:black;
+	background-color: #ffce00;
+	padding: 10rpx;
+	position: relative;
+	overflow: visible;
+	z-index:20;
+	font-weight: 400;
+	border:1px solid black;
+}
+.share-btn::after{
+	content: " ";
+	margin: 0 auto;
+	border-radius: 70rpx;
+	text-align: center;
+	color:black;
+	background-color: #ffce00;
+	padding: 10rpx;
+	position: absolute;
+	left:0;
+	right: 0;
+	top:-8rpx;
+	z-index:-1;
+	font-weight: 400;
+	border:1px solid black;
 }

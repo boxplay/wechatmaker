@@ -1,7 +1,12 @@
 <!--pages/index/home.wxml-->
 <view class='container'>
+	<view wx:if="{{posterTempPath}}">
+		<image class="poster-img" wx:if="{{backPath}}" src="{{backPath}}" width="100%" mode="widthFix" />
+	</view>
+	<canvas class="shareCanvas" canvas-id="realShareBox"  style="width: 750px;height: 1334px;position:fixed;top:9999px"></canvas>
 	<canvas class="shareCanvas" canvas-id="shareBox"  style="width: 750px;height: 1334px;position:fixed;top:9999px"></canvas>
-	<image wx:if="{{posterTempPath}}" src="{{posterTempPath}}" width="100%" mode="widthFix" />
-	<button bindtap="saveFile">保存海报</button>
-	<!-- <image src='https://img.someet.cc/shareBack.jpg' mode="widthFix" style="width: 100%;" /> -->
+	<!--<image wx:if="{{posterTempPath}}" src="{{posterTempPath}}" width="100%" mode="widthFix"  />-->
+	<view class="poster-btn" style="{{isIpx ?'bottom:265rpx':''}}">
+		<button bindtap="saveFile" class="share-btn" disabled = "{{!posterTempPath}}">保存并分享</button>
+	</view>
 </view>

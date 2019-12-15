@@ -32,8 +32,25 @@
 .list{width:calc(100vw * .9);height:calc(100vw * .9 * .5);position:relative;margin:0 auto 40rpx;}
 .list .img_box{border-radius:20rpx;width:100%;height:calc(100vw * .9 * .5);overflow:hidden;position:relative;}
 .list .img_box image{width:100%;}
-.title_box{
+/*.title_box{
 	margin: 0 auto;
 	margin-top: 30rpx;
 	margin-bottom: 15rpx;
+}*/
+.index-title{
+	position: relative;
+}
+.index-title .title_box{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	left: 0;
+	right: 0;
+	bottom:0;
+	background-color: rgba(0,0,0,0.5);
+	color:white;
+	height: 70rpx;
+	line-height: 70rpx;
+	z-index: 2;
+	border-radius:0rpx 0rpx 20rpx 20rpx;
 }

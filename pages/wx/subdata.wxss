@@ -242,3 +242,10 @@
 	top: 25%;
 	left: 10rpx;
 }
+.subdata-tips-title,.subdata-tips-text{
+	display: block;
+}
+.subdata-tips-text{
+	font-size: 20rpx;
+	padding-left: 35rpx;
+}

@@ -1,7 +1,7 @@
 export default {
   'en': {
     'language': 'English',
-    'home': 'Home',
+    'home': 'News',
     'develop': 'Be a Maker',
     'news': 'On-Site News',
     'stories': 'WeChat Makers’stories',
@@ -35,7 +35,7 @@ export default {
 
   'zh_CN': {
     'language': '中文',
-    'home': '首页',
+    'home': '咨询',
     'develop': '成为Maker',
     'news': '创客资讯',
     'stories': '微信创客快报',

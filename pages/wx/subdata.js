@@ -91,17 +91,14 @@ Page({
 		formData.challenge = this.data.challenge
 		app.globalData.nickName = formData.nickname
 		var errorTips ='';
-		if(!formData.why_description){
-			errorTips = '为什么参加这次自己自荐计划'
-		}
 		if(!formData.challenge){
-			errorTips = '参不参加神秘挑战呢'
+			errorTips = '请勾选是否参加神秘挑战'
 		}
 		if(!formData.why_description){
 			errorTips = '为什么参加这次自荐计划'
 		}
-		if(formData.why_description.length <=20){
-			errorTips = '最少填写20个字'
+		if(formData.why_description.length <10){
+			errorTips = '文字描述最少填写10个字'
 		}
 		var dataList = this.data.dataList
 		if(formData.product_has == 1){
@@ -109,44 +106,44 @@ Page({
 				
 				if(formData.product_id == 4){
 					if(!dataList[i].product_name || !dataList[i].emoji_type || !dataList[i].description){
-						errorTips = '请完善信息2'
+						errorTips = '请填完后提交'
 						break;
 					}
 				}else if(formData.product_id == 1 || formData.product_id == 3){
 					if(!dataList[i].product_name || !dataList[i].fans_count || !dataList[i].description || !dataList[i].game_lighter){
-						errorTips = '请完善信息1'
+						errorTips = '请填完后提交'
 						break;
 					}
 				}else{
 					if(!dataList[i].product_name || !dataList[i].fans_count || !dataList[i].description){
-						errorTips = '请完善信息1'
+						errorTips = '请填完后提交'
 						break;
 					}
+				}
+				if(dataList[i].description && dataList[i].description.length <10){
+					errorTips = '文字描述最少填写10个字'
 				}
 			}
 		}else{
 			for(let i =0;i<dataList.length;i++){
 				dataList[i].product_name = '无'
-				console.log(dataList[i])
-				console.log(dataList[i].description)
 				if(!dataList[i].description){
-					errorTips = '请描述你的idea'
+					errorTips = '请填完后提交'
 					break;
 				}
 			}
+		}
+		if(!(/^[\d\w]+$/.test(formData.wechat_id))){
+			errorTips='微信ID只允许输入数字和字母'
 		}
 		if(!(/^1[3|4|5|6|7|8|9][0-9]\d{8}$$/.test(formData.phone))){
 			errorTips = '请正确填写手机号码'
 		}
 		if(!formData.nickname || !formData.wechat_id){
-			errorTips = '请完善信息3'
+			errorTips = '请填完后提交'
 		}
-		if(!(/^[\d\w]+$/.test(formData.wechat_id))){
-			errorTips='微信ID只允许输入数字和字母'
-		}
-		console.log(errorTips)
 		if(errorTips !== '' || errorTips){
-			if(errorTips != '请正确填写手机号码' && errorTips != '微信ID只允许输入数字和字母') errorTips = '请填完后提交'
+//			if(errorTips != '请正确填写手机号码' && errorTips != '微信ID只允许输入数字和字母') errorTips = '请填完后提交'
 			wx.showToast({
 			  title: errorTips,
 			  icon:'none',
@@ -175,18 +172,49 @@ Page({
 				
 				if(res.data.status == 1){
 					wx.showToast({
-					  title: '自荐成功',
-					  icon: 'success',
+					  title: '自荐成功,开始生成海报',
+					  icon: 'none',
 					  duration: 2000
 					})
-					setTimeout(function(){
-						wx.redirectTo({
-							url:'home'
-						})
-					},1000)
-					// wx.redirectTo({
-					// 	url:'poster?p='+this.data.product_has+'&id='+formData.product_id+'&name='+this.data.dataList[0].product_name
-					// })
+					var img = 'https://makercdn.someet.cc/wxapp/shareBack1.jpg'
+					if(that.data.isIpx){
+						img = 'https://makercdn.someet.cc/wxapp/shareBackX.jpg'
+					}
+				    wx.getImageInfo({
+						src: img, //下载微信头像获得临时地址
+						success: res => {
+							//将头像缓存在全局变量里
+							app.globalData.shareBack1 = res.path;
+							app.globalData.shareBack1W = res.width;
+							app.globalData.shareBack1H = res.height;
+							wx.getImageInfo({
+								src: img, //下载微信头像获得临时地址
+								success: res => {
+									//将头像缓存在全局变量里
+									app.globalData.realPath = res.path;
+									app.globalData.realPathW = res.width;
+									app.globalData.realPathH = res.height;
+									setTimeout(function(){
+										wx.redirectTo({
+										 	url:'poster?p='+that.data.product_has+'&id='+formData.product_id+'&name='+that.data.dataList[0].product_name
+										 })
+									},1000)
+								},
+								fail: res => {
+									//失败回调
+									wx.showToast({
+									  title: '获取图片2信息失败',
+									})
+								}
+							});
+						},
+						fail: res => {
+							//失败回调
+							wx.showToast({
+							  title: '获取图片2信息失败',
+							})
+						}
+					});
 				}else{
 					wx.showToast({
 					  title: '信息存储失败',
@@ -202,6 +230,35 @@ Page({
 				console.log(err)
 			}
 		})
+	},
+	checkRule(e){
+		var str = e.detail.value
+		var type =e.currentTarget.dataset.type
+		if(type == 'wechat_id'){
+			if(!(/^[\d\w]+$/.test(str))){
+				wx.showToast({
+				  title: '微信ID只允许输入数字和字母',
+				  icon: 'none',
+				  duration: 1500
+				})
+			}
+		}else if(type == 'phone'){
+			wx.showToast({
+				title:'请正确填写手机号码',
+				icon:'none',
+				duration:1500
+			})
+		}
+	},
+	Textblur(e){
+		var str = e.detail.value
+		if(str.length <10){
+			wx.showToast({
+			  title: '至少填写10个字',
+			  icon: 'none',
+			  duration: 1500
+			})
+		}
 	},
 	changeTextAreaInput(e){
 		var res = e.detail.value

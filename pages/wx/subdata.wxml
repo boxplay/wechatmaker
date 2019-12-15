@@ -9,7 +9,7 @@
 					1.为什么参加这次自荐计划？
 				</view>
 				<view class="firstPage-answers">
-					<textarea name="why_description" data-type='why_description' bindinput="changeTextAreaInput" bindblur="changeTextAreaInput"  cursor-spacing='20' class="subdata-textarea" placeholder="你有什么样的故事和经验分享给平台里更多的用户和微信创客们？"></textarea>
+					<textarea name="why_description"  data-type='why_description' bindinput="changeTextAreaInput" bindblur="Textblur"  cursor-spacing='20' class="subdata-textarea" placeholder="我们希望你可以和更多小伙伴分享你的故事和经验"></textarea>
 					<!-- <view class="line"></view> -->
 				</view>
 				<view wx:if="{{product_has == 0}}" style="margin-top: 40rpx;">
@@ -17,7 +17,7 @@
 						2.写下你希望用{{tips}}实现的idea
 					</view>
 					<view class="firstPage-answers">
-						<textarea name="description" data-index="0" bindinput="descriptionChange" bindblur="descriptionChange"
+						<textarea  placeholder="快分享一下你的idea，然后马上开始创造吧" name="description" data-index="0" bindinput="descriptionChange" bindblur="Textblur"
 						 cursor-spacing='20' class="subdata-textarea"></textarea>
 						<!-- <view class="line"></view> -->
 					</view>
@@ -32,12 +32,12 @@
 						<view class="subdata-question-box">
 							<view class="subdata-question">{{tips}}名称</view>
 							<view class="subdata-question subdata-input">
-								<input style="padding-left: 15rpx;" data-index="{{index}}" cursor-spacing='20' bindinput="wnameChange" bindblur="wnameChange"
+								<input placeholder="请完整填写名称" style="padding-left: 15rpx;" data-index="{{index}}" cursor-spacing='20' bindinput="wnameChange" bindblur="wnameChange"
 								 class="weui-input" />
 							</view>
-							<view class="subdata-question">为你的作品写下自荐语</view>
+							<view class="subdata-question">你的作品为什么值得被看见</view>
 							<view class="subdata-question subdata-input" style="position: relative;">
-								<textarea data-index="{{index}}" bindfocus="changeTipsTextShow" bindinput="descriptionChange" bindblur="descriptionChange" placeholder="你的作品为什么值得被看见?" class="subdata-textarea"></textarea>
+								<textarea data-index="{{index}}" bindfocus="changeTipsTextShow" bindinput="descriptionChange" bindblur="Textblur" placeholder="我们希望你可以说一说你作品的独特之处" class="subdata-textarea"></textarea>
 								<!-- <view class="hiddenText" wx:if="{{zjTextShow[index] === true}}">
 								 	<text>你的作品为什么值得被看见</text>
 								 	<text>你和你的作品有什么特别的故事吗?</text>
@@ -98,14 +98,15 @@
 					<!-- 第二个微信公众号 -->
 					<!-- <view class="line-dashed"></view> -->
 					<view>
-						<button class="subdata-button" bindtap="addWxProduct">添加{{tips}} +</button>
+						<button class="subdata-button" bindtap="addWxProduct">添加更多{{tips}} +</button>
 					</view>
 					<!-- <view class="line-dashed"></view> -->
 
 				</view>
 				<!-- 第二个微信公众号开始 -->
 				<view class="firstPage-questions" style="margin-top: 60rpx;margin-bottom: 20rpx;">
-					3.是否愿意参加神秘挑战？
+					<text class="subdata-tips-title">3.是否愿意参加神秘挑战？</text>
+					<text class="subdata-tips-text">有机会和一批同好进行一场快闪创造</text>
 				</view>
 				<view class="firstPage-answers">
 					<view class="product_type {{challenge == 1?'type_selected':''}}" data-id="1" data-ctype='challenge' bindtap="clickFunc">
@@ -117,17 +118,18 @@
 					</view>
 				</view>
 				<view class="firstPage-questions" style="margin-top: 60rpx;">
-					4.请留下你的联系信息
+					<text class="subdata-tips-title">4.请留下你的联系信息</text>
+					<text class="subdata-tips-text">被选为优秀作品后便于和你取得联系</text>
 				</view>
 				<view class="subdata-question-box">
 					<view class="subdata-question subdata-input userinfoname">
 						<input name="nickname" cursor-spacing='20' data-type='nickname' bindinput="changeTextAreaInput" bindblur="changeTextAreaInput" class="subdata-input-external" placeholder="昵称" />
 					</view>
 					<view class="subdata-question subdata-input userinfoid">
-						<input name="wechat_id" cursor-spacing='20' data-type='wechat_id' bindinput="changeTextAreaInput" bindblur="changeTextAreaInput" class="subdata-input-external" placeholder="微信号" />
+						<input name="wechat_id" cursor-spacing='20' data-type='wechat_id' bindinput="changeTextAreaInput" bindblur="checkRule" class="subdata-input-external" placeholder="微信号" />
 					</view>
 					<view class="subdata-question subdata-input userinfophone">
-						<input name="phone" type="number" cursor-spacing='20' data-type='phone' bindinput="changeTextAreaInput" bindblur="changeTextAreaInput" class="subdata-input-external" placeholder="手机号" />
+						<input name="phone" type="number" cursor-spacing='20' data-type='phone' bindinput="changeTextAreaInput" bindblur="checkRule" class="subdata-input-external" placeholder="手机号" />
 					</view>
 				</view>
 			</view>
@@ -139,6 +141,6 @@
 			<view class="pageTotal">
 				2/2
 			</view>
-			<button class="firstPage-button" disabled="{{buttonDisable}}" bindtap="formSubmit">提交自荐</button>
+			<button class="firstPage-button" disabled="{{buttonDisable}}" bindtap="formSubmit">提 交</button>
 		</view>
 </view>

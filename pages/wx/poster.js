@@ -21,12 +21,14 @@ Page({
 		product_id:0,
 		product_name:'无',
 		product_has:1,
-		product_type:1
+		product_type:1,
+		backPath:app.globalData.shareBack1,
+		realPath:app.globalData.realPath
 	},
 	checkImage() {
 		var that = this;
 		var userInfo = app.globalData.userInfo
-		var shareBack = this.data.product_has === 1?'https://makercdn.someet.cc/wxapp/shareBack.jpg':'https://makercdn.someet.cc/wxapp/shareBack2.jpg'
+		var shareBack = this.data.backPath
 		if (!userInfo) {
 			userInfo = wx.getStorageSync('userInfo')	
 		}
@@ -36,32 +38,28 @@ Page({
 			})
 			return false
 		}
-		wx.getImageInfo({
-			src: shareBack, //下载微信头像获得临时地址
-			success: res => {
-				//将头像缓存在全局变量里
-				app.globalData.shareBackTempPath = res.path;
-				console.log(res)
-				that.setData({
-					imgw:res.width,
-					imgh:res.height
-				})
-				that.drawImage(res.width,res.height);
-			},
-			fail: res => {
-				//失败回调
-				wx.showToast({
-				  title: '获取图片2信息失败',
-				})
-			}
-		});
+		this.drawImage(app.globalData.shareBack1W,app.globalData.shareBack1H,app.globalData.shareBack1);
+//		wx.getImageInfo({
+//			src: shareBack, //下载微信头像获得临时地址
+//			success: res => {
+//				//将头像缓存在全局变量里
+//				app.globalData.shareBackTempPath = res.path;
+//				that.setData({
+//					imgw:res.width,
+//					imgh:res.height
+//				})
+//				that.drawImage(res.width,res.height,res.path);
+//			},
+//			fail: res => {
+//				//失败回调
+//				wx.showToast({
+//				  title: '获取图片2信息失败',
+//				})
+//			}
+//		});
 	},
-	drawImage(w,h) {
+	drawImageForRealPath(w,h,path){
 		var that = this;
-		wx.showLoading({
-		  title: '正在加载专属海报',
-		})
-		const ctx = wx.createCanvasContext('shareBox')
 		var obj = {
 			shareBack: { //背景图的位置和大小
 				width: 750,
@@ -69,39 +67,34 @@ Page({
 				x: 0,
 				y: 0
 			},
-			// avatar: {
-			// 	width: 80,
-			// 	height: 80,
-			// 	x: (this.data.w - 90) / 2,
-			// 	y: 360
-			// }
+			textPos:{
+				leftWidth:140,
+				height:790,
+				nameHeight:720,
+				heightY:910
+			}
 		}
-		ctx.drawImage(app.globalData.shareBackTempPath, obj.shareBack.x, obj.shareBack.y, obj.shareBack.width, obj.shareBack
-			.height); // 推进去图片
-
-		ctx.save(); // 先保存状态 已便于画完圆再用
-		ctx.beginPath(); //开始绘制
-		// 先画个圆   前两个参数确定了圆心 （x,y） 坐标  第三个参数是圆的半径  四参数是绘图方向  默认是false，即顺时针
-		// ctx.arc(obj.avatar.width / 2 + obj.avatar.x, obj.avatar.width / 2 + obj.avatar.y, obj.avatar.width / 2, 0, Math.PI *
-		// 	2, false);
-		// ctx.clip(); //画了圆 再剪切  原始画布中剪切任意形状和尺寸。一旦剪切了某个区域，则所有之后的绘图都会被限制在被剪切的区域内
-		// ctx.drawImage(app.globalData.avatarUrlTempPath, obj.avatar.x, obj.avatar.y, obj.avatar.width, obj.avatar.heigth); // 推进去图片
-		ctx.restore(); //恢复状态
-		var name = this.data.userInfo.nickName+" :"
-		console.log(this.data.userInfo)
-		this.drawText(ctx, name, 100, 740,520)
-		var str = "因为你的勇气和创造力，在”微信创客自荐计划“中，被认证为「微信创客」自荐作品:"+this.data.product_type+this.data.product_name+"已被收录";
+		const ctx = wx.createCanvasContext('realShareBox')
+		var t = "因你的勇气和创造力，你提交的"+this.data.product_type+this.data.product_name+"已被收录。"
+		var str ={
+			x:t,
+			y:"你就是我们要找的微信创客！"
+		}
 		if(this.data.product_has == 0){
-			str = "因为你的勇气和创造力，你在”微信创客自荐计划“中，我们看到了你成为「微信创客」的可能性。快用"+this.data.product_type+"实现你想法吧!";
+			t = "快用"+this.data.product_type+"实现你的想法吧！"
+			var str ={
+				x:"因你的勇气和创造力，我们看到了你成为「微信创客」的可能性。",
+				y:t
+			}
 		}
-		this.drawText(ctx, str, 130, 800,480);
+		this.startDraw(path,w,h,obj,ctx,str)
 		ctx.draw(true, setTimeout(function() {
 			wx.canvasToTempFilePath({
 				x: 0,
 				y: 0,
-				destWidth: w,
-				destHeight: h,
-				canvasId: 'shareBox',
+				destWidth: 666,
+				destHeight: 945,
+				canvasId: 'realShareBox',
 				success(res) {
 					that.setData({
 						posterTempPath: res.tempFilePath
@@ -112,13 +105,87 @@ Page({
 					console.log(11111)
 				}
 			})
-		}, 1000));
+		}, 400));
+	},
+	drawImage(w,h,path) {
+		console.log('start')
+		var that = this;
+		var obj = {
+			shareBack: { //背景图的位置和大小
+				width: 750,
+				height: 1334,
+				x: 0,
+				y: 0
+			},
+			textPos:{
+				leftWidth:140,
+				height:690,
+				nameHeight:620,
+				heightY:810
+			}
+		}
+		if(this.data.isIpx){
+			obj.textPos ={
+				leftWidth:140,
+				height:560,
+				nameHeight:500,
+				heightY:690
+			}
+		}
+		const ctx = wx.createCanvasContext('shareBox')
+		wx.showLoading({
+		  title: '正在生成证书',
+		})
+		var t = "因你的勇气和创造力，你提交的"+this.data.product_type+this.data.product_name+"已被收录。"
+		var str ={
+			x:t,
+			y:"你就是我们要找的微信创客！"
+		}
+		if(this.data.product_has == 0){
+			t = "快用"+this.data.product_type+"实现你的想法吧！"
+			var str ={
+				x:"因你的勇气和创造力，我们看到了你成为「微信创客」的可能性。",
+				y:t
+			}
+		}
+		this.startDraw(path,w,h,obj,ctx,str)
+		ctx.draw(true, setTimeout(function() {
+			wx.canvasToTempFilePath({
+				x: 0,
+				y: 0,
+				destWidth: w,
+				destHeight: h,
+				canvasId: 'shareBox',
+				success(res) {
+					console.log(res.tempFilePath)
+					that.setData({
+						backPath:res.tempFilePath
+					})
+					that.cutCanvas(w,h,obj)
+				},
+				fail(res) {
+					console.log(11111)
+				}
+			})
+		}, 300));
+	},
+	startDraw(path,w,h,obj,ctx,str){
+		console.log(path)
+		ctx.drawImage(path, obj.shareBack.x, obj.shareBack.y, obj.shareBack.width, obj.shareBack
+			.height); // 推进去图片
+		ctx.save(); // 先保存状态 已便于画完圆再用
+		ctx.beginPath(); //开始绘制
+		ctx.restore(); //恢复状态
+		var name = app.globalData.nickName+" :"
+		this.drawText(ctx, name, 140, obj.textPos.nameHeight,450)
+		this.drawText(ctx, str.x, 140, obj.textPos.height,450);
+		this.drawText(ctx, str.y, 140, obj.textPos.heightY,450);
 	},
 	//文本换行 参数：1、canvas对象，2、文本 3、距离左侧的距离 4、距离顶部的距离 5、6、文本的宽度
 	drawText: function(ctx, str, leftWidth, initHeight,canvasWidth) {
-		ctx.font = 'normal 32px sans-serif';
+		ctx.setFontSize(32);
 		ctx.setFillStyle('black');
-		var lineWidth = 18;
+//		var lineWidth = 32;
 		var chr = str.split(""); //这个方法是将一个字符串分割成字符串数组
 		var temp = "";
 		var row = [];
@@ -142,6 +209,29 @@ Page({
 			ctx.fillText(row[b],leftWidth,initHeight)
 			initHeight += 60;
 		}
+	},
+	//裁剪图片
+	cutCanvas(w,h,obj){
+		var that = this
+		this.drawImageForRealPath(app.globalData.realPathW,app.globalData.realPathH,app.globalData.shareBack1);
+//		wx.getImageInfo({
+//			src: this.data.realPath, //下载微信头像获得临时地址
+//			success: res => {
+//				//将头像缓存在全局变量里
+//				app.globalData.shareBackTempPath = res.path;
+//				that.setData({
+//					imgw:res.width,
+//					imgh:res.height
+//				})
+//				that.drawImageForRealPath(res.width,res.height,res.path);
+//			},
+//			fail: res => {
+//				//失败回调
+//				wx.showToast({
+//				  title: '获取图片2信息失败',
+//				})
+//			}
+//		});
 	},
 	saveFile() {
 		var that = this
@@ -207,10 +297,10 @@ Page({
 		var that = this;
 		console.log(options);
 		var tips = new Array();
-		tips[1] = '公众号'
-		tips[2] = '小程序'
-		tips[3] = '小游戏'
-		tips[4] = '表情包'
+		tips[1] = '微信公众号'
+		tips[2] = '微信小程序'
+		tips[3] = '微信小游戏'
+		tips[4] = '微信表情包'
 		this.setData({
 			product_id:options.id,
 			product_name:options.name,
@@ -233,6 +323,13 @@ Page({
 		var userInfo = wx.getStorageSync('userInfo');
 		this.setData({
 			userInfo:userInfo
+		})
+		var backPath ='https://makercdn.someet.cc/wxapp/shareBack1.jpg';
+		if(app.globalData.isIpx){
+			var backPath ='https://makercdn.someet.cc/wxapp/shareBackX.jpg';//x的背景图
+		}
+		this.setData({
+			backPath:backPath
 		})
 		that.checkImage()
 	},

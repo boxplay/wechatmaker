@@ -11,10 +11,10 @@
  </swiper> -->
 	<scroll-view scroll-y="true" style="height: {{scrollHeight}};">
 		<block wx:for="{{newsUrls}}" wx:key="{{index}}">
-			<view class="title_box" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
-				{{item.title}}
-			</view>
-			<view class='list' data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
+			<view class='list index-title' data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
+				<view class="title_box" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
+					{{item.title}}
+				</view>
 				<view class='img_box'>
 					<image src='{{item.pic}}' mode="widthFix"></image>
 					<view class='desc'>{{item.title}}</view>

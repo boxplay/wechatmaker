@@ -63,12 +63,17 @@ App({
   globalData: {
     userInfo: null,
     isIpx: false,
-	isSmall:false,
+		isSmall:false,
     language:'',
-	avatarUrlTempPath:'',
-	nickName:'',
-	shareBack:'https://img.someet.cc/phpXa5xyY',
-	shareBackTempPath:'',
+		avatarUrlTempPath:'',
+		nickName:'',
+		shareBack1:'https://img.someet.cc/phpXa5xyY',
+		realPath:'https://makercdn.someet.cc/wxapp/realPath.jpg',
+		shareBack1W:0,
+		shareBack1H:0,
+		realPathW:0,
+		realPathH:0,
+		shareBackX:'',
   },
   onShow(options) {
     wx.getSystemInfo({
