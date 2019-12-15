@@ -5,12 +5,25 @@
 }
 .home-video{
 	position: absolute;
-	top:1218rpx;
+	top:1292rpx;
 	width: 100%;
 	margin: 0 auto;
+	border-radius:20rpx;
+}
+.home-link{
+	position: absolute;
+	top:5933rpx;
+	width: 100%;
+	margin: 0 auto;
+	border-radius:20rpx;
+	background:red;
+	height:60rpx;
+	opacity:0;
 }
 .home-video video{
-	width: calc(100vw * 0.85);
+	width: calc(100vw * 0.91);
+	border-radius:20rpx;
+	height:290rpx;
 }
 .home_main_title text {
 	display: inline-block;
@@ -85,6 +98,8 @@
 
 .index-image-box image {
 	width: 100%;
+	display:block;
+	height:auto;
 }
 
 .index-button-box {
@@ -94,15 +109,20 @@
 	right: 0;
 	margin-left: auto;
 	margin-right: auto;
-	width: calc(140vw / 2);
+	width: calc(100vw * .9);
+	background:url('https://makercdn.someet.cc/wxapp/btn.png') no-repeat;
+	background-size:contain;
+	height:100rpx;
 }
 
 .index-button-box button {
 	width: 100%;
-	background-color: rgb(29, 214, 70);
+	background-color:  #ffce00;
 	height: 80rpx;
 	border-radius: 80rpx;
 	line-height: 80rpx;
+	opacity:0;
+	z-index:2;
 }
 .index-button-x{
 	bottom: 188rpx;

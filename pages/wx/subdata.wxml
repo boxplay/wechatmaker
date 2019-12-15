@@ -1,16 +1,15 @@
 <!--pages/index/home.wxml-->
 <view class='container'>
-	<form bindsubmit="formSubmit">
 		<view class="firstPage-whitebox">
 			<view class="title-image">
-				<image src="https://img.someet.cc/phpMilTj5" style="width: 100%;" mode="widthFix" />
+				<image src="https://makercdn.someet.cc/wxapp/titleImg.jpg" style="width: 100%;" mode="widthFix" />
 			</view>
 			<view class="firstPage-qabox">
 				<view class="firstPage-questions" style="margin-top: 120rpx;">
 					1.为什么参加这次自荐计划？
 				</view>
 				<view class="firstPage-answers">
-					<textarea name="why_description" cursor-spacing='20' class="subdata-textarea" placeholder="{{product_has == 1?'当初':''}}为什么{{product_has == 1?'':'想'}}{{tipsAction}}{{tips}}"></textarea>
+					<textarea name="why_description" data-type='why_description' bindinput="changeTextAreaInput" bindblur="changeTextAreaInput"  cursor-spacing='20' class="subdata-textarea" placeholder="你有什么样的故事和经验分享给平台里更多的用户和微信创客们？"></textarea>
 					<!-- <view class="line"></view> -->
 				</view>
 				<view wx:if="{{product_has == 0}}" style="margin-top: 40rpx;">
@@ -38,13 +37,11 @@
 							</view>
 							<view class="subdata-question">为你的作品写下自荐语</view>
 							<view class="subdata-question subdata-input" style="position: relative;">
-								<textarea data-index="{{index}}" bindfocus="changeTipsTextShow" bindinput="descriptionChange" bindblur="descriptionChange" class="subdata-textarea"
-								 placeholder=""></textarea>
-								 {{zjTextShow[index]}}
-								 <view class="hiddenText" wx:if="{{zjTextShow[index] === true}}">
-								 	<text>你觉得你作品有什么值得推荐的地方？</text>
+								<textarea data-index="{{index}}" bindfocus="changeTipsTextShow" bindinput="descriptionChange" bindblur="descriptionChange" placeholder="你的作品为什么值得被看见?" class="subdata-textarea"></textarea>
+								<!-- <view class="hiddenText" wx:if="{{zjTextShow[index] === true}}">
+								 	<text>你的作品为什么值得被看见</text>
 								 	<text>你和你的作品有什么特别的故事吗?</text>
-								 </view>
+								 </view> -->
 							</view>
 						</view>
 						<view class="subdata-question-box" wx:if="{{product_has !=0 && product_id ==4}}">
@@ -59,6 +56,17 @@
 								</view>
 							</view>
 						</view>
+						<view class="subdata-question-box" wx:if="{{product_has !=0 && product_id ==1}}">
+							<view class="subdata-question">你的微信公众号属于哪一个创意领域？</view>
+							<view class="firstPage-answers">
+								<block wx:for="{{gameLighterList}}" wx:key="unique" wx:for-index="key" wx:for-item="item">
+									<view class="product_type {{item.id == gameLighter[index]?'type_selected':''}}" data-id="{{item.id}}" data-index="{{index}}"
+									 bindtap="changegameLighter">
+										{{item.name}}
+									</view>
+								</block>
+							</view>
+						</view>
 						<view class="subdata-question-box" wx:if="{{product_has !=0 && product_id ==3}}">
 							<view class="subdata-question">你的作品哪一部分最具有创新性？</view>
 							<view class="firstPage-answers">
@@ -71,7 +79,7 @@
 							</view>
 						</view>
 						<view class="subdata-question-box" wx:if="{{product_id != 4}}">
-							<view class="subdata-question">累计{{product_id == 1?'粉丝':'用户'}}数量有多少？</view>
+							<view class="subdata-question">{{product_id == 2 || product_id == 3?'':'累计'}}{{product_id == 1?'粉丝':'日活跃用户'}}数量有多少？</view>
 							<view class="firstPage-answers">
 								<block wx:for="{{fansCountList}}" wx:key="unique" wx:for-index="key" wx:for-item="item">
 									<view class="product_type {{item.id == fansCount[index]?'type_selected':''}}" data-id="{{item.id}}" data-index="{{index}}"
@@ -113,13 +121,13 @@
 				</view>
 				<view class="subdata-question-box">
 					<view class="subdata-question subdata-input userinfoname">
-						<input name="nickname" cursor-spacing='20' class="subdata-input-external" placeholder="昵称" />
+						<input name="nickname" cursor-spacing='20' data-type='nickname' bindinput="changeTextAreaInput" bindblur="changeTextAreaInput" class="subdata-input-external" placeholder="昵称" />
 					</view>
 					<view class="subdata-question subdata-input userinfoid">
-						<input name="wechat_id" cursor-spacing='20' class="subdata-input-external" placeholder="微信号" />
+						<input name="wechat_id" cursor-spacing='20' data-type='wechat_id' bindinput="changeTextAreaInput" bindblur="changeTextAreaInput" class="subdata-input-external" placeholder="微信号" />
 					</view>
 					<view class="subdata-question subdata-input userinfophone">
-						<input name="phone" type="number" cursor-spacing='20' class="subdata-input-external" placeholder="手机号" />
+						<input name="phone" type="number" cursor-spacing='20' data-type='phone' bindinput="changeTextAreaInput" bindblur="changeTextAreaInput" class="subdata-input-external" placeholder="手机号" />
 					</view>
 				</view>
 			</view>
@@ -131,7 +139,6 @@
 			<view class="pageTotal">
 				2/2
 			</view>
-			<button class="firstPage-button" disabled="{{buttonDisable}}" formType="submit">提交自荐</button>
+			<button class="firstPage-button" disabled="{{buttonDisable}}" bindtap="formSubmit">提交自荐</button>
 		</view>
-	</form>
 </view>

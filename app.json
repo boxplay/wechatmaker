@@ -5,13 +5,7 @@
 		"pages/wx/subpage",
 		"pages/wx/index",
 		"pages/wx/detail",
-		"pages/wx/subdata",
-		"pages/index/home",
-		"pages/index/index",
-		"pages/logs/logs",
-		"pages/index/article",
-		"pages/index/detail",
-		"pages/index/detail_img"
+		"pages/wx/subdata"
 	],
 	"window": {
 		"backgroundTextStyle": "light",

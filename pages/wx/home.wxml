@@ -3,13 +3,28 @@
 	<!-- <image src="https://img.someet.cc/phpuQHR37" style="height: 0px;" /> -->
 	<view class="index-image-box">
 		<view class="home-video">
-			<video id="myVideo" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" danmu-list="{{danmuList}}" controls></video>
+			<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="https://makercdn.someet.cc/wxapp/wechatmaker.mp4" controls></video>
 		</view>
-		<image src="https://makercdn.someet.cc/WechatIMG2.jpg" width="100%" mode="widthFix" />
+		<view class="home-link" bindtap="goExternalLink">
+		</view>
+		<image src="https://makercdn.someet.cc/wxapp/homeImg1.jpg" width="100%" mode="widthFix" />
+		<view style="margin-top:-1rpx;">
+			<image src="https://makercdn.someet.cc/wxapp/m1.jpg" width="100%" mode="widthFix"/>
+		</view>
+		<view style="margin-top:-1rpx;">
+			<image src="https://makercdn.someet.cc/wxapp/m2.jpg" width="100%" mode="widthFix"/>
+		</view>
+		<view style="margin-top:-1rpx;">
+			<image src="https://makercdn.someet.cc/wxapp/m3.jpg" width="100%" mode="widthFix"/>
+		</view>
+		<!-- <image src="https://makercdn.someet.cc/wxapp/homeImg2.jpg" width="100%" mode="widthFix"/> -->
+		<view  style="margin-top:-1rpx;">
+			<image src="https://makercdn.someet.cc/wxapp/homeImg3.jpg" width="100%" mode="widthFix"/>
+		</view>
 	</view>
 	<view class="index-button-box {{isIpx ? 'index-button-x':''}}">
 		<button type="primary" wx:if="{{userInfo.nickName}}" bindtap="goSubPage"> 马上自荐</button>
-		<button type="primary" wx:if="{{!userInfo.nickName || userInfo == null}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">我要自荐</button>
+		<button type="primary" wx:if="{{!userInfo.nickName || userInfo == null}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">马上自荐</button>
 	</view>
 	<view class="tab_bar {{isIpx ? 'fix-iphonex-button':''}}">
 		<view class='icon_home' bindtap='goIndex'>

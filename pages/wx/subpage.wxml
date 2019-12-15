@@ -2,7 +2,7 @@
 <view class='container' style="{{isIpx?'height: 100%;':''}}">
 	<view class="firstPage-whitebox {{isSmall?'small-screen':''}} {{isIpx ?'large-screen':''}}">
 		<view class="title-image">
-			<image src="https://img.someet.cc/phpMilTj5" style="width: 100%;" mode="widthFix" />
+			<image src="https://makercdn.someet.cc/wxapp/titleImg.jpg" style="width: 100%;" mode="widthFix" />
 		</view>
 		<view class="firstPage-qabox">
 			<view class="firstPage-questions" style="margin-top: 180rpx;">

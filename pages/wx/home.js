@@ -6,10 +6,11 @@ Page({
     newsUrls:[],
     title: 'Wechat Maker',
     isIpx: app.globalData.isIpx ? true : false,
-	home: wx.T.locales["home"],
-	develop: wx.T.locales["develop"],
-	scrollHeight:'88rpx',
-	userInfo:{'nickName':''}
+  	home: wx.T.locales["home"],
+  	develop: wx.T.locales["develop"],
+  	scrollHeight:'88rpx',
+  	userInfo:{'nickName':''},
+    isPlay:false
   },
   onGotUserInfo(e){
 	  var that = this
@@ -54,13 +55,27 @@ Page({
 		  url:'subpage'
 	  })
   },
+  videoControl(){
+    console.log(1231)
+    var vtx = wx.createVideoContext('wechatmaker')
+    if(this.data.isPlay){
+      vtx.pause();
+    }else{
+      vtx.play();
+    }
+    this.setData({
+      isPlay:!this.data.isPlay
+    })
+  },
+  goExternalLink(){
+    console.log('即将跳转外部链接')
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this;
 	var userInfo = wx.getStorageSync('userInfo')
-	console.log(userInfo)
 	if(userInfo){
 		this.setData({
 			userInfo:userInfo

@@ -19,14 +19,14 @@ Page({
 		posterTempPath: '',
 		dpr: 2,
 		product_id:0,
-		product_name:'无啊',
+		product_name:'无',
 		product_has:1,
 		product_type:1
 	},
 	checkImage() {
 		var that = this;
 		var userInfo = app.globalData.userInfo
-		var shareBack = this.data.product_has === 1?'https://img.someet.cc/shareBack.jpg':'https://img.someet.cc/shareBack2.jpg'
+		var shareBack = this.data.product_has === 1?'https://makercdn.someet.cc/wxapp/shareBack.jpg':'https://makercdn.someet.cc/wxapp/shareBack2.jpg'
 		if (!userInfo) {
 			userInfo = wx.getStorageSync('userInfo')	
 		}
@@ -211,12 +211,12 @@ Page({
 		tips[2] = '小程序'
 		tips[3] = '小游戏'
 		tips[4] = '表情包'
-		// this.setData({
-		// 	product_id:options.id,
-		// 	product_name:options.name,
-		// 	product_has:options.p,
-		// 	product_type:tips[options.id]
-		// })
+		this.setData({
+			product_id:options.id,
+			product_name:options.name,
+			product_has:options.p,
+			product_type:tips[options.id]
+		})
 		wx.getSystemInfo({
 			success: function(res) {
 				// console.log(res.windowWidth);

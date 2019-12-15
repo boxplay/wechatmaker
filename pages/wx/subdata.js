@@ -24,7 +24,7 @@ Page({
 			description: '',
 			fans_count:'',
 			emoji_type:'',
-			game_lighter:''
+			game_lighter:'',
 		}],
 		fansCount:[],
 		fansCountList: [{
@@ -51,19 +51,19 @@ Page({
 		gameLighter:[],
 		gameLighterList: [{
 				id: 10,
-				name: '文字创意'
+				name: '玩法'
 			},
 			{
 				id: 11,
-				name: '图片创意'
+				name: '美术'
 			},
 			{
 				id: 12,
-				name: '视频创意'
+				name: '剧情'
 			},
 			{
 				id: 13,
-				name: '互动创意'
+				name: '音乐'
 			}
 		],
 		buttonDisable:false
@@ -74,17 +74,20 @@ Page({
 		})
 	},
 	//提交表单
-	formSubmit(e) {
+	formSubmit() {
+		console.log('开始提交')
 		var  that = this
 		this.setData({
 			buttonDisable:true
 		})
-		var formData = e.detail.value
+		var formData = new Object();
+		formData.nickname = this.data.nickname
+		formData.wechat_id = this.data.wechat_id
+		formData.phone = this.data.phone
+		formData.why_description = this.data.why_description
 		formData.product_id = this.data.product_id
 		formData.product_has = this.data.product_has
 		formData.desc = JSON.stringify(this.data.dataList)
-		// formData.emoji_admire = this.data.emoji_admire
-		// formData.emoji_type = this.data.emoji_type
 		formData.challenge = this.data.challenge
 		app.globalData.nickName = formData.nickname
 		var errorTips ='';
@@ -97,12 +100,21 @@ Page({
 		if(!formData.why_description){
 			errorTips = '为什么参加这次自荐计划'
 		}
+		if(formData.why_description.length <=20){
+			errorTips = '最少填写20个字'
+		}
 		var dataList = this.data.dataList
 		if(formData.product_has == 1){
 			for(let i =0;i<dataList.length;i++){
+				
 				if(formData.product_id == 4){
 					if(!dataList[i].product_name || !dataList[i].emoji_type || !dataList[i].description){
 						errorTips = '请完善信息2'
+						break;
+					}
+				}else if(formData.product_id == 1 || formData.product_id == 3){
+					if(!dataList[i].product_name || !dataList[i].fans_count || !dataList[i].description || !dataList[i].game_lighter){
+						errorTips = '请完善信息1'
 						break;
 					}
 				}else{
@@ -114,7 +126,9 @@ Page({
 			}
 		}else{
 			for(let i =0;i<dataList.length;i++){
-				console.log(dataList[i].product_name,dataList[i].fans_count,dataList[i].description)
+				dataList[i].product_name = '无'
+				console.log(dataList[i])
+				console.log(dataList[i].description)
 				if(!dataList[i].description){
 					errorTips = '请描述你的idea'
 					break;
@@ -127,9 +141,12 @@ Page({
 		if(!formData.nickname || !formData.wechat_id){
 			errorTips = '请完善信息3'
 		}
+		if(!(/^[\d\w]+$/.test(formData.wechat_id))){
+			errorTips='微信ID只允许输入数字和字母'
+		}
 		console.log(errorTips)
 		if(errorTips !== '' || errorTips){
-			if(errorTips != '请正确填写手机号码') errorTips = '请填完后提交'
+			if(errorTips != '请正确填写手机号码' && errorTips != '微信ID只允许输入数字和字母') errorTips = '请填完后提交'
 			wx.showToast({
 			  title: errorTips,
 			  icon:'none',
@@ -156,16 +173,20 @@ Page({
 			success: (res) => {
 				wx.hideLoading()
 				
-				console.log(res.data)
 				if(res.data.status == 1){
 					wx.showToast({
 					  title: '自荐成功',
 					  icon: 'success',
 					  duration: 2000
 					})
-					wx.redirectTo({
-						url:'poster?p='+this.data.product_has+'&id='+formData.product_id+'&name='+this.data.dataList[0].product_name
-					})
+					setTimeout(function(){
+						wx.redirectTo({
+							url:'home'
+						})
+					},1000)
+					// wx.redirectTo({
+					// 	url:'poster?p='+this.data.product_has+'&id='+formData.product_id+'&name='+this.data.dataList[0].product_name
+					// })
 				}else{
 					wx.showToast({
 					  title: '信息存储失败',
@@ -181,6 +202,32 @@ Page({
 				console.log(err)
 			}
 		})
+	},
+	changeTextAreaInput(e){
+		var res = e.detail.value
+		var type =e.currentTarget.dataset.type
+		switch (type){
+			case 'why_description':
+				this.setData({
+					why_description:res
+				})
+			break;
+			case 'nickname':
+				this.setData({
+					nickname:res
+				})
+			break;
+			case 'wechat_id':
+				this.setData({
+					wechat_id:res
+				})
+			break;
+			case 'phone':
+				this.setData({
+					phone:res
+				})
+			break;
+		}
 	},
 	changeTipsTextShow(e){
 		var index = e.currentTarget.dataset.index
@@ -211,7 +258,6 @@ Page({
 	changeFansCount(e) {
 		var fansCount = e.currentTarget.dataset.id
 		var index = e.currentTarget.dataset.index
-		console.log(index)
 		var dataList = this.data.dataList
 		dataList[index].fans_count = fansCount
 		var fansList = this.data.fansCount
@@ -225,10 +271,8 @@ Page({
 	changegameLighter(e) {
 		var fansCount = e.currentTarget.dataset.id
 		var index = e.currentTarget.dataset.index
-		console.log(index)
 		var dataList = this.data.dataList
 		dataList[index].game_lighter = fansCount
-		console.log(dataList[index])
 		var fansList = this.data.gameLighter
 		fansList[index] = fansCount
 		this.setData({
@@ -257,7 +301,6 @@ Page({
 			case 'emojitype':
 				var dataList = this.data.dataList
 				dataList[index].emoji_type = id
-				console.log(dataList)
 				this.setData({
 					dataList: dataList,
 				})
@@ -295,7 +338,6 @@ Page({
 				game_lighter:''
 			})
 			zjTextShow.push(true)
-			console.log(list);
 			this.setData({
 				dataList: list,
 				zjTextShow:zjTextShow
@@ -308,7 +350,7 @@ Page({
 	onLoad: function(options) {
 		var that = this;
 		var tips = new Array(),
-			fansCountList = new Array(),tipsAction = new Array();
+			fansCountList = new Array(),tipsAction = new Array(),gameLighterList = new Array();
 		tips[1] = '微信公众号'
 		tips[2] = '微信小程序'
 		tips[3] = '微信小游戏'
@@ -316,19 +358,36 @@ Page({
 		tipsAction = ['开通','开发','开发','设计']
 		fansCountList = [{
 				id: 6,
-				name: '5000以下'
+				name: '1000以下'
 			},
 			{
 				id: 7,
-				name: '5000-10000'
+				name: '1001-10000'
 			},
 			{
 				id: 8,
-				name: '10000-100000'
+				name: '10001-100000'
 			},
 			{
 				id: 9,
 				name: '100000+'
+			}
+		]
+		gameLighterList = [{
+				id: 14,
+				name: '互动创意'
+			},
+			{
+				id: 15,
+				name: '视频创意'
+			},
+			{
+				id: 16,
+				name: '图片创意'
+			},
+			{
+				id: 17,
+				name: '文字创意'
 			}
 		]
 		const eventChannel = that.getOpenerEventChannel()
@@ -338,6 +397,11 @@ Page({
 			if (index > 1) {
 				that.setData({
 					fansCountList: fansCountList
+				})
+			}
+			if(index == 1){
+				that.setData({
+					gameLighterList:gameLighterList
 				})
 			}
 			tindex -=1

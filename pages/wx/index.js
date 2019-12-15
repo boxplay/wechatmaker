@@ -9,6 +9,7 @@ Page({
 	home: wx.T.locales["home"],
 	develop: wx.T.locales["develop"],
 	scrollHeight:'88rpx',
+  isSmall: app.globalData.isSmall ? true : false,
   },
   goHome: function (e) {
     wx.redirectTo({
@@ -47,14 +48,19 @@ Page({
         })
 		if(app.globalData.isIpx){
 			that.setData({
-				scrollHeight:Number(win_h*2 - 328) + 'rpx'
+				scrollHeight:Number(win_h*2 - 168) + 'rpx'
 			})
-			console.log(that.data.scrollHeight)
-		}else{
+			
+		}else if(app.globalData.isSmall){
+      that.setData({
+        scrollHeight:Number(win_h*2 + 48) + 'rpx'
+      })
+      
+    }else{
 			that.setData({
 				scrollHeight:Number(win_h*2 - 240) + 'rpx'
 			})
-			console.log(that.data.scrollHeight)
+			
 		}
       },
     })
