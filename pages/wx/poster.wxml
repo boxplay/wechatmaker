@@ -1,10 +1,21 @@
 <!--pages/index/home.wxml-->
 <view class='container'>
 	<view wx:if="{{posterTempPath}}">
+		<view class="posterForNo" wx:if="{{product_has == 0}}">
+			<text>{{userInfo.nickName}}：</text>
+			<text>因你的勇气和创造力，我们看到了你成为「微信创客」的可能性。</text>
+			<text>快用{{product_type}}实现你的想法吧！</text>
+		</view>
+		<view class="posterForYes" wx:if="{{product_has == 1}}">
+			<text>{{userInfo.nickName}}：</text>
+			<text>因你的勇气和创造力，你提交的{{product_type}}</text>
+			<text>作品{{product_name}}已被收录。</text>
+			<text>你就是我们要找的微信创客！</text>
+		</view>
 		<image class="poster-img" wx:if="{{backPath}}" src="{{backPath}}" width="100%" mode="widthFix" />
 	</view>
-	<canvas class="shareCanvas" canvas-id="realShareBox"  style="width: 750px;height: 1334px;position:fixed;top:9999px"></canvas>
-	<canvas class="shareCanvas" canvas-id="shareBox"  style="width: 750px;height: 1334px;position:fixed;top:9999px"></canvas>
+	<canvas class="shareCanvas" canvas-id="realShareBox"  style="width: 625px;height: 888px;position:fixed;top:9999px"></canvas>
+	<!--<canvas class="shareCanvas" canvas-id="shareBox"  style="width: 750px;height: 1334px;position:fixed;top:9999px"></canvas>-->
 	<!--<image wx:if="{{posterTempPath}}" src="{{posterTempPath}}" width="100%" mode="widthFix"  />-->
 	<view class="poster-btn" style="{{isIpx ?'bottom:265rpx':''}}">
 		<button bindtap="saveFile" class="share-btn" disabled = "{{!posterTempPath}}">保存并分享</button>

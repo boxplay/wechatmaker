@@ -23,7 +23,8 @@ Page({
 		product_has:1,
 		product_type:1,
 		backPath:app.globalData.shareBack1,
-		realPath:app.globalData.realPath
+		realPath:app.globalData.realPath,
+		isStart:false
 	},
 	checkImage() {
 		var that = this;
@@ -38,7 +39,8 @@ Page({
 			})
 			return false
 		}
-		this.drawImage(app.globalData.shareBack1W,app.globalData.shareBack1H,app.globalData.shareBack1);
+		this.cutCanvas(app.globalData.shareBack1W,app.globalData.shareBack1H,app.globalData.shareBack1);
+//		this.drawImage(app.globalData.shareBack1W,app.globalData.shareBack1H,app.globalData.shareBack1);
 //		wx.getImageInfo({
 //			src: shareBack, //下载微信头像获得临时地址
 //			success: res => {
@@ -62,29 +64,43 @@ Page({
 		var that = this;
 		var obj = {
 			shareBack: { //背景图的位置和大小
-				width: 750,
-				height: 1334,
+				width: 625,
+				height: 888,
 				x: 0,
 				y: 0
 			},
 			textPos:{
 				leftWidth:140,
-				height:790,
-				nameHeight:720,
-				heightY:910
+				heightA:490,
+				nameHeight:450,
+				heightB:530,
+				heightC:570,
+				IpxLeftW:90,
+				IpxWidth:460
 			}
 		}
 		const ctx = wx.createCanvasContext('realShareBox')
-		var t = "因你的勇气和创造力，你提交的"+this.data.product_type+this.data.product_name+"已被收录。"
+		var t = "因你的勇气和创造力，你提交的"+this.data.product_type
 		var str ={
-			x:t,
-			y:"你就是我们要找的微信创客！"
+			a:t,
+			b:"作品"+this.data.product_name+"已被收录。",
+			c:'你就是我们要找的微信创客！'
 		}
 		if(this.data.product_has == 0){
 			t = "快用"+this.data.product_type+"实现你的想法吧！"
 			var str ={
-				x:"因你的勇气和创造力，我们看到了你成为「微信创客」的可能性。",
-				y:t
+				a:"因你的勇气和创造力，我们看到了你成为「微信创客」的可能性。",
+				b:t,
+				c:''
+			}
+			obj.textPos = {
+				leftWidth:140,
+				heightA:490,
+				nameHeight:450,
+				heightB:570,
+				heightC:570,
+				IpxLeftW:90,
+				IpxWidth:420
 			}
 		}
 		this.startDraw(path,w,h,obj,ctx,str)
@@ -92,60 +108,83 @@ Page({
 			wx.canvasToTempFilePath({
 				x: 0,
 				y: 0,
-				destWidth: 666,
-				destHeight: 945,
+				destWidth: 625,
+				destHeight: 888,
 				canvasId: 'realShareBox',
 				success(res) {
 					that.setData({
 						posterTempPath: res.tempFilePath
 					})
 					wx.hideLoading()
+					that.setData({
+							isStart:false
+						})
 				},
 				fail(res) {
 					console.log(11111)
 				}
 			})
-		}, 400));
+		}, 600));
 	},
 	drawImage(w,h,path) {
 		console.log('start')
 		var that = this;
 		var obj = {
 			shareBack: { //背景图的位置和大小
-				width: 750,
-				height: 1334,
+				width: app.globalData.shareBack1W,
+				height: app.globalData.isIpx?'1624':'1344',
 				x: 0,
 				y: 0
 			},
 			textPos:{
 				leftWidth:140,
-				height:690,
-				nameHeight:620,
-				heightY:810
+				heightA:650,
+				nameHeight:600,
+				heightB:690,
+				heightC:730,
+				IpxLeftW:140,
+				IpxWidth:500
 			}
 		}
 		if(this.data.isIpx){
-			obj.textPos ={
-				leftWidth:140,
-				height:560,
-				nameHeight:500,
-				heightY:690
+			if(this.data.product_has == 0){
+				obj.textPos ={
+					leftWidth:140,
+					heightA:650,
+					nameHeight:600,
+					heightB:690,
+					heightC:730,
+					IpxLeftW:140,
+					IpxWidth:480
+				}
+			}else{
+				obj.textPos ={
+					leftWidth:140,
+					heightA:650,
+					nameHeight:600,
+					heightB:690,
+					heightC:730,
+					IpxLeftW:140,
+					IpxWidth:480
+				}
 			}
 		}
 		const ctx = wx.createCanvasContext('shareBox')
 		wx.showLoading({
 		  title: '正在生成证书',
 		})
-		var t = "因你的勇气和创造力，你提交的"+this.data.product_type+this.data.product_name+"已被收录。"
+		var t = "因你的勇气和创造力，你提交的"+this.data.product_type
 		var str ={
-			x:t,
-			y:"你就是我们要找的微信创客！"
+			a:t,
+			b:"作品"+this.data.product_name+"已被收录。",
+			c:"你就是我们要找的微信创客！"
 		}
 		if(this.data.product_has == 0){
 			t = "快用"+this.data.product_type+"实现你的想法吧！"
 			var str ={
-				x:"因你的勇气和创造力，我们看到了你成为「微信创客」的可能性。",
-				y:t
+				a:"因你的勇气和创造力，我们看到了你成为「微信创客」的可能性。",
+				b:t,
+				c:""
 			}
 		}
 		this.startDraw(path,w,h,obj,ctx,str)
@@ -153,8 +192,6 @@ Page({
 			wx.canvasToTempFilePath({
 				x: 0,
 				y: 0,
-				destWidth: w,
-				destHeight: h,
 				canvasId: 'shareBox',
 				success(res) {
 					console.log(res.tempFilePath)
@@ -167,23 +204,24 @@ Page({
 					console.log(11111)
 				}
 			})
-		}, 300));
+		}, 400));
 	},
 	startDraw(path,w,h,obj,ctx,str){
-		console.log(path)
 		ctx.drawImage(path, obj.shareBack.x, obj.shareBack.y, obj.shareBack.width, obj.shareBack
 			.height); // 推进去图片
 		ctx.save(); // 先保存状态 已便于画完圆再用
 		ctx.beginPath(); //开始绘制
 		ctx.restore(); //恢复状态
 		var name = app.globalData.nickName+" :"
-		this.drawText(ctx, name, 140, obj.textPos.nameHeight,450)
-		this.drawText(ctx, str.x, 140, obj.textPos.height,450);
-		this.drawText(ctx, str.y, 140, obj.textPos.heightY,450);
+		this.drawText(ctx, name, obj.textPos.IpxLeftW, obj.textPos.nameHeight,obj.textPos.IpxWidth)
+		this.drawText(ctx, str.a, obj.textPos.IpxLeftW, obj.textPos.heightA,obj.textPos.IpxWidth);
+		this.drawText(ctx, str.b, obj.textPos.IpxLeftW, obj.textPos.heightB,obj.textPos.IpxWidth);
+		this.drawText(ctx, str.c, obj.textPos.IpxLeftW, obj.textPos.heightC,obj.textPos.IpxWidth);
 	},
 	//文本换行 参数：1、canvas对象，2、文本 3、距离左侧的距离 4、距离顶部的距离 5、6、文本的宽度
 	drawText: function(ctx, str, leftWidth, initHeight,canvasWidth) {
-		ctx.setFontSize(32);
+		if(!str) return false;
+		ctx.setFontSize(24);
 		ctx.setFillStyle('black');
 //		var lineWidth = 32;
 		var chr = str.split(""); //这个方法是将一个字符串分割成字符串数组
@@ -207,13 +245,28 @@ Page({
 		row.push(temp);
 		for (var b = 0;b<row.length;b++) {
 			ctx.fillText(row[b],leftWidth,initHeight)
-			initHeight += 60;
+			if(app.globalData.isIpx && this.data.product_has == 0){
+				initHeight += 35;
+			}else{
+				if(this.data.product_has == 0){
+					initHeight += 40;
+				}else{
+					initHeight += 35;
+				}
+				
+			}
 		}
 	},
 	//裁剪图片
 	cutCanvas(w,h,obj){
+		if(this.data.isStart){
+			return false
+		}
+		this.setData({
+			isStart:true
+		})
 		var that = this
-		this.drawImageForRealPath(app.globalData.realPathW,app.globalData.realPathH,app.globalData.shareBack1);
+		this.drawImageForRealPath(app.globalData.realPathW,app.globalData.realPathH,app.globalData.realPath);
 //		wx.getImageInfo({
 //			src: this.data.realPath, //下载微信头像获得临时地址
 //			success: res => {
@@ -295,17 +348,19 @@ Page({
 	 */
 	onLoad: function(options) {
 		var that = this;
-		console.log(options);
 		var tips = new Array();
 		tips[1] = '微信公众号'
 		tips[2] = '微信小程序'
 		tips[3] = '微信小游戏'
-		tips[4] = '微信表情包'
+		tips[4] = '微信表情'
 		this.setData({
 			product_id:options.id,
 			product_name:options.name,
 			product_has:options.p,
-			product_type:tips[options.id]
+			product_type:tips[options.id],
+			userInfo:{
+				nickName:app.globalData.nickName
+			}
 		})
 		wx.getSystemInfo({
 			success: function(res) {
@@ -321,19 +376,17 @@ Page({
 			},
 		})
 		var userInfo = wx.getStorageSync('userInfo');
-		this.setData({
-			userInfo:userInfo
-		})
 		var backPath ='https://makercdn.someet.cc/wxapp/shareBack1.jpg';
 		if(app.globalData.isIpx){
 			var backPath ='https://makercdn.someet.cc/wxapp/shareBackX.jpg';//x的背景图
 		}
 		this.setData({
-			backPath:backPath
+			backPath:app.globalData.shareBack1?app.globalData.shareBack1:backPath
 		})
+		
 		that.checkImage()
 	},
-
+	
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */

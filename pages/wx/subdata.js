@@ -133,8 +133,8 @@ Page({
 				}
 			}
 		}
-		if(!(/^[\d\w]+$/.test(formData.wechat_id))){
-			errorTips='微信ID只允许输入数字和字母'
+		if(!(/^[a-zA-Z][a-zA-Z0-9_-]{5,19}$/.test(formData.wechat_id)) && !(/^1[3|4|5|6|7|8|9][0-9]\d{8}$$/.test(formData.wechat_id))){
+			errorTips='微信ID格式不正确'
 		}
 		if(!(/^1[3|4|5|6|7|8|9][0-9]\d{8}$$/.test(formData.phone))){
 			errorTips = '请正确填写手机号码'
@@ -172,49 +172,16 @@ Page({
 				
 				if(res.data.status == 1){
 					wx.showToast({
-					  title: '自荐成功,开始生成海报',
+					  title: '自荐成功,请稍后',
 					  icon: 'none',
 					  duration: 2000
 					})
-					var img = 'https://makercdn.someet.cc/wxapp/shareBack1.jpg'
-					if(that.data.isIpx){
-						img = 'https://makercdn.someet.cc/wxapp/shareBackX.jpg'
-					}
-				    wx.getImageInfo({
-						src: img, //下载微信头像获得临时地址
-						success: res => {
-							//将头像缓存在全局变量里
-							app.globalData.shareBack1 = res.path;
-							app.globalData.shareBack1W = res.width;
-							app.globalData.shareBack1H = res.height;
-							wx.getImageInfo({
-								src: img, //下载微信头像获得临时地址
-								success: res => {
-									//将头像缓存在全局变量里
-									app.globalData.realPath = res.path;
-									app.globalData.realPathW = res.width;
-									app.globalData.realPathH = res.height;
-									setTimeout(function(){
-										wx.redirectTo({
-										 	url:'poster?p='+that.data.product_has+'&id='+formData.product_id+'&name='+that.data.dataList[0].product_name
-										 })
-									},1000)
-								},
-								fail: res => {
-									//失败回调
-									wx.showToast({
-									  title: '获取图片2信息失败',
-									})
-								}
-							});
-						},
-						fail: res => {
-							//失败回调
-							wx.showToast({
-							  title: '获取图片2信息失败',
-							})
-						}
-					});
+					setTimeout(function(){
+						wx.redirectTo({
+						 	url:'poster?p='+that.data.product_has+'&id='+formData.product_id+'&name='+that.data.dataList[0].product_name
+						 })
+					},500)
+					
 				}else{
 					wx.showToast({
 					  title: '信息存储失败',
@@ -235,19 +202,22 @@ Page({
 		var str = e.detail.value
 		var type =e.currentTarget.dataset.type
 		if(type == 'wechat_id'){
-			if(!(/^[\d\w]+$/.test(str))){
+			if(!(/^[a-zA-Z][a-zA-Z0-9_-]{5,19}$/.test(str)) && !(/^1[3|4|5|6|7|8|9][0-9]\d{8}$$/.test(str))){
 				wx.showToast({
-				  title: '微信ID只允许输入数字和字母',
+				  title: '微信ID格式错误',
 				  icon: 'none',
 				  duration: 1500
 				})
 			}
 		}else if(type == 'phone'){
-			wx.showToast({
-				title:'请正确填写手机号码',
-				icon:'none',
-				duration:1500
-			})
+			if(!(/^1[3|4|5|6|7|8|9][0-9]\d{8}$$/.test(str))){
+				wx.showToast({
+					title:'请正确填写手机号码',
+					icon:'none',
+					duration:1500
+				})
+			}
+			
 		}
 	},
 	Textblur(e){
@@ -259,6 +229,44 @@ Page({
 			  duration: 1500
 			})
 		}
+	},
+	getShareBack(){
+		var that = this
+		var img = 'https://makercdn.someet.cc/wxapp/shareBack1.jpg'
+		if(that.data.isIpx){
+			img = 'https://makercdn.someet.cc/wxapp/shareBackX.jpg'
+		}
+		var realPath = 'https://makercdn.someet.cc/wxapp/realPath.jpg'
+	    wx.getImageInfo({
+			src: img, //下载微信头像获得临时地址
+			success: res => {
+				//将头像缓存在全局变量里
+				app.globalData.shareBack1 = res.path;
+				app.globalData.shareBack1W = res.width;
+				app.globalData.shareBack1H = res.height;
+				wx.getImageInfo({
+					src: realPath, //下载微信头像获得临时地址
+					success: res => {
+						//将头像缓存在全局变量里
+						app.globalData.realPath = res.path;
+						app.globalData.realPathW = res.width;
+						app.globalData.realPathH = res.height;
+					},
+					fail: res => {
+						//失败回调
+						wx.showToast({
+						  title: '获取图片2信息失败',
+						})
+					}
+				});
+			},
+			fail: res => {
+				//失败回调
+				wx.showToast({
+				  title: '获取图片2信息失败',
+				})
+			}
+		});
 	},
 	changeTextAreaInput(e){
 		var res = e.detail.value
@@ -482,6 +490,7 @@ Page({
 				}
 			},
 		})
+		this.getShareBack()
 	},
 
 	/**

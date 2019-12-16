@@ -58,3 +58,16 @@ image{
 	font-weight: 400;
 	border:1px solid black;
 }
+.posterForNo,.posterForYes{
+	position: absolute;
+	top: 576rpx;
+	left: 138rpx;
+	width: calc(100vw * .65);
+	font-size: 25rpx;
+	line-height: 42rpx;
+	text-align: left;
+	font-weight: 600;
+}
+.posterForNo text,.posterForYes text{
+	display: block;
+}
