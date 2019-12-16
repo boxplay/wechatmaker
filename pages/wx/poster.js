@@ -76,7 +76,7 @@ Page({
 				heightB:530,
 				heightC:570,
 				IpxLeftW:90,
-				IpxWidth:460
+				IpxWidth:460,
 			}
 		}
 		const ctx = wx.createCanvasContext('realShareBox')
@@ -89,15 +89,16 @@ Page({
 		if(this.data.product_has == 0){
 			t = "快用"+this.data.product_type+"实现你的想法吧！"
 			var str ={
-				a:"因你的勇气和创造力，我们看到了你成为「微信创客」的可能性。",
-				b:t,
-				c:''
+				a:"因你的勇气和创造力，我们看到了你成为",
+				b:'「微信创客」的可能性。',
+				c:t,
+				aRed:"「微信创客」"
 			}
 			obj.textPos = {
 				leftWidth:140,
 				heightA:490,
 				nameHeight:450,
-				heightB:570,
+				heightB:530,
 				heightC:570,
 				IpxLeftW:90,
 				IpxWidth:420
@@ -182,9 +183,9 @@ Page({
 		if(this.data.product_has == 0){
 			t = "快用"+this.data.product_type+"实现你的想法吧！"
 			var str ={
-				a:"因你的勇气和创造力，我们看到了你成为「微信创客」的可能性。",
-				b:t,
-				c:""
+				a:"因你的勇气和创造力，我们看到了你成为",
+				b:'「微信创客」的可能性。',
+				c:t
 			}
 		}
 		this.startDraw(path,w,h,obj,ctx,str)
@@ -213,16 +214,18 @@ Page({
 		ctx.beginPath(); //开始绘制
 		ctx.restore(); //恢复状态
 		var name = app.globalData.nickName+" :"
-		this.drawText(ctx, name, obj.textPos.IpxLeftW, obj.textPos.nameHeight,obj.textPos.IpxWidth)
-		this.drawText(ctx, str.a, obj.textPos.IpxLeftW, obj.textPos.heightA,obj.textPos.IpxWidth);
-		this.drawText(ctx, str.b, obj.textPos.IpxLeftW, obj.textPos.heightB,obj.textPos.IpxWidth);
-		this.drawText(ctx, str.c, obj.textPos.IpxLeftW, obj.textPos.heightC,obj.textPos.IpxWidth);
+		this.drawText(ctx, name, obj.textPos.IpxLeftW, obj.textPos.nameHeight,obj.textPos.IpxWidth,'black')
+		this.drawText(ctx, str.a, obj.textPos.IpxLeftW, obj.textPos.heightA,obj.textPos.IpxWidth,'black');
+		this.drawText(ctx, str.b, obj.textPos.IpxLeftW, obj.textPos.heightB,obj.textPos.IpxWidth,'black');
+		this.drawText(ctx, str.c, obj.textPos.IpxLeftW, obj.textPos.heightC,obj.textPos.IpxWidth,'black');
+//		var redLeft = ctx.measureText(str.c).width + obj.textPos.IpxLeftW
+//		this.drawText(ctx, str.aRed, redLeft, obj.textPos.heightC,obj.textPos.IpxWidth,'red');
 	},
 	//文本换行 参数：1、canvas对象，2、文本 3、距离左侧的距离 4、距离顶部的距离 5、6、文本的宽度
-	drawText: function(ctx, str, leftWidth, initHeight,canvasWidth) {
+	drawText: function(ctx, str, leftWidth, initHeight,canvasWidth,color) {
 		if(!str) return false;
 		ctx.setFontSize(24);
-		ctx.setFillStyle('black');
+		ctx.setFillStyle(color);
 //		var lineWidth = 32;
 		var chr = str.split(""); //这个方法是将一个字符串分割成字符串数组
 		var temp = "";

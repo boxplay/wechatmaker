@@ -3,7 +3,8 @@
 	<view wx:if="{{posterTempPath}}">
 		<view class="posterForNo" wx:if="{{product_has == 0}}">
 			<text>{{userInfo.nickName}}：</text>
-			<text>因你的勇气和创造力，我们看到了你成为「微信创客」的可能性。</text>
+			<text>因你的勇气和创造力，我们看到了你成为</text>
+			<text>「微信创客」的可能性。</text>
 			<text>快用{{product_type}}实现你的想法吧！</text>
 		</view>
 		<view class="posterForYes" wx:if="{{product_has == 1}}">
