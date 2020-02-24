@@ -1,0 +1,8 @@
+<view class='container'>
+	<view style="width: 100%;">
+		<image style="width:100%;" src="{{detail}}" mode="widthFix" />
+	</view>
+	<view>
+		这是video 地址 {{video}}
+	</view>
+</view>

@@ -1,0 +1,51 @@
+<!--pages/index/home.wxml-->
+<view class='container'>
+	<view class="maker-text-top">
+		<view class="maker-text-green">
+			微信创客在行动
+		</view>
+		<view class="maker-text-gray">
+			疫情下的创客都干了什么
+		</view>
+	</view>
+	<view class="maker-swiper-box">
+		<swiper style="position: relative;" bindchange="changeSlider" previous-margin="40px" next-margin="100px" current="1"
+		 autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height: {{imgHeight}};"
+		 display-multiple-items="1">
+			<block wx:for="{{posterList}}" wx:for-index="index" wx:key="key" wx:for-item="item">
+				<swiper-item data-index="{{index}}" bindtap="goMakerDetail" class="maker-swiper-item">
+					<view class="swiper-item">
+						<image style="width:100%;" bindload="imgH" data-index="{{index}}" src="{{item.poster}}" mode="widthFix" />
+					</view>
+				</swiper-item>
+			</block>
+			<swiper-item class="maker-swiper-item">
+
+			</swiper-item>
+		</swiper>
+		<view class="dots-list" wx:if="{{posterList.length > 0}}">
+			<view wx:for="{{posterList}}" wx:for-index="index" wx:key="key" wx:for-item="item" class="dots-list-item {{currentIndex == index?'dots-list-item-active':''}}"></view>
+			<view class="dots-list-item {{currentIndex == posterList.length?'dots-list-item-active':''}}"></view>
+		</view>
+	</view>
+	<view class="tab_bar {{isIpx ? 'fix-iphonex-button':''}}">
+		<view class='icon_home' bindtap='goIndex'>
+			<view class='icon'>
+				<view class='home'></view>
+				<text>{{home}}</text>
+			</view>
+		</view>
+		<view class='icon_article' bindtap='goHome'>
+			<view class='icon'>
+				<view class='article'></view>
+				<text>{{develop}}</text>
+			</view>
+		</view>
+		<view class='icon_we'>
+			<view class='icon selected'>
+				<view class='we'></view>
+				<text>战役.在行动</text>
+			</view>
+		</view>
+	</view>
+</view>

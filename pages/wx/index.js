@@ -13,7 +13,7 @@ Page({
   },
   goHome: function (e) {
     wx.redirectTo({
-      url: 'home',
+      url: '/pages/wx/home',
     })
   },
   detail:function(e){
@@ -24,9 +24,14 @@ Page({
       url: 'detail?id=' + detail_id + "&title=" + detail_title,
     })
   },
+  goMaker: function(e) {
+  	wx.redirectTo({
+  		url: '/pages/wx/maker/index',
+  	})
+  },
   goIndex: function (e) {
     wx.redirectTo({
-      url: 'index',
+      url: '/pages/wx/index',
     })
   },  
   /**

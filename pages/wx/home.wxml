@@ -1,4 +1,3 @@
-<!--pages/index/home.wxml-->
 <view class='container'>
 	<!-- <image src="https://img.someet.cc/phpuQHR37" style="height: 0px;" /> -->
 	<view class="index-image-box">
@@ -33,10 +32,16 @@
 				<text>{{home}}</text>
 			</view>
 		</view>
-		<view class='icon_article' bindtap='goHome'>
+		<view class='icon_article'>
 			<view class='icon selected'>
 				<view class='article'></view>
 				<text>{{develop}}</text>
+			</view>
+		</view>
+		<view class='icon_we' bindtap='goMaker'>
+			<view class='icon'>
+				<view class='we'></view>
+				<text>战役.在行动</text>
 			</view>
 		</view>
 	</view>

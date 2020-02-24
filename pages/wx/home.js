@@ -46,10 +46,16 @@ Page({
     })
   },
   goIndex: function (e) {
+	  
     wx.redirectTo({
-      url: 'index',
+      url: '/pages/wx/index',
     })
   },  
+  goMaker:function(){
+  	wx.redirectTo({
+      url: '/pages/wx/maker/index',
+    })
+  },
   goSubPage(){
 	  wx.navigateTo({
 		  url:'subpage'
