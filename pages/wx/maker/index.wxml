@@ -9,7 +9,7 @@
 		</view>
 	</view>
 	<view class="maker-swiper-box">
-		<swiper style="position: relative;" bindchange="changeSlider" previous-margin="40px" next-margin="100px" current="1"
+		<swiper circular="true" style="position: relative;" bindchange="changeSlider" previous-margin="40px" next-margin="100px" current="1"
 		 autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height: {{imgHeight}};"
 		 display-multiple-items="1">
 			<block wx:for="{{posterList}}" wx:for-index="index" wx:key="key" wx:for-item="item">
@@ -19,13 +19,13 @@
 					</view>
 				</swiper-item>
 			</block>
-			<swiper-item class="maker-swiper-item">
+		<!-- 	<swiper-item class="maker-swiper-item">
 
-			</swiper-item>
+			</swiper-item> -->
 		</swiper>
 		<view class="dots-list" wx:if="{{posterList.length > 0}}">
 			<view wx:for="{{posterList}}" wx:for-index="index" wx:key="key" wx:for-item="item" class="dots-list-item {{currentIndex == index?'dots-list-item-active':''}}"></view>
-			<view class="dots-list-item {{currentIndex == posterList.length?'dots-list-item-active':''}}"></view>
+			<!-- <view class="dots-list-item {{currentIndex == posterList.length?'dots-list-item-active':''}}"></view> -->
 		</view>
 	</view>
 	<view class="tab_bar {{isIpx ? 'fix-iphonex-button':''}}">

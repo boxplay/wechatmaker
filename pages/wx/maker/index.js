@@ -12,11 +12,11 @@ Page({
 		scrollHeight: '88rpx',
 		isSmall: app.globalData.isSmall ? true : false,
 		vertical: false,
-		autoplay: false,
+		autoplay: true,
 		interval: 2000,
 		duration: 500,
 		imgHeight: 0,
-		currentIndex:1,
+		currentIndex:0,
 		posterList:[111]
 	},
 	goHome: function(e) {

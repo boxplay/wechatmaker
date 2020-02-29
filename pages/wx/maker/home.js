@@ -135,7 +135,7 @@ changeItem(e) {
 		currentItem: index
 	})
 	wx.pageScrollTo({
-		scrollTop: item.top + 100,
+		scrollTop: item.top + 200,
 		duration: 10,
 		complete:function(){
 			that.setData({
