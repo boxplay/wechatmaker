@@ -30,13 +30,13 @@
 	</view>
 	<view class="tab_bar {{isIpx ? 'fix-iphonex-button':''}}">
 		<view class='icon_home' bindtap='goIndex'>
-			<view class='icon'>
+			<view class='icon selected'>
 				<view class='home'></view>
 				<text>{{home}}</text>
 			</view>
 		</view>
 		<view class='icon_we'>
-			<view class='icon selected'>
+			<view class='icon'>
 				<view class='we'></view>
 				<text>{{articleList}}</text>
 			</view>
