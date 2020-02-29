@@ -1,12 +1,13 @@
 {
 	"pages": [
+		"pages/wx/maker/index",
+		"pages/wx/maker/home",
 		"pages/wx/home",
 		"pages/wx/poster",
 		"pages/wx/subpage",
 		"pages/wx/index",
 		"pages/wx/detail",
 		"pages/wx/subdata",
-		"pages/wx/maker/index",
 		"pages/wx/maker/detail"
 	],
 	"window": {

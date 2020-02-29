@@ -2,7 +2,8 @@ export default {
   'en': {
     'language': 'English',
     'home': 'News',
-    'develop': 'Be a Maker',
+    'develop': '看见Maker',
+	'articleList': '抗疫-作品展',
     'news': 'On-Site News',
     'stories': 'WeChat Makers’stories',
     'next': 'Next',
@@ -36,7 +37,8 @@ export default {
   'zh_CN': {
     'language': '中文',
     'home': '资讯',
-    'develop': '成为Maker',
+    'develop': '看见Maker',
+	'articleList': '抗疫-作品展',
     'news': '创客资讯',
     'stories': '微信创客快报',
     'next': '下一篇',

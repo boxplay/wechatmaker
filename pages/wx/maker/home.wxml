@@ -1,0 +1,42 @@
+<view class='container'>
+	<!-- <image src="https://img.someet.cc/phpuQHR37" style="height: 0px;" /> -->
+	<view class="index-image-box">
+		<view class="home-video">
+			<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="https://makercdn.someet.cc/wxapp/wechatmaker.mp4" controls></video>
+		</view>
+		<block wx:for="{{imgList}}" wx:key="index" wx:for-item="item">
+			<view style="margin-top:-1rpx;" data-index="{{item.index}}" id="imgView{{item.index}}" id="{{item.index}}">
+				<image src="{{item.detail}}" width="100%" mode="widthFix" bindload="getDomTop" data-ele="{{item.index}}" />
+			</view>
+		</block>
+		<view class="floatMenu floatMenuHidden" id='floatMenuHidden'>
+		</view>
+		<view class="floatMenu {{isFixedMenu?'fixedMenu':''}}" id='floadMenu'>
+			<view data-index="wechat" bindtap="changeItem" class="floatMenuItem {{currentItem == 'wechat'?'floatMenuItemActive':''}}">公众号</view>
+			<view data-index="wxapp" bindtap="changeItem" class="floatMenuItem {{currentItem == 'wxapp'?'floatMenuItemActive':''}}">小程序</view>
+			<view data-index="wxgame" bindtap="changeItem" class="floatMenuItem {{currentItem == 'wxgame'?'floatMenuItemActive':''}}">小游戏</view>
+			<view data-index="wxemoji" bindtap="changeItem" class="floatMenuItem {{currentItem == 'wxemoji'?'floatMenuItemActive':''}}">微表情</view>
+		</view>
+	</view>
+	
+	<view class="tab_bar {{isIpx ? 'fix-iphonex-button':''}}">
+		<view class='icon_home' bindtap='goIndex'>
+			<view class='icon'>
+				<view class='home'></view>
+				<text>{{home}}</text>
+			</view>
+		</view>
+		<view class='icon_we' bindtap='goMaker'>
+			<view class='icon'>
+				<view class='we'></view>
+				<text>{{articleList}}</text>
+			</view>
+		</view>
+		<view class='icon_article'>
+			<view class='icon selected'>
+				<view class='article'></view>
+				<text>{{develop}}</text>
+			</view>
+		</view>
+	</view>
+</view>

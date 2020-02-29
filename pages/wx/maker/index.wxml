@@ -35,16 +35,16 @@
 				<text>{{home}}</text>
 			</view>
 		</view>
+		<view class='icon_we'>
+			<view class='icon selected'>
+				<view class='we'></view>
+				<text>{{articleList}}</text>
+			</view>
+		</view>
 		<view class='icon_article' bindtap='goHome'>
 			<view class='icon'>
 				<view class='article'></view>
 				<text>{{develop}}</text>
-			</view>
-		</view>
-		<view class='icon_we'>
-			<view class='icon selected'>
-				<view class='we'></view>
-				<text>战役.在行动</text>
 			</view>
 		</view>
 	</view>

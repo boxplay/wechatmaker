@@ -8,12 +8,13 @@ Page({
     isIpx: app.globalData.isIpx ? true : false,
 	home: wx.T.locales["home"],
 	develop: wx.T.locales["develop"],
+	articleList: wx.T.locales["articleList"],
 	scrollHeight:'88rpx',
   isSmall: app.globalData.isSmall ? true : false,
   },
   goHome: function (e) {
     wx.redirectTo({
-      url: '/pages/wx/home',
+      url: '/pages/wx/maker/home',
     })
   },
   detail:function(e){

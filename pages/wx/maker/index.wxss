@@ -58,13 +58,13 @@
 	text-align: center;
 }
 .dots-list-item{
-	width: 30rpx;
-	height: 10rpx;
-	background-color: green;
+	width: 20rpx;
+	height: 20rpx;
+	background-color: lightGray;
 	margin: 10rpx;
+	border-radius: 50%;
 	display: inline-block;
 }
 .dots-list-item-active{
-	width: 40rpx;
 	background-color: red;
 }

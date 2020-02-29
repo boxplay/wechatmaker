@@ -8,6 +8,7 @@ Page({
 		isIpx: app.globalData.isIpx ? true : false,
 		home: wx.T.locales["home"],
 		develop: wx.T.locales["develop"],
+		articleList: wx.T.locales["articleList"],
 		scrollHeight: '88rpx',
 		isSmall: app.globalData.isSmall ? true : false,
 		vertical: false,
@@ -19,8 +20,9 @@ Page({
 		posterList:[111]
 	},
 	goHome: function(e) {
+		console.log('12312')
 		wx.redirectTo({
-			url: '/pages/wx/home',
+			url: '/pages/wx/maker/home',
 		})
 	},
 	detail: function(e) {
@@ -73,9 +75,6 @@ Page({
 	 */
 	onLoad: function(options) {
 		var that = this;
-		//预加载图片
-		//banner
-		//news
 		wx.request({
 			url: 'https://someetapi.someet.cc/poster.json',
 			data: {
@@ -85,8 +84,8 @@ Page({
 				'content-type': 'application/json'
 			},
 			success: function(res) {
-				
 				var list = res.data.makers
+				wx.setStorageSync('imgList',res.data)
 				that.setData({
 					posterList:list
 				})

@@ -8,6 +8,7 @@ Page({
     isIpx: app.globalData.isIpx ? true : false,
   	home: wx.T.locales["home"],
   	develop: wx.T.locales["develop"],
+	articleList: wx.T.locales["articleList"],
   	scrollHeight:'88rpx',
   	userInfo:{'nickName':''},
     isPlay:false
@@ -42,7 +43,7 @@ Page({
   },
   oHome: function (e) {
     wx.redirectTo({
-      url: 'home',
+      url: '/pages/wx/maker/home',
     })
   },
   goIndex: function (e) {

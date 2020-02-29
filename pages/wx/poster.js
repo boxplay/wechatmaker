@@ -8,6 +8,7 @@ Page({
 		isIpx: app.globalData.isIpx ? true : false,
 		home: wx.T.locales["home"],
 		develop: wx.T.locales["develop"],
+		articleList: wx.T.locales["articleList"],
 		scrollHeight: '88rpx',
 		userInfo: {
 			'nickName': ''

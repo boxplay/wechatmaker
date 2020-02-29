@@ -32,16 +32,16 @@
 				<text>{{home}}</text>
 			</view>
 		</view>
+		<view class='icon_we' bindtap='goMaker'>
+			<view class='icon'>
+				<view class='we'></view>
+				<text>{{articleList}}</text>
+			</view>
+		</view>
 		<view class='icon_article'>
 			<view class='icon selected'>
 				<view class='article'></view>
 				<text>{{develop}}</text>
-			</view>
-		</view>
-		<view class='icon_we' bindtap='goMaker'>
-			<view class='icon'>
-				<view class='we'></view>
-				<text>战役.在行动</text>
 			</view>
 		</view>
 	</view>
