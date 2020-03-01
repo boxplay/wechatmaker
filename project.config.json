@@ -21,7 +21,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.4",
+	"libVersion": "2.10.2",
 	"appid": "wx1c0d06533e7dd178",
 	"projectname": "WechatMaker",
 	"debugOptions": {

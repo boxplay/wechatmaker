@@ -16,33 +16,11 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-	var index = options.index
-	this.setData({
-		index:index
+	var data = wx.getStorageSync('item');
+	that.setData({
+		detail:data.detail,
+		video:data.video
 	})
-	console.log(index)
-    //details
-    wx.request({
-      url: 'https://someetapi.someet.cc/poster.json',
-      data: {
-        
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-		var list = res.data.makers
-		for (var [key,row] of list.entries()) {
-			if(key == that.data.index){
-				that.setData({
-					detail:row.detail,
-					video:row.video
-				})
-			}
-		}
-      }
-    })
   },
 
   /**

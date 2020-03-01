@@ -17,7 +17,7 @@ Page({
 		duration: 500,
 		imgHeight: 0,
 		currentIndex:0,
-		posterList:[111]
+		posterList:[]
 	},
 	goHome: function(e) {
 		console.log('12312')
@@ -65,10 +65,17 @@ Page({
 		})
 	},
 	goMakerDetail(e){
-		var index = e.currentTarget.dataset.index 
-		wx.navigateTo({
-			url:'/pages/wx/maker/detail?index='+index
-		})
+		var index = e.currentTarget.dataset.index
+		var item = this.data.posterList.find((val,key)=>{
+			return key == index
+		});
+		wx.setStorageSync('item',item)
+		if(wx.getStorageSync('item')){
+			wx.navigateTo({
+				url:'/pages/wx/maker/detail'
+			})
+		}
+		
 	},
 	/**
 	 * 生命周期函数--监听页面加载

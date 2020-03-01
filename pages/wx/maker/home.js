@@ -63,7 +63,7 @@ Page({
 				that = this;
 			query.select('#floatMenuHidden').boundingClientRect()
 			query.selectViewport().scrollOffset()
-			var scrollTop = e.scrollTop
+			var scrollTop = e.scrollTop + 40
 			setTimeout(function() {
 				query.exec(function(res) {
 					var top = res[0].top
@@ -107,7 +107,7 @@ Page({
 			query.select(ele).boundingClientRect()
 			query.selectViewport().scrollOffset()
 			query.exec(function(res) {
-				var top = res[0].top
+				var top = res[0].top - 40
 				var i = {
 					ele:eleName,
 					top:top
@@ -135,7 +135,7 @@ changeItem(e) {
 		currentItem: index
 	})
 	wx.pageScrollTo({
-		scrollTop: item.top + 200,
+		scrollTop: item.top,
 		duration: 10,
 		complete:function(){
 			that.setData({

@@ -5,7 +5,7 @@
 			<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="https://makercdn.someet.cc/wxapp/wechatmaker.mp4" controls></video>
 		</view>
 		<block wx:for="{{imgList}}" wx:key="index" wx:for-item="item">
-			<view style="margin-top:-1rpx;" data-index="{{item.index}}" id="imgView{{item.index}}" id="{{item.index}}">
+			<view style="margin-top:-1rpx;" data-index="{{item.index}}"  id="{{item.index}}">
 				<image src="{{item.detail}}" width="100%" mode="widthFix" bindload="getDomTop" data-ele="{{item.index}}" />
 			</view>
 		</block>
