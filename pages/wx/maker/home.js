@@ -6,6 +6,7 @@ Page({
 		newsUrls: [],
 		title: 'Wechat Maker',
 		isIpx: app.globalData.isIpx ? true : false,
+		isPad:app.globalData.isPad ? true : false,
 		home: wx.T.locales["home"],
 		develop: wx.T.locales["develop"],
 		articleList: wx.T.locales["articleList"],
@@ -19,7 +20,8 @@ Page({
 		imgList: [],
 		isStop: true,
 		isClick:false,
-		itemList:[]
+		itemList:[],
+		delTopHeight:0
 	},
 	onGotUserInfo(e) {
 		var that = this
@@ -78,19 +80,19 @@ Page({
 							isStop: true
 						})
 					}
-					var itemList = that.data.itemList,currentItem = 'wechat';
-					if(scrollTop >= itemList[0].top && scrollTop <= itemList[1].top){
-						currentItem = 'wechat'
-					}else if(scrollTop > itemList[1].top && scrollTop <= itemList[2].top){
-						currentItem = 'wxapp'
-					}else if(scrollTop > itemList[2].top && scrollTop <= itemList[3].top){
-						currentItem = 'wxgame'
-					}else if(scrollTop > itemList[3].top){
-						currentItem = 'wxemoji'
-					}
-					that.setData({
-						currentItem:currentItem
-					})
+					// var itemList = that.data.itemList,currentItem = 'wechat';
+					// if(scrollTop >= itemList[0].top && scrollTop <= itemList[1].top){
+					// 	currentItem = 'wechat'
+					// }else if(scrollTop > itemList[1].top && scrollTop <= itemList[2].top){
+					// 	currentItem = 'wxapp'
+					// }else if(scrollTop > itemList[2].top && scrollTop <= itemList[3].top){
+					// 	currentItem = 'wxemoji'
+					// }else if(scrollTop > itemList[3].top){
+					// 	currentItem = 'wxgame'
+					// }
+					// that.setData({
+					// 	currentItem:currentItem,
+					// })
 				})
 			}, 20)
 		}
@@ -98,7 +100,6 @@ Page({
 	},
 	getDomTop(e) {
 		var ele = e.currentTarget.dataset.ele,eleName=e.currentTarget.dataset.ele;
-
 		if (ele) {
 			    ele = '#' + ele;
 				var itemList = [];
@@ -107,7 +108,14 @@ Page({
 			query.select(ele).boundingClientRect()
 			query.selectViewport().scrollOffset()
 			query.exec(function(res) {
-				var top = res[0].top - 40
+				var radio = res[0].width/e.detail.width
+				var top = res[0].top - 10
+				if(eleName == 'wechat'){
+					top = res[0].top - 10 + (e.detail.height * radio)
+					that.setData({
+						delTopHeight:e.detail.height * radio
+					})
+				}
 				var i = {
 					ele:eleName,
 					top:top
@@ -120,29 +128,41 @@ Page({
 					itemList:sortItem
 				})
 			})
+			
 		}
 },
 changeItem(e) {
-	this.setData({
-		isClick:true
-	})
+	// this.setData({
+	// 	isClick:true
+	// })
 	var index = e.currentTarget.dataset.index,that = this
 	var itemList = this.data.itemList
 	var item = itemList.find(function(a){
 		return a.ele == index
 	})
+	var t = this.data.delTopHeight
+	wx.pageScrollTo({
+		scrollTop: t,
+		duration: 1000
+	});
 	this.setData({
 		currentItem: index
 	})
-	wx.pageScrollTo({
-		scrollTop: item.top,
-		duration: 10,
-		complete:function(){
-			that.setData({
-				isClick:false
-			})
-		}
-	});
+	
+	
+	// var top = item.top
+	// if(index == 'wxapp'){
+	// 	top -=that.data.delTopHeight
+	// }
+	// wx.pageScrollTo({
+	// 	scrollTop: top,
+	// 	duration: 1000,
+	// 	complete:function(){
+	// 		that.setData({
+	// 			isClick:false
+	// 		})
+	// 	}
+	// });
 	
 },
 goIndex: function(e) {

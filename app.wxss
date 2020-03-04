@@ -16,10 +16,10 @@ page{
   text-align:center;
   padding: 0.1rpx;
 } 
-.tab_bar{position:fixed;width:100vw;height:88rpx;background-color:#fff;z-index:9999;bottom:0;box-sizing:border-box;padding:0 100rpx;display:flex;flex-direction: colum;align-items: center;justify-content: space-between;box-shadow:0 -10rpx 20rpx rgba(0,0,0,.1);}
+.tab_bar{position:fixed;width:100vw;height:88rpx;background-color:#fff;z-index:9999;bottom:0;box-sizing:border-box;padding:0 0rpx;display:flex;flex-direction: colum;align-items: center;justify-content: space-between;box-shadow:0 -10rpx 20rpx rgba(0,0,0,.1);}
 
 /* .tab_bar.iphonex{padding:50rpx 100rpx 0;} */
-.tab_bar .icon_home,.tab_bar .icon_article,.tab_bar .icon_we{width:50%;height:88rpx;text-align:center;}
+.tab_bar .icon_home,.tab_bar .icon_article,.tab_bar .icon_we{width:24%;height:88rpx;text-align:center;}
 .tab_bar .icon_home .icon,.tab_bar .icon_article .icon,.tab_bar .icon_we .icon{height:88rpx;line-height:86rpx;}
 .tab_bar .icon_home .icon.selected,.tab_bar .icon_article .icon.selected,.tab_bar .icon_we .icon.selected{height:120rpx;width:120rpx;background:#fff;border-radius:100%;box-shadow:0 -10rpx 20rpx rgba(0,0,0,.1);margin:-15rpx auto 0;line-height:88rpx;box-sizing:border-box;padding-top:15rpx;}
 .tab_bar .icon_home .icon text,.tab_bar .icon_article .icon text,.tab_bar .icon_we .icon text{font-size:20rpx;display:block;color:#ccc;line-height:20rpx;margin:-25rpx 0;padding:0;}
@@ -107,7 +107,7 @@ page{
 .clearfix:after, .clear:after {clear: both;}
 
 .fix-iphonex-button {
-  padding:0 100rpx 68rpx;height:156rpx;
+  padding:0 0rpx 68rpx;height:156rpx;
 }
 .container image.fix-iphonex-page{
   left:-32rpx;

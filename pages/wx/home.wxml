@@ -25,7 +25,7 @@
 		<button type="primary" wx:if="{{userInfo.nickName}}" bindtap="goSubPage"> 马上自荐</button>
 		<button type="primary" wx:if="{{!userInfo.nickName || userInfo == null}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">马上自荐</button>
 	</view>
-	<view class="tab_bar {{isIpx ? 'fix-iphonex-button':''}}">
+	<!-- <view class="tab_bar {{isIpx ? 'fix-iphonex-button':''}}">
 		<view class='icon_home' bindtap='goIndex'>
 			<view class='icon'>
 				<view class='home'></view>
@@ -44,5 +44,5 @@
 				<text>{{articleList}}</text>
 			</view>
 		</view>
-	</view>
+	</view> -->
 </view>

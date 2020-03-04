@@ -59,7 +59,12 @@ Page({
 		var imgw = e.detail.width;
 		// imgw = winWid - 140
 		var swiperH = (winWid - 140)/imgw *imgh +'px'
-		console.log(swiperH)
+		if(app.globalData.isIpx){
+			swiperH = (winWid - 140)/imgw *imgh + 80 +'px'
+		}
+		if(app.globalData.isPad){
+			swiperH = (winWid - 140)/imgw *imgh + 80 +'px'
+		}
 		this.setData({
 			imgHeight: swiperH //设置高度
 		})
@@ -82,6 +87,7 @@ Page({
 	 */
 	onLoad: function(options) {
 		var that = this;
+		wx.showLoading('加载中...')
 		wx.request({
 			url: 'https://someetapi.someet.cc/poster.json',
 			data: {
@@ -91,6 +97,7 @@ Page({
 				'content-type': 'application/json'
 			},
 			success: function(res) {
+				wx.hideLoading()
 				var list = res.data.makers
 				wx.setStorageSync('imgList',res.data)
 				that.setData({

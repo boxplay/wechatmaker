@@ -1,10 +1,10 @@
 <view class='container'>
 	<block wx:for="{{detail}}" wx:key="index" wx:for-item="item">
 		<view data-index="{{index}}">
-			<image src="{{item}}" width="100%" mode="widthFix" />
+			<image src="{{item}}" width="100%" style="width: 100%;" mode="widthFix" />
 		</view>
 	</block>
-	<view>
+	<!-- <view>
 		这是video 地址 {{video}}
-	</view>
+	</view> -->
 </view>

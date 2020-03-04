@@ -1,15 +1,18 @@
 <!--pages/index/home.wxml-->
-<view class='container'>
+<view class='container' style="overflow-x:hidden ;">
 	<view class="maker-text-top">
-		<view class="maker-text-green">
+		<!-- <view class="maker-text-green">
 			微信创客在行动
 		</view>
 		<view class="maker-text-gray">
 			疫情下的创客都干了什么
+		</view> -->
+		<view>
+			<image src='https://makercdn.someet.cc/wxapp/top.png' mode="widthFix" style="width: 100%;" />
 		</view>
 	</view>
 	<view class="maker-swiper-box">
-		<swiper circular="true" style="position: relative;" bindchange="changeSlider" previous-margin="40px" next-margin="100px" current="1"
+		<swiper circular="true" style="position: relative;" bindchange="changeSlider" previous-margin="40px" next-margin="40px" current="1"
 		 autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height: {{imgHeight}};"
 		 display-multiple-items="1">
 			<block wx:for="{{posterList}}" wx:for-index="index" wx:key="key" wx:for-item="item">

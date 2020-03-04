@@ -132,14 +132,21 @@
 	width: 100vw;
 	left:0;
 	right:0;
-	top:87vh;
+	top:calc(100vh * 1.93);
 	height: 80rpx;
 	z-index:10;
 	/* background-color: red; */
 }
+.floatMenuForIphx{
+	top:calc(100vh * 1.6);
+}
+.floatMenuForPad{
+	top:calc(100vh * 2.5);
+}
 .fixedMenu{
 	position: fixed;
 	top:0;
+	background-color: white
 }
 .floatMenuHidden{
 	height: 1rpx;
@@ -152,5 +159,6 @@
 	line-height: 80rpx;
 }
 .floatMenuItemActive{
-	border-bottom: 9rpx solid red;
+	border-bottom: 9rpx solid #09bb07;
+	color:#09bb07;
 }

@@ -5,13 +5,17 @@
 			<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="https://makercdn.someet.cc/wxapp/wechatmaker.mp4" controls></video>
 		</view> -->
 		<view style="margin-top:-1rpx;" data-index="wechat'"  id="wechat">
-			<image data-ele="wechat" lazy-load="true" bindload="getDomTop" data-ele="wechat" src="https://makercdn.someet.cc/wxapp/makers/top/top.jpg" width="100%" mode="widthFix"/>
+			<image data-ele="wechat" lazy-load="true" bindload="getDomTop" src="https://makercdn.someet.cc/wxapp/makers/top/top.jpg" width="100%" mode="widthFix"/>
 		</view>
 		<block wx:for="{{imgList}}" wx:key="index" wx:for-item="item">
-			<view hidden="{{currentItem != item.index}}">
-				<view wx:for="{{item.detail}}" wx:key="i" wx:for-index="di" wx:for-item="d">
-					<image lazy-load="true" src="{{d}}" width="100%"  mode="widthFix" />
-				</view>
+			<view wx:if="{{di == 0 && item.index =='wechat'}}"  wx:for="{{item.detail}}" wx:key="i" wx:for-index="di" wx:for-item="d" style="margin-top:-1rpx;">
+				<image lazy-load="true" src="{{d}}" width="100%"  mode="widthFix" />
+			</view>
+			<view wx:if="{{di == 0 && item.index !='wechat'}}"  wx:for="{{item.detail}}" wx:key="i" wx:for-index="di" wx:for-item="d" data-index="{{item.index}}"  id="{{item.index}}"  style="margin-top:-1rpx;">
+				<image lazy-load="true" src="{{d}}" width="100%" bindload="getDomTop" data-ele="{{item.index}}"   mode="widthFix" />
+			</view>
+			<view wx:if="{{di !=0}}" wx:for="{{item.detail}}" wx:for-index="di" wx:key="i" wx:for-item="d" style="margin-top:-1rpx;">
+				<image lazy-load="true" src="{{d}}" width="100%"  mode="widthFix" />
 			</view>
 		</block>
 		<view class="floatMenu {{isPad?'floatMenuForPad':''}} {{isIpx?'floatMenuForIphx':''}} floatMenuHidden" id='floatMenuHidden'>

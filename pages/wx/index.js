@@ -17,6 +17,11 @@ Page({
       url: '/pages/wx/maker/home',
     })
   },
+  goApplyHome(){
+	  wx.navigateTo({
+	    url: '/pages/wx/home',
+	  })
+  },
   detail:function(e){
     // console.log(e.currentTarget.dataset.url)
     var detail_id = e.currentTarget.dataset.id;
@@ -73,6 +78,9 @@ Page({
 	//预加载图片
     //banner
     //news
+	wx.showLoading({
+		title:'加载中...'
+	})
     wx.request({
       url: 'https://makerforwx.someet.cc/v3/topics.json',
       data: {
@@ -83,6 +91,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+		  wx.hideLoading()
         var list = res.data.data;
         console.log(list)
         that.setData({

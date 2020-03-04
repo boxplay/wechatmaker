@@ -31,10 +31,15 @@
 }
 .maker-swiper-box{
 	width: 100vw;
+	margin-bottom: 120rpx
 }
 .maker-swiper-item{
-	padding-left: 10px;
-	padding-right: 10px;
+	/* padding-left: 10px;
+	padding-right: 10px; */
+}
+.swiper-item{
+	margin-left: 15rpx;
+	margin-right: 15rpx;
 }
 .maker-text-top{
 	width: 100%;
@@ -54,17 +59,17 @@
 }
 .dots-list{
 	widows: 100vw;
-	height: 20rpx;
+	height: 10rpx;
 	text-align: center;
 }
 .dots-list-item{
-	width: 20rpx;
-	height: 20rpx;
+	width: 10rpx;
+	height: 10rpx;
 	background-color: lightGray;
 	margin: 10rpx;
 	border-radius: 50%;
 	display: inline-block;
 }
 .dots-list-item-active{
-	background-color: red;
+	background-color: #09bb07;
 }
