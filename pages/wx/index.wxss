@@ -29,7 +29,7 @@
   border-radius: 7.5rpx;
   background-color: #1AAD19;
 }
-.list{width:calc(100vw * .9);height:calc(100vw * .9 * .5);position:relative;margin:0 auto 40rpx;}
+.list{width:calc(100vw * .9);height:calc(100vw * .9 * .5);position:relative;margin:0 auto 40rpx;margin-bottom: 60rpx;}
 .list .img_box{border-radius:20rpx;width:100%;height:calc(100vw * .9 * .5);overflow:hidden;position:relative;}
 .list .img_box image{width:100%;}
 /*.title_box{
@@ -53,4 +53,17 @@
 	line-height: 70rpx;
 	z-index: 2;
 	border-radius:0rpx 0rpx 20rpx 20rpx;
+}
+#homeVideoBox{
+	margin-top: 20rpx;
+}
+.home-video{
+	width: 100%;
+	margin: 0 auto;
+	border-radius:20rpx;
+}
+.home-video video{
+	width: calc(100vw * 0.91);
+	border-radius:20rpx;
+	height:290rpx;
 }

@@ -21,13 +21,16 @@ App({
     var _this = this
     wx.getSystemInfo({
       success: function (res) {
-        console.log(res.model)
         console.log(res.windowHeight)
         console.log(res.windowWidth)
         if (res.windowHeight >= '724') {
           _this.globalData.isIpx = true;
         }else if(res.windowHeight < '640'){
 			_this.globalData.isSmall = true;
+		}
+		if(res.windowHeight/res.windowWidth >=1.8 && res.windowHeight/res.windowWidth < 1.9){
+			_this.globalData.isIpx = false;
+			_this.globalData.isHuaWei = true;
 		}
 		if(res.windowHeight/res.windowWidth >=1.25 && res.windowHeight/res.windowWidth < 1.30){
 			_this.globalData.isPad = true;
@@ -69,6 +72,7 @@ App({
     isIpx: false,
 	isSmall:false,
 	isPad:false,
+	isHuaWei:false,
     language:'',
 		avatarUrlTempPath:'',
 		nickName:'',

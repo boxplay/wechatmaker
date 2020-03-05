@@ -10,12 +10,9 @@
    </block>
  </swiper> -->
 	<scroll-view scroll-y="true" style="height: {{scrollHeight}};">
-		<view class='list index-title' data-id="0" data-title="微信创客自荐报名入口" bindtap="goApplyHome">
-			<view class="title_box" data-id="0" data-title="微信创客自荐报名入口" bindtap="goApplyHome">
-				微信创客自荐报名入口
-			</view>
-			<view class='img_box'>
-				<image src="https://makerforwx.someet.cc/uploads/core/topic/pic/42/wxsk.jpg" mode="widthFix"></image>
+		<view class='list index-title' id="homeVideoBox" data-id="0" data-title="微信创客自荐报名入口">
+			<view class="home-video">
+				<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="https://makercdn.someet.cc/wxapp/wechatmaker.mp4" controls></video>
 			</view>
 		</view>
 		<block wx:for="{{newsUrls}}" wx:key="{{index}}">

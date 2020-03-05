@@ -138,10 +138,13 @@
 	/* background-color: red; */
 }
 .floatMenuForIphx{
-	top:calc(100vh * 1.6);
+	top:calc(100vh * 1.63);
 }
 .floatMenuForPad{
 	top:calc(100vh * 2.5);
+}
+.floatMenuForHuaWei{
+	top: calc(100vh * 1.7);
 }
 .fixedMenu{
 	position: fixed;
@@ -157,8 +160,19 @@
 	text-align: center;
 	height: 80rpx;
 	line-height: 80rpx;
+	color: darkGray;
 }
 .floatMenuItemActive{
-	border-bottom: 9rpx solid #09bb07;
+	position: relative;
 	color:#09bb07;
+}
+.floatMenuItemActive:after{
+	content: "";
+	position: absolute;
+	width: 75%;
+	left: 12.5%;
+	right: 12.5%;
+	bottom:10rpx;
+	height: 5rpx;
+	background-color:#09bb07;
 }

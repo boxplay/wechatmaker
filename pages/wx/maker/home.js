@@ -7,6 +7,7 @@ Page({
 		title: 'Wechat Maker',
 		isIpx: app.globalData.isIpx ? true : false,
 		isPad:app.globalData.isPad ? true : false,
+		isHuaWei:app.globalData.isHuaWei ? true : false,
 		home: wx.T.locales["home"],
 		develop: wx.T.locales["develop"],
 		articleList: wx.T.locales["articleList"],
@@ -21,7 +22,8 @@ Page({
 		isStop: true,
 		isClick:false,
 		itemList:[],
-		delTopHeight:0
+		delTopHeight:0,
+		currentItemDetail:[]
 	},
 	onGotUserInfo(e) {
 		var that = this
@@ -135,19 +137,35 @@ changeItem(e) {
 	// this.setData({
 	// 	isClick:true
 	// })
+	var t = this.data.delTopHeight
+	if(this.data.isFixedMenu){
+		wx.pageScrollTo({
+			scrollTop: t - 40,
+			duration: 0
+		});
+	}
+	
+	var currentItemDetail = [];
+	this.setData({
+		currentItemDetail:currentItemDetail
+	})
 	var index = e.currentTarget.dataset.index,that = this
 	var itemList = this.data.itemList
 	var item = itemList.find(function(a){
 		return a.ele == index
 	})
-	var t = this.data.delTopHeight
-	wx.pageScrollTo({
-		scrollTop: t,
-		duration: 1000
-	});
-	this.setData({
-		currentItem: index
-	})
+	var that = this;
+	wx.showLoading()
+	setTimeout(function(){
+		currentItemDetail = that.data.imgList.find(function(a){
+			return a.index == index
+		})
+		wx.hideLoading()
+		that.setData({
+			currentItem: index,
+			currentItemDetail:currentItemDetail
+		})
+	},200)
 	
 	
 	// var top = item.top
@@ -199,6 +217,7 @@ goExternalLink() {
  * 生命周期函数--监听页面加载
  */
 onLoad: function(options) {
+	console.log(app.globalData.isHuaWei)
 	var that = this;
 	var userInfo = wx.getStorageSync('userInfo')
 	if (userInfo) {
@@ -237,7 +256,8 @@ getImgList() {
 		success: function(res) {
 			var list = res.data.home
 			that.setData({
-				imgList: list
+				imgList: list,
+				currentItemDetail:list[0]
 			})
 		}
 	})

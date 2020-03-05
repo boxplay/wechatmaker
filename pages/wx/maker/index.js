@@ -11,8 +11,9 @@ Page({
 		articleList: wx.T.locales["articleList"],
 		scrollHeight: '88rpx',
 		isSmall: app.globalData.isSmall ? true : false,
+		isHuaWei:app.globalData.isHuaWei ? true : false,
 		vertical: false,
-		autoplay: true,
+		autoplay: false,
 		interval: 2000,
 		duration: 500,
 		imgHeight: 0,
@@ -20,7 +21,6 @@ Page({
 		posterList:[]
 	},
 	goHome: function(e) {
-		console.log('12312')
 		wx.redirectTo({
 			url: '/pages/wx/maker/home',
 		})
@@ -50,6 +50,7 @@ Page({
 		})
 	},
 	imgH: function(e) {
+		console.log(e)
 		var index = e.currentTarget.dataset.index 
 		if(index >0){
 			return false
@@ -58,15 +59,21 @@ Page({
 		var imgh = e.detail.height; //图片高度
 		var imgw = e.detail.width;
 		// imgw = winWid - 140
-		var swiperH = (winWid - 140)/imgw *imgh +'px'
+		var realImgWidth = winWid - (60 + 240)/2
+		var radio = imgw/realImgWidth
+		var swiperH = (imgh/radio) + 20
+		// var swiperH = (winWid - 140)/imgw *imgh + 80
 		if(app.globalData.isIpx){
-			swiperH = (winWid - 140)/imgw *imgh + 80 +'px'
+			swiperH = swiperH + 20
 		}
 		if(app.globalData.isPad){
-			swiperH = (winWid - 140)/imgw *imgh + 80 +'px'
+			swiperH = swiperH - 200
+		}
+		if(app.globalData.isHuaWei){
+			swiperH = swiperH + 20
 		}
 		this.setData({
-			imgHeight: swiperH //设置高度
+			imgHeight: swiperH +'px' //设置高度
 		})
 	},
 	goMakerDetail(e){

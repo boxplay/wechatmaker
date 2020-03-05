@@ -7,20 +7,20 @@
 		<view style="margin-top:-1rpx;" data-index="wechat'"  id="wechat">
 			<image data-ele="wechat" lazy-load="true" bindload="getDomTop" data-ele="wechat" src="https://makercdn.someet.cc/wxapp/makers/top/top.jpg" width="100%" mode="widthFix"/>
 		</view>
-		<block wx:for="{{imgList}}" wx:key="index" wx:for-item="item">
-			<view hidden="{{currentItem != item.index}}">
-				<view wx:for="{{item.detail}}" wx:key="i" wx:for-index="di" wx:for-item="d">
-					<image lazy-load="true" src="{{d}}" width="100%"  mode="widthFix" />
+		<view style="min-height: 100vh;">
+			<block wx:for="{{currentItemDetail.detail}}" wx:key="index" wx:for-item="item">
+				<view>
+					<image lazy-load="true" src="{{item}}" width="100%"  mode="widthFix" />
 				</view>
-			</view>
-		</block>
-		<view class="floatMenu {{isPad?'floatMenuForPad':''}} {{isIpx?'floatMenuForIphx':''}} floatMenuHidden" id='floatMenuHidden'>
+			</block>
 		</view>
-		<view class="floatMenu {{isPad?'floatMenuForPad':''}} {{isIpx?'floatMenuForIphx':''}} {{isFixedMenu?'fixedMenu':''}}" id='floadMenu'>
+		<view class="floatMenu {{isPad?'floatMenuForPad':''}} {{isHuaWei?'floatMenuForHuaWei':''}} {{isIpx?'floatMenuForIphx':''}} floatMenuHidden" id='floatMenuHidden'>
+		</view>
+		<view class="floatMenu {{isPad?'floatMenuForPad':''}} {{isHuaWei?'floatMenuForHuaWei':''}} {{isIpx?'floatMenuForIphx':''}} {{isFixedMenu?'fixedMenu':''}}" id='floadMenu'>
 			<view data-index="wechat" bindtap="changeItem" class="floatMenuItem {{currentItem == 'wechat'?'floatMenuItemActive':''}}">公众号</view>
 			<view data-index="wxapp" bindtap="changeItem" class="floatMenuItem {{currentItem == 'wxapp'?'floatMenuItemActive':''}}">小程序</view>
-			<view data-index="wxemoji" bindtap="changeItem" class="floatMenuItem {{currentItem == 'wxemoji'?'floatMenuItemActive':''}}">微表情</view>
 			<view data-index="wxgame" bindtap="changeItem" class="floatMenuItem {{currentItem == 'wxgame'?'floatMenuItemActive':''}}">小游戏</view>
+			<view data-index="wxemoji" bindtap="changeItem" class="floatMenuItem {{currentItem == 'wxemoji'?'floatMenuItemActive':''}}">表情</view>
 		</view>
 	</view>
 	
