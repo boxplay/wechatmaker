@@ -19,11 +19,17 @@ Page({
 		isFixedMenu: false,
 		currentItem: 'wechat',
 		imgList: [],
-		isStop: true,
 		isClick:false,
 		itemList:[],
 		delTopHeight:0,
-		currentItemDetail:[]
+		currentItemDetail:[],
+		padPosterStyle:'',
+		phoneStyle:'',
+		posterStyle:''
+	},
+	posterLoad(e){
+		var index = e.currentTarget.dataset.index
+		// if(index)
 	},
 	onGotUserInfo(e) {
 		var that = this
@@ -59,10 +65,7 @@ Page({
 		})
 	},
 	onPageScroll(e) {
-		if (this.data.isStop && !this.data.isClick) {
-			this.setData({
-				isStop: false
-			})
+		if (!this.data.isClick) {
 			const query = wx.createSelectorQuery(),
 				that = this;
 			query.select('#floatMenuHidden').boundingClientRect()
@@ -71,30 +74,17 @@ Page({
 			setTimeout(function() {
 				query.exec(function(res) {
 					var top = res[0].top
-					if (top <= 0) {
+					if (top <= 0 && !that.data.isFixedMenu) {
 						that.setData({
-							isFixedMenu: true,
-							isStop: true
+							isFixedMenu: true
 						})
-					} else {
-						that.setData({
-							isFixedMenu: false,
-							isStop: true
-						})
+					} else if(top >= 0 && that.data.isFixedMenu) {
+						if(that.data.isFixedMenu){
+							that.setData({
+								isFixedMenu: false
+							})
+						}
 					}
-					// var itemList = that.data.itemList,currentItem = 'wechat';
-					// if(scrollTop >= itemList[0].top && scrollTop <= itemList[1].top){
-					// 	currentItem = 'wechat'
-					// }else if(scrollTop > itemList[1].top && scrollTop <= itemList[2].top){
-					// 	currentItem = 'wxapp'
-					// }else if(scrollTop > itemList[2].top && scrollTop <= itemList[3].top){
-					// 	currentItem = 'wxemoji'
-					// }else if(scrollTop > itemList[3].top){
-					// 	currentItem = 'wxgame'
-					// }
-					// that.setData({
-					// 	currentItem:currentItem,
-					// })
 				})
 			}, 20)
 		}
@@ -166,21 +156,6 @@ changeItem(e) {
 			currentItemDetail:currentItemDetail
 		})
 	},200)
-	
-	
-	// var top = item.top
-	// if(index == 'wxapp'){
-	// 	top -=that.data.delTopHeight
-	// }
-	// wx.pageScrollTo({
-	// 	scrollTop: top,
-	// 	duration: 1000,
-	// 	complete:function(){
-	// 		that.setData({
-	// 			isClick:false
-	// 		})
-	// 	}
-	// });
 	
 },
 goIndex: function(e) {
@@ -257,7 +232,10 @@ getImgList() {
 			var list = res.data.home
 			that.setData({
 				imgList: list,
-				currentItemDetail:list[0]
+				currentItemDetail:list[0],
+				padPosterStyle:res.data.padPosterStyle,
+				phoneStyle:res.data.phoneStyle,
+				posterStyle:res.data.posterStyle
 			})
 		}
 	})

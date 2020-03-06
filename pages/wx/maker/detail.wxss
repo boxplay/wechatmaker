@@ -1,1 +1,16 @@
 .container{height:100%;overflow:none;padding:0rpx;text-align:left;}
+.home-video{
+	width: 100%;
+	margin: 0 auto;
+	border-radius:20rpx;
+	text-align: center;
+	
+}
+.home-video video{
+	width: calc(100vw * 0.91);
+	border-radius:20rpx;
+	height:290rpx;
+}
+.detailBox{
+	position: relative;
+}

@@ -11,6 +11,7 @@ Page({
 		articleList: wx.T.locales["articleList"],
 		scrollHeight: '88rpx',
 		isSmall: app.globalData.isSmall ? true : false,
+		isPlay:false
 	},
 	goHome: function(e) {
 		wx.redirectTo({
@@ -20,6 +21,17 @@ Page({
 	goApplyHome() {
 		wx.navigateTo({
 			url: '/pages/wx/home',
+		})
+	},
+	videoControl(){
+		var vtx = wx.createVideoContext('wechatmaker')
+		if (this.data.isPlay) {
+			vtx.pause();
+		} else {
+			vtx.play();
+		}
+		this.setData({
+			isPlay: !this.data.isPlay
 		})
 	},
 	detail: function(e) {

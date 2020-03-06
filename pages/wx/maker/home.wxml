@@ -1,16 +1,16 @@
 <view class='container' style="overflow-x: hidden;">
 	<!-- <image src="https://img.someet.cc/phpuQHR37" style="height: 0px;" /> -->
-	<view class="index-image-box">
+	<view class="index-image-box" style="margin-bottom: {{isIpx?'130rpx':'60rpx'}};">
 		<!-- <view class="home-video">
 			<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="https://makercdn.someet.cc/wxapp/wechatmaker.mp4" controls></video>
 		</view> -->
 		<view style="margin-top:-1rpx;" data-index="wechat'"  id="wechat">
-			<image data-ele="wechat" lazy-load="true" bindload="getDomTop" data-ele="wechat" src="https://makercdn.someet.cc/wxapp/makers/top/top.jpg" width="100%" mode="widthFix"/>
+			<image data-ele="wechat" lazy-load="true" bindload="getDomTop" data-ele="wechat" src="https://makercdn.someet.cc/wxapp/makers/top/top.jpg{{isPad?'':phoneStyle}}" width="100%" mode="widthFix"/>
 		</view>
 		<view style="min-height: 100vh;">
-			<block wx:for="{{currentItemDetail.detail}}" wx:key="index" wx:for-item="item">
+			<block wx:for="{{currentItemDetail.detail}}" wx:key="i" wx:for-item="item">
 				<view>
-					<image lazy-load="true" src="{{item}}" width="100%"  mode="widthFix" />
+					<image bindload="posterLoad" data-index="index" lazy-load="true" src="{{item}}{{isPad?'':phoneStyle}}" width="100%"  mode="widthFix" />
 				</view>
 			</block>
 		</view>

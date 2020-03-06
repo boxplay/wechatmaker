@@ -7,8 +7,11 @@ Page({
    */
   data: {
     detail:'',
-	index:0,
-	video:''
+	video:'',
+	selectedIndex:0,
+	padPosterStyle:'',
+	phoneStyle:'',
+	posterStyle:''
   },
 
   /**
@@ -19,7 +22,11 @@ Page({
 	var data = wx.getStorageSync('item');
 	that.setData({
 		detail:data.detail,
-		video:data.video
+		video:data.video,
+		selectedIndex:data.index,
+		padPosterStyle:data.padPosterStyle,
+		phoneStyle:data.phoneStyle,
+		posterStyle:data.posterStyle
 	})
   },
 

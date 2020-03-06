@@ -1,7 +1,22 @@
 <view class='container'>
-	<block wx:for="{{detail}}" wx:key="index" wx:for-item="item">
-		<view data-index="{{index}}">
-			<image src="{{item}}" width="100%" style="width: 100%;" mode="widthFix" />
+	<block wx:for="{{detail}}" wx:key="i" wx:for-item="item">
+		<view class="detailBox" data-index="{{selectedIndex}}" wx:if="{{selectedIndex == 10}}">
+			<image wx:if="{{index != 2}}" src="{{item}}{{isPad?'':phoneStyle}}" style="width: 100%;" mode="widthFix" />
+			<view wx:if="{{video && index == 2}}" class="home-video">
+				<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="{{video}}"></video>
+			</view>
+		</view>
+		<view class="detailBox" data-index="{{selectedIndex}}"  wx:if="{{selectedIndex == 18}}">
+			<image src="{{item}}{{isPad?'':phoneStyle}}" width="100%" style="width: 100%;" mode="widthFix" />
+			<view wx:if="{{video}}" class="home-video" style="position: absolute;bottom: -268rpx;padding-bottom: 60rpx;">
+				<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="{{video}}"></video>
+			</view>
+		</view>
+		<view class="detailBox" data-index="{{selectedIndex}}" wx:if="{{selectedIndex != 18 && selectedIndex != 10}}">
+			<image src="{{item}}{{isPad?'':phoneStyle}}" width="100%" style="width: 100%;" mode="widthFix" />
+			<view wx:if="{{video}}" class="home-video">
+				<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="{{video}}"></video>
+			</view>
 		</view>
 	</block>
 	<!-- <view>

@@ -61,9 +61,10 @@
 	width: 100%;
 	margin: 0 auto;
 	border-radius:20rpx;
+	height: 100%;
 }
 .home-video video{
 	width: calc(100vw * 0.91);
 	border-radius:20rpx;
-	height:290rpx;
+	height:100%;
 }
