@@ -4,13 +4,19 @@
 		<!-- <view class="home-video">
 			<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="https://makercdn.someet.cc/wxapp/wechatmaker.mp4" controls></video>
 		</view> -->
-		<view style="margin-top:-1rpx;" data-index="wechat'"  id="wechat">
-			<image data-ele="wechat" lazy-load="true" bindload="getDomTop" data-ele="wechat" src="https://makercdn.someet.cc/wxapp/makers/top/top.jpg{{isPad?'':phoneStyle}}" width="100%" mode="widthFix"/>
+		<view style="margin-top:-1rpx;">
+			<image lazy-load="true" src="https://makercdn.someet.cc/wxapp/makers/top/top1.jpg{{isPad?'':phoneStyle}}" width="100%" mode="widthFix"/>
+			<view id="wechat">
+				<image show-menu-by-longpress="{{true}}" data-ele="wechat" lazy-load="true" bindload="getDomTop" src="https://makercdn.someet.cc/wxapp/makers/top/top2.jpg{{isPad?'':phoneStyle}}" width="100%" mode="widthFix"/>
+			</view>
 		</view>
-		<view style="min-height: 100vh;">
+		<view style="min-height: 100vh;" hidden="{{!topImgLoad}}" >
 			<block wx:for="{{currentItemDetail.detail}}" wx:key="i" wx:for-item="item">
-				<view>
-					<image bindload="posterLoad" data-index="index" lazy-load="true" src="{{item}}{{isPad?'':phoneStyle}}" width="100%"  mode="widthFix" />
+				<view hidden="{{!tabDisplay}}" wx:if="{{index == 0}}">
+					<image show-menu-by-longpress="{{true}}" style="margin-top: -2rpx;" bindload="posterLoad" data-index="{{index}}" data-tab="{{currentItemDetail.index}}" lazy-load="true" src="{{item}}{{isPad?'':phoneStyle}}" width="100%"  mode="widthFix" />
+				</view>
+				<view hidden="{{!tabDisplay}}" wx:if="{{index != 0}}">
+					<image show-menu-by-longpress="{{true}}" style="margin-top: -2rpx;" bindload="posterLoad" data-index="{{index}}" data-tab="{{currentItemDetail.index}}" lazy-load="true" src="{{item}}{{isPad?'':phoneStyle}}" width="100%"  mode="widthFix" />
 				</view>
 			</block>
 		</view>

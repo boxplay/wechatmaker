@@ -18,10 +18,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options.title)
-    // wx.setNavigationBarTitle({
-    //   title:options.title
-    // })
     var that = this;
 
     //details
@@ -41,8 +37,8 @@ Page({
         content: WxParse.wxParse('content', 'html', content, that, 5)
         that.setData({
           title:topic.title,
-          topic_from:topic.from_type,
-          topic_date:topic.created_at
+          topic_from:options.fname,
+          topic_date:options.name,
         })
       }
     })

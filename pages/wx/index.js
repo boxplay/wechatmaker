@@ -11,7 +11,8 @@ Page({
 		articleList: wx.T.locales["articleList"],
 		scrollHeight: '88rpx',
 		isSmall: app.globalData.isSmall ? true : false,
-		isPlay:false
+		isPlay:false,
+		isPlayTitle:false
 	},
 	goHome: function(e) {
 		wx.redirectTo({
@@ -24,6 +25,11 @@ Page({
 		})
 	},
 	videoControl(){
+		if(!this.data.isPlayTitle){
+			this.setData({
+				isPlayTitle:true
+			})
+		}
 		var vtx = wx.createVideoContext('wechatmaker')
 		if (this.data.isPlay) {
 			vtx.pause();
@@ -38,8 +44,10 @@ Page({
 		// console.log(e.currentTarget.dataset.url)
 		var detail_id = e.currentTarget.dataset.id;
 		var detail_title = e.currentTarget.dataset.title;
+		var from_name = e.currentTarget.dataset.fname
+		var name = e.currentTarget.dataset.name
 		wx.navigateTo({
-			url: 'detail?id=' + detail_id + "&title=" + detail_title,
+			url: 'detail?id=' + detail_id + "&title=" + detail_title+"&name="+name+'&fname='+from_name,
 		})
 	},
 	goMaker: function(e) {
@@ -99,7 +107,7 @@ Page({
 			title: '加载中...'
 		})
 		wx.request({
-			url: 'https://makerforwx.someet.cc/v3/topics.json',
+			url: 'https://someetapi.someet.cc/news.json',
 			data: {
 				gener: "合作相关内容报道"
 			},
@@ -110,7 +118,6 @@ Page({
 			success: function(res) {
 				wx.hideLoading()
 				var list = res.data.data;
-				console.log(list)
 				that.setData({
 					newsUrls: list
 				})

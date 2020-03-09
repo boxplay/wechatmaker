@@ -9,14 +9,9 @@
      </swiper-item>
    </block>
  </swiper> -->
-	<scroll-view scroll-y="true" style="height: {{scrollHeight}};">
-		<view class='list index-title' id="homeVideoBox" data-id="0">
-			<view class="home-video">
-				<video poster="https://makerforwx.someet.cc/uploads/core/topic/pic/42/wxsk.jpg" id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="https://makercdn.someet.cc/wxapp/wechatmaker.mp4" controls></video>
-			</view>
-		</view>
-		<block wx:for="{{newsUrls}}" wx:key="{{index}}">
-			<view class='list index-title' data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
+	<view scroll-y="true" style="margin-bottom:200rpx;">
+		<block wx:if="{{index ==7 }}" wx:for="{{newsUrls}}" wx:key="i">
+			<view style="padding-top: 35rpx;" class='list index-title' data-name="{{item.name}}" data-fname="{{item.from}}" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
 				<view class="title_box" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
 					{{item.title}}
 				</view>
@@ -25,7 +20,25 @@
 				</view>
 			</view>
 		</block>
-	</scroll-view>
+		<view wx:if="{{newsUrls.length >0}}" class='list index-title' id="homeVideoBox" data-id="0">
+			<view class="home-video" id="{{isPlayTitle?'':'vidoPlayImg'}}" bindtap="videoControl">
+				<view hidden="{{isPlayTitle}}" class="title_box" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
+					这是属于你的微信创客自荐舞台
+				</view>
+				<video show-center-play-btn="{{false}}" show-play-btn="{{isPlayTitle}}" controls="{{true}}" poster="https://makercdn.someet.cc/wxapp/videoposter.jpg" id="wechatmaker" object-fit="cover"  src="https://makercdn.someet.cc/wxapp/wechatmaker.mp4"></video>
+			</view>
+		</view>
+		<block wx:if="{{index !=7}}" wx:for="{{newsUrls}}" wx:key="i">
+			<view class='list index-title' data-name="{{item.name}}" data-fname="{{item.from}}" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
+				<view class="title_box" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="detail">
+					{{item.title}}
+				</view>
+				<view class='img_box'>
+					<image src='{{item.pic}}' mode="widthFix"></image>
+				</view>
+			</view>
+		</block>
+	</view>
 	<view class="tab_bar {{isIpx ? 'fix-iphonex-button':''}}">
 		<view class='icon_home'>
 			<view class='icon selected'>

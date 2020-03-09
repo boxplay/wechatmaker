@@ -14,8 +14,8 @@ Page({
 		isHuaWei: app.globalData.isHuaWei ? true : false,
 		isPad: app.globalData.isPad ? true : false,
 		vertical: false,
-		autoplay: true,
-		interval: 4000,
+		autoplay: false,
+		interval: 4500,
 		duration: 500,
 		imgHeight: 0,
 		currentIndex: 0,
@@ -24,7 +24,8 @@ Page({
 		isLoad: false,
 		padPosterStyle: '',
 		phoneStyle: '',
-		posterStyle: ''
+		posterStyle: '',
+		swiperH:0
 	},
 	goHome: function(e) {
 		wx.redirectTo({
@@ -68,9 +69,10 @@ Page({
 	},
 	imgH: function(e) {
 		var index = e.currentTarget.dataset.index
-		if (index > 0) {
+		if (this.data.swiperH != 0) {
 			return false
 		}
+		console.log('获取swiper高度')
 		var winWid = wx.getSystemInfoSync().windowWidth; //获取当前屏幕的宽度
 		var imgh = e.detail.height; //图片高度
 		var imgw = e.detail.width;
@@ -88,14 +90,22 @@ Page({
 		if (app.globalData.isHuaWei) {
 			swiperH = swiperH + 20
 		}
+		console.log('屏幕宽度:'+winWid)
+		console.log('显示图片宽度为:'+realImgWidth,'显示图片高度为:'+swiperH)
 		this.setData({
 			imgHeight: swiperH + 'px', //设置高度
-			isLoad: true
+			isLoad: true,
+			swiperH:swiperH
 		})
 		wx.hideLoading()
 	},
 	goMakerDetail(e) {
 		var index = e.currentTarget.dataset.index
+		
+		wx.navigateTo({
+			url: '/pages/wx/maker/detail?index='+index
+		})
+		return false
 		var item = this.data.posterList.find((val, key) => {
 			return key == index
 		});
@@ -106,6 +116,10 @@ Page({
 		if (wx.getStorageSync('item')) {
 			wx.navigateTo({
 				url: '/pages/wx/maker/detail'
+			})
+		}else{
+			wx.navigateTo({
+				url: '/pages/wx/maker/detail?index='+index
 			})
 		}
 
@@ -140,28 +154,36 @@ Page({
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
 	onReady: function() {
-
+		this.setData({
+			autoplay:true
+		})
 	},
 
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function() {
-
+		this.setData({
+			autoplay:true
+		})
 	},
 
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
 	onHide: function() {
-
+		this.setData({
+			autoplay:false
+		})
 	},
 
 	/**
 	 * 生命周期函数--监听页面卸载
 	 */
 	onUnload: function() {
-
+		this.setData({
+			autoplay:false
+		})
 	},
 
 	/**

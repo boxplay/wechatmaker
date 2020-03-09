@@ -1,19 +1,19 @@
 <view class='container'>
 	<block wx:for="{{detail}}" wx:key="i" wx:for-item="item">
-		<view class="detailBox" data-index="{{selectedIndex}}" wx:if="{{selectedIndex == 10}}">
-			<image wx:if="{{index != 2}}" src="{{item}}{{isPad?'':phoneStyle}}" style="width: 100%;" mode="widthFix" />
-			<view wx:if="{{video && index == 2}}" class="home-video">
+		<view class="detailBox" data-index="{{selectedIndex}}" wx:if="{{selectedIndex == 16}}">
+			<image show-menu-by-longpress="{{true}}" data-index="{{index}}" bindload="posterLoad" wx:if="{{index != 2}}" src="{{item}}{{isPad?'':phoneStyle}}" style="width: 100%;" mode="widthFix" />
+			<view hidden="{{!imgLoad}}" wx:if="{{video && index == 2}}" class="home-video">
 				<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="{{video}}"></video>
 			</view>
 		</view>
-		<view class="detailBox" data-index="{{selectedIndex}}"  wx:if="{{selectedIndex == 18}}">
-			<image src="{{item}}{{isPad?'':phoneStyle}}" width="100%" style="width: 100%;" mode="widthFix" />
-			<view wx:if="{{video}}" class="home-video" style="position: absolute;bottom: -268rpx;padding-bottom: 60rpx;">
+		<view class="detailBox" data-index="{{selectedIndex}}"  wx:if="{{selectedIndex == 1}}">
+			<image show-menu-by-longpress="{{true}}" data-index="{{index}}" bindload="posterLoad" src="{{item}}{{isPad?'':phoneStyle}}" width="100%" style="width: 100%;" mode="widthFix" />
+			<view hidden="{{!imgLoad}}" wx:if="{{video}}" class="home-video" style="position: absolute;bottom: -268rpx;padding-bottom: 60rpx;">
 				<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="{{video}}"></video>
 			</view>
 		</view>
-		<view class="detailBox" data-index="{{selectedIndex}}" wx:if="{{selectedIndex != 18 && selectedIndex != 10}}">
-			<image src="{{item}}{{isPad?'':phoneStyle}}" width="100%" style="width: 100%;" mode="widthFix" />
+		<view class="detailBox" data-index="{{selectedIndex}}" wx:if="{{selectedIndex != 1 && selectedIndex != 16}}">
+			<image show-menu-by-longpress="{{true}}" data-index="{{index}}" src="{{item}}{{isPad?'':phoneStyle}}" width="100%" style="width: 100%;" mode="widthFix" />
 			<view wx:if="{{video}}" class="home-video">
 				<video id="wechatmaker" object-fit="cover" bindtap="videoControl" play-btn-position="center" src="{{video}}"></video>
 			</view>

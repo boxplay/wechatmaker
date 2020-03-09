@@ -11,19 +11,19 @@
 			<image src='https://makercdn.someet.cc/wxapp/top.png' mode="widthFix" style="width: 100%;" />
 		</view>
 	</view>
-	<view class="maker-swiper-box" style="{{isIpx ? 'margin-top:50rpx ;':''}}">
-		<swiper circular="true" style="position: relative;" bindchange="changeSlider" previous-margin="120rpx" next-margin="120rpx" current="1"
+	<view hidden="{{swiperH == 0}}" class="maker-swiper-box" style="{{isIpx ? 'margin-top:50rpx ;':''}}">
+		<swiper circular="true" style="position: relative;" bindchange="changeSlider" previous-margin="120rpx" next-margin="120rpx" current="{{currentIndex}}"
 		 autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height: {{imgHeight}};"
 		 display-multiple-items="1">
 			<block wx:for="{{posterList}}" wx:for-index="index" wx:key="key" wx:for-item="item">
 				<swiper-item data-index="{{index}}" bindtap="goMakerDetail" class="maker-swiper-item">
 					<view class="swiper-item" wx:if="{{isPad}}">
-						<image wx:if="{{index == 0}}" style="width:100%;border-radius: 15rpx;" bindload="imgH" data-index="{{index}}" src="{{item.poster}}{{isPad?padPosterStyle:posterStyle}}" mode="widthFix" />
-						<image lazy-load="true" wx:if="{{index != 0}}" style="width:100%;border-radius: 15rpx;" data-index="{{index}}" src="{{item.poster}}{{isPad?padPosterStyle:posterStyle}}" mode="widthFix" />
+						<image show-menu-by-longpress="{{true}}" wx:if="{{index == 0}}" style="width:100%;border-radius: 15rpx;" bindload="imgH" data-index="{{index}}" src="{{item.poster}}{{isPad?padPosterStyle:posterStyle}}" mode="widthFix" />
+						<image show-menu-by-longpress="{{true}}" lazy-load="true" wx:if="{{index != 0}}" style="width:100%;border-radius: 15rpx;" data-index="{{index}}" src="{{item.poster}}{{isPad?padPosterStyle:posterStyle}}" mode="widthFix" />
 					</view>
 					<view class="swiper-item" wx:if="{{!isPad}}">
-						<image wx:if="{{index == 0}}" style="width:100%;border-radius: 15rpx;" bindload="imgH" data-index="{{index}}" src="{{item.poster}}{{isPad?padPosterStyle:posterStyle}}" mode="widthFix" />
-						<image lazy-load="true" wx:if="{{index != 0}}" style="width:100%;border-radius: 15rpx;" data-index="{{index}}" src="{{item.poster}}{{isPad?padPosterStyle:posterStyle}}" mode="widthFix" />
+						<image show-menu-by-longpress="{{true}}" wx:if="{{index == 0}}" style="width:100%;border-radius: 15rpx;" bindload="imgH" data-index="{{index}}" src="{{item.poster}}{{isPad?padPosterStyle:posterStyle}}" mode="widthFix" />
+						<image show-menu-by-longpress="{{true}}" lazy-load="true" wx:if="{{index != 0}}" style="width:100%;border-radius: 15rpx;" data-index="{{index}}" src="{{item.poster}}{{isPad?padPosterStyle:posterStyle}}" mode="widthFix" />
 					</view>
 				</swiper-item>
 			</block>
